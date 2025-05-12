@@ -1,14 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>backend_NEW</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWSSDK.CORE" Version="4.0.0.3" />
+    <PackageReference Include="AWSSDK.RDS" Version="4.0.0.2" />
+    <PackageReference Include="AWSSDK.S3" Version="4.0.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.8" />
+    <PackageReference Include="MySql.Data" Version="9.3.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
