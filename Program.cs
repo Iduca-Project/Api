@@ -1,44 +1,42 @@
+using System;
+using System.Data;
+using MySql.Data;
+using MySql.Data.MySqlClient;
+using Amazon;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+try
+{
+    var conn = new MySqlConnection(
+        "server=iducadb.cres2a24ikk2.us-east-1.rds.amazonaws.com;" +
+        "user=admin;" +
+        "database=IducaDB;" +
+        "port=3306;" +
+        "password=admin1234");
+
+    {
+        conn.Open();
+        Console.WriteLine("Conectado com sucesso!");
+
+        var cmd = new MySqlCommand("SHOW DATABASES;", conn);
+        var reader = cmd.ExecuteReader();
+        {
+            while (reader.Read())
+            {
+                Console.WriteLine(reader[0]);
+            }
+        }
+    }
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Erro na conexão ou execução: {ex.Message}");
+}
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
 app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
-
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
