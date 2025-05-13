@@ -1286,6 +1286,7 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
+
       },
       "System.Threading.Tasks/4.3.0": {
         "type": "package",
@@ -1344,6 +1345,7 @@
       "sha512": "buwoISwecYke3CmgG1AQSg+sNZjJeIb93vTAtJiHZX35hP/teYMxsfg0NDXGUKjGx6BKBTNKc77O2M3vKvlXZQ==",
       "type": "package",
       "path": "bouncycastle.cryptography/2.3.1",
+
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4000,7 +4002,10 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net8.0": [
+    "net9.0": [
+      "AWSSDK.CORE >= 4.0.0.3",
+      "AWSSDK.RDS >= 4.0.0.2",
+      "AWSSDK.S3 >= 4.0.0.3",
       "Microsoft.AspNetCore.OpenApi >= 8.0.8",
       "Microsoft.EntityFrameworkCore >= 8.0.11",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.11",
@@ -4025,16 +4030,15 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net8.0"
+        "net9.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "projectReferences": {}
         }
       },
@@ -4047,12 +4051,25 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
-      "net8.0": {
-        "targetAlias": "net8.0",
+      "net9.0": {
+        "targetAlias": "net9.0",
         "dependencies": {
+          "AWSSDK.CORE": {
+            "target": "Package",
+            "version": "[4.0.0.3, )"
+          },
+          "AWSSDK.RDS": {
+            "target": "Package",
+            "version": "[4.0.0.2, )"
+          },
+          "AWSSDK.S3": {
+            "target": "Package",
+            "version": "[4.0.0.3, )"
+          },
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[8.0.8, )"
@@ -4095,7 +4112,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\Aluno\\Downloads\\DOTNET\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
