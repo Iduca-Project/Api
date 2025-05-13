@@ -4100,11 +4100,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\CR\\repositories\\Backend-NEW\\Api.csproj",
+      "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\CR\\repositories\\Api\\Api.csproj",
       "projectName": "Api",
-      "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\repositories\\Backend-NEW\\Api.csproj",
+      "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\repositories\\Api\\Api.csproj",
       "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Aluno\\Desktop\\CR\\repositories\\Backend-NEW\\obj\\",
+      "outputPath": "C:\\Users\\Aluno\\Desktop\\CR\\repositories\\Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
