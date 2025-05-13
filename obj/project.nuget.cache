@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ue40VAkFRsE=",
+  "dgSpecHash": "el3v1DilIbc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Aluno\\Desktop\\CR\\repositories\\backend-NEW\\backend-NEW.csproj",
+  "projectFilePath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Backend-NEW.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aluno\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.8\\microsoft.aspnetcore.openapi.8.0.8.nupkg.sha512",
     "C:\\Users\\Aluno\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

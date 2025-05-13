@@ -465,11 +465,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\CR\\repositories\\backend-NEW\\backend-NEW.csproj",
-      "projectName": "backend-NEW",
-      "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\repositories\\backend-NEW\\backend-NEW.csproj",
+      "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Backend-NEW.csproj",
+      "projectName": "Backend-NEW",
+      "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Backend-NEW.csproj",
       "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Aluno\\Desktop\\CR\\repositories\\backend-NEW\\obj\\",
+      "outputPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
