@@ -132,6 +132,8 @@ Authorization: Bearer {token}
 ```
 {
   "username": "João da Silva",
+  "isManager": false,
+  "isAdmin": false,
   "totalCourses": 10,
   "ongoingCourses": 4,
   "completeCourses": 6,
