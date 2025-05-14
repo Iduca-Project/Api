@@ -223,7 +223,7 @@ Authorization: Bearer {token}
 ## 📚 Cursos (Todos precisam de token):
 
 ### 📌 GET /cursos
-Retorna a lista paginada de cursos, com suporte a busca por nome, filtro por categoria, filtro por dificuldade e paginação (9 cursos por página).
+Retorna a lista paginada de cursos, com suporte a busca por nome, filtro por categoria, filtro por dificuldade e paginação (12 cursos por página).
 
 🔐 Headers
 ```
