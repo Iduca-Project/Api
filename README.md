@@ -10,7 +10,7 @@
 ## Login/forgotPass:
 
 
-##🔐 Autenticação (Login e Recuperação de Senha)
+## 🔐 Autenticação (Login e Recuperação de Senha)
 
 📌 POST /auth/login
 Realiza o login do usuário com e-mail corporativo e senha.
@@ -41,7 +41,7 @@ Realiza o login do usuário com e-mail corporativo e senha.
 }
 ```
 
-##📌 POST /auth/forgotPass
+## 📌 POST /auth/forgotPass
 Envia um código de 5 dígitos para o e-mail corporativo do usuário para recuperação de senha.
 
 📥 Request Body
@@ -58,7 +58,7 @@ Envia um código de 5 dígitos para o e-mail corporativo do usuário para recupe
 }
 ```
 
-##📌 POST /auth/checkCode
+## 📌 POST /auth/checkCode
 Verifica se o código enviado ao e-mail está correto.
 
 📥 Request Body
