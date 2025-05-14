@@ -5,9 +5,12 @@
 
 # Endpoints:
 
+<br/>
+<br/>
+
 ## Login/forgotPass:
 
-###🔐 Autenticação (Login e Recuperação de Senha)
+##🔐 Autenticação (Login e Recuperação de Senha)
 📌 POST /auth/login
 Realiza o login do usuário com e-mail corporativo e senha.
 
@@ -37,7 +40,7 @@ Realiza o login do usuário com e-mail corporativo e senha.
 }
 ```
 
-###📌 POST /auth/forgotPass
+##📌 POST /auth/forgotPass
 Envia um código de 5 dígitos para o e-mail corporativo do usuário para recuperação de senha.
 
 📥 Request Body
@@ -54,7 +57,7 @@ Envia um código de 5 dígitos para o e-mail corporativo do usuário para recupe
 }
 ```
 
-###📌 POST /auth/checkCode
+##📌 POST /auth/checkCode
 Verifica se o código enviado ao e-mail está correto.
 
 📥 Request Body
@@ -79,7 +82,7 @@ Verifica se o código enviado ao e-mail está correto.
 }
 ```
 
-###📌 POST /auth/resendCode
+##📌 POST /auth/resendCode
 Reenvia o código de 5 dígitos para o e-mail corporativo do usuário.
 
 📥 Request Body
@@ -95,7 +98,7 @@ Reenvia o código de 5 dígitos para o e-mail corporativo do usuário.
 }
 ```
 
-###📌 POST /auth/resetPassword
+##📌 POST /auth/resetPassword
 Redefine a senha do usuário após a verificação do código.
 
 📥Request Body
@@ -115,7 +118,7 @@ Redefine a senha do usuário após a verificação do código.
 
 ## Home (Todos precisam do token):
 
-###📌 GET /home/progress
+##📌 GET /home/progress
 Retorna o progresso geral do usuário nos cursos. Requer o token de autenticação no header.
 
 🔐 Headers
@@ -133,7 +136,7 @@ Authorization: Bearer {token}
 }
 
 ```
-###📌 GET /home/coursesInProgress
+##📌 GET /home/coursesInProgress
 Retorna até 8 cursos que o usuário está fazendo atualmente.
 
 Difficulty:
@@ -174,7 +177,7 @@ Authorization: Bearer {token}
 ]
 ```
 
-###📌 GET /home/calendar
+##📌 GET /home/calendar
 Retorna os lembretes do usuário e as datas de prazos de atividades/provas.
 
 Type:
@@ -210,7 +213,7 @@ Authorization: Bearer {token}
 
 ## 📚 Cursos (Todos precisam de token):
 
-###📌 GET /cursos
+##📌 GET /cursos
 Retorna a lista paginada de cursos, com suporte a busca por nome, filtro por categoria, filtro por dificuldade e paginação (9 cursos por página).
 
 🔐 Headers
@@ -263,7 +266,7 @@ Authorization: Bearer {token}
 
 ##🗓️ Calendário
 
-###📌 GET /calendar
+##📌 GET /calendar
 Retorna todos os eventos do usuário: lembretes, prazos de atividades e provas.
 
 🔐 Headers
@@ -292,7 +295,7 @@ Authorization: Bearer {token}
 ]
 ```
 
-###📌 GET /calendar/next
+##📌 GET /calendar/next
 Retorna os eventos dos próximos 7 dias (lembretes + prazos + provas).
 
 🔐 Headers
@@ -316,7 +319,7 @@ Authorization: Bearer {token}
 ]
 ```
 
-###📌 POST /calendar/reminder
+##📌 POST /calendar/reminder
 Permite ao usuário adicionar um lembrete pessoal. Todos os lembretes criados manualmente terão type: 1.
 
 🔐 Headers
@@ -340,7 +343,7 @@ Authorization: Bearer {token}
 
 ## 👤 Perfil (Todos precisam de token):
 
-###📌 GET /profile
+##📌 GET /profile
 Retorna todas as informações do usuário logado.
 
 🔐 Headers
@@ -376,7 +379,7 @@ Authorization: Bearer {token}
 
 🔹 Se o usuário não tiver interesses, o array "interests" vem vazio: []
 
-###📌 GET /certificados/:id/imagem
+##📌 GET /certificate/:id/image
 Retorna a imagem do certificado de um curso finalizado.
 
 🔐 Headers
@@ -395,7 +398,7 @@ Authorization: Bearer {token}
 ```
 > image/png ou image/jpeg (para exibir direto no "<img src="..." />")
 
-###📌 GET /certificados/:id/pdf
+##📌 GET /certificate/:id/pdf
 Retorna o PDF do certificado para download.
 
 🔐 Headers
@@ -415,7 +418,7 @@ Authorization: Bearer {token}
 
 ##✏️ Editar Perfil
 
-###📌 GET /interesses
+##📌 GET /interests
 Retorna a lista de interesses disponíveis para o usuário escolher (máximo de 5 na hora de salvar).
 
 📤 Response
@@ -431,7 +434,7 @@ Retorna a lista de interesses disponíveis para o usuário escolher (máximo de 
 ]
 ```
 
-###📌 PUT /perfil
+##📌 PUT /profile
 Permite que o usuário edite sua foto de perfil e/ou seus interesses (até 5).
 
 🔐 Headers
@@ -464,7 +467,7 @@ interests: [1, 2, 4, 6, 7]
 
 ##📘 Detalhes do curso
 
-###📌 GET /courses/:id
+##📌 GET /courses/:id
 Retorna as informações gerais de um curso + lista de módulos.
 
 Type:
@@ -556,7 +559,7 @@ Authorization: Bearer {token}
 
 ##📘 Aulas
 
-###📌 GET /lessons/:id
+##📌 GET /lessons/:id
 Retorna os dados completos de uma aula (escrita ou em vídeo) + info sobre a próxima aula (se tiver).
 
 
@@ -599,7 +602,7 @@ Authorization: Bearer {token}
 }
 ```
 
-###🧠 Se for vídeo (type 2):
+##🧠 Se for vídeo (type 2):
 
 ```
 "content": [
@@ -610,7 +613,7 @@ Authorization: Bearer {token}
 ]
 ```
 
-###🧠 Se for atividade de múltipla escolha (type 3):
+##🧠 Se for atividade de múltipla escolha (type 3):
 
 ```
 {
@@ -644,7 +647,7 @@ Authorization: Bearer {token}
 }
 ```
 
-###🧠 Se for atividade de PDF (type 3):
+##🧠 Se for atividade de PDF (type 3):
 
 ```
 {
@@ -659,7 +662,7 @@ Authorization: Bearer {token}
 }
 ```
 
-###📌 POST /activities/:id/submitQuiz
+##📌 POST /activities/:id/submitQuiz
 Para atividades de múltipla escolha.
 
 📥 Request Body
@@ -679,7 +682,7 @@ Para atividades de múltipla escolha.
 }
 ```
 
-###📌 POST /activities/:id/upload
+##📌 POST /activities/:id/upload
 
 📥 Request Body
 > file: PDF enviado pelo usuário
