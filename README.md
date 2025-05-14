@@ -12,7 +12,7 @@
 
 ## 🔐 Autenticação (Login e Recuperação de Senha)
 
-📌 POST /auth/login
+### 📌 POST /auth/login
 Realiza o login do usuário com e-mail corporativo e senha.
 
 **Exemplo**
