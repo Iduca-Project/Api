@@ -10,10 +10,14 @@
 
 ## Login/forgotPass:
 
+<br/>
+
 ##🔐 Autenticação (Login e Recuperação de Senha)
+<br/>
+<br/>
 📌 POST /auth/login
 Realiza o login do usuário com e-mail corporativo e senha.
-
+<br/>
 **Exemplo**
 📥 Request Body
 
@@ -23,7 +27,7 @@ Realiza o login do usuário com e-mail corporativo e senha.
   "password": "senha123"
 }
 ```
-
+<br/>
 📤 Response - Login comum
 ```
 {
@@ -31,7 +35,7 @@ Realiza o login do usuário com e-mail corporativo e senha.
   "firstAccess": false
 }
 ```
-
+<br/>
 📤 Response - Primeiro acesso
 ```
 {
@@ -39,27 +43,27 @@ Realiza o login do usuário com e-mail corporativo e senha.
   "firstAccess": true
 }
 ```
-
+<br/><br/>
 ##📌 POST /auth/forgotPass
 Envia um código de 5 dígitos para o e-mail corporativo do usuário para recuperação de senha.
-
+<br/>
 📥 Request Body
 ```
 {
   "email": "usuario@empresa.com"
 }
 ```
-
+<br/>
 📤 Response
 ```
 {
   "response": true
 }
 ```
-
+<br/><br/>
 ##📌 POST /auth/checkCode
 Verifica se o código enviado ao e-mail está correto.
-
+<br/>
 📥 Request Body
 ```
 {
@@ -67,40 +71,41 @@ Verifica se o código enviado ao e-mail está correto.
   "code": "12345"
 }
 ```
-
+<br/>
 📤 Response - Código válido
 ```
 {
   "response": true
 }
 ```
-
+<br/>
 📤 Response - Código inválido
 ```
 {
   "response": false
 }
 ```
-
+<br/><br/>
 ##📌 POST /auth/resendCode
 Reenvia o código de 5 dígitos para o e-mail corporativo do usuário.
-
+<br/>
 📥 Request Body
 ```
 {
   "email": "usuario@empresa.com"
 }
 ```
+<br/>
 📤 Response
 ```
 {
   "response": true
 }
 ```
-
+<br/><br/>
 ##📌 POST /auth/resetPassword
 Redefine a senha do usuário após a verificação do código.
-
+<br/>
 📥Request Body
 ```
 {
@@ -108,23 +113,24 @@ Redefine a senha do usuário após a verificação do código.
   "newPass": "senhaNova123"
 }
 ```
-
+<br/>
 📥Response
 ```
 {
   "response": true
 }
 ```
-
-## Home (Todos precisam do token):
-
+<br/><br/><br/>
+## 🏠 Home (Todos precisam do token):
+<br/><br/>
 ##📌 GET /home/progress
 Retorna o progresso geral do usuário nos cursos. Requer o token de autenticação no header.
-
+<br/>
 🔐 Headers
 ```
 Authorization: Bearer {token}
 ```
+<br/>
 📤 Response
 ```
 {
@@ -134,20 +140,23 @@ Authorization: Bearer {token}
   "completeCourses": 6,
   "percenteGeneral": 60
 }
-
 ```
+
+<br/><br/>
+
 ##📌 GET /home/coursesInProgress
 Retorna até 8 cursos que o usuário está fazendo atualmente.
-
+<br/>
 Difficulty:
 1 - Iniciante
 2 - Intermediário
 3 - Avançado
-
+<br/>
 🔐 Headers
 ```
 Authorization: Bearer {token}
 ```
+<br/>
 
 📤 Response
 ```
@@ -176,20 +185,20 @@ Authorization: Bearer {token}
   }
 ]
 ```
-
+<br/><br/>
 ##📌 GET /home/calendar
 Retorna os lembretes do usuário e as datas de prazos de atividades/provas.
-
+<br/>
 Type:
 1 - Lembrete do usuário
 2 - Atividade
 3 - Prova
-
+<br/>
 🔐 Headers
 ```
 Authorization: Bearer {token}
 ```
-
+<br/>
 📤 Response
 ```
 [
@@ -210,17 +219,17 @@ Authorization: Bearer {token}
   }
 ]
 ```
-
+<br/><br/><br/>
 ## 📚 Cursos (Todos precisam de token):
-
+<br/><br/>
 ##📌 GET /cursos
 Retorna a lista paginada de cursos, com suporte a busca por nome, filtro por categoria, filtro por dificuldade e paginação (9 cursos por página).
-
+<br/>
 🔐 Headers
 ```
 Authorization: Bearer {token}
 ```
-
+<br/>
 🧾 Query Params
 
 | Parâmetro     | Tipo   | Descrição                                   |
@@ -230,7 +239,7 @@ Authorization: Bearer {token}
 | `category`   | string | Categoria do curso (opcional)               |
 | `difficulty` | number | Dificuldade do curso (1, 2 ou 3) (opcional) |
 
-
+<br/>
 📤 Response
 ```
 {
@@ -263,17 +272,17 @@ Authorization: Bearer {token}
 }
 ```
 
-
+<br/><br/><br/>
 ##🗓️ Calendário
-
+<br/><br/>
 ##📌 GET /calendar
 Retorna todos os eventos do usuário: lembretes, prazos de atividades e provas.
-
+<br/>
 🔐 Headers
 ```
 Authorization: Bearer {token}
 ```
-
+<br/>
 📤 Response
 ```
 [
@@ -294,15 +303,15 @@ Authorization: Bearer {token}
   }
 ]
 ```
-
+<br/><br/>
 ##📌 GET /calendar/next
 Retorna os eventos dos próximos 7 dias (lembretes + prazos + provas).
-
+<br/>
 🔐 Headers
 ```
 Authorization: Bearer {token}
 ```
-
+<br/>
 📤 Response
 ```
 [
@@ -318,15 +327,15 @@ Authorization: Bearer {token}
   }
 ]
 ```
-
+<br/><br/>
 ##📌 POST /calendar/reminder
 Permite ao usuário adicionar um lembrete pessoal. Todos os lembretes criados manualmente terão type: 1.
-
+<br/>
 🔐 Headers
 ```
 Authorization: Bearer {token}
 ```
-
+<br/>
 📥 Request Body
 ```
 {
@@ -334,23 +343,24 @@ Authorization: Bearer {token}
   "date": "2025-05-18"
 }
 ```
+<br/>
 📤 Response
 ```
 {
   "response": true
 }
 ```
-
+<br/><br/><br/>
 ## 👤 Perfil (Todos precisam de token):
-
+<br/><br/>
 ##📌 GET /profile
 Retorna todas as informações do usuário logado.
-
+<br/>
 🔐 Headers
 ```
 Authorization: Bearer {token}
 ```
-
+<br/>
 📤 Response
 ```
 {
@@ -378,18 +388,18 @@ Authorization: Bearer {token}
 ```
 
 🔹 Se o usuário não tiver interesses, o array "interests" vem vazio: []
-
+<br/><br/>
 ##📌 GET /certificate/:id/image
 Retorna a imagem do certificado de um curso finalizado.
-
+<br/>
 🔐 Headers
 ```
 Authorization: Bearer {token}
 ```
-
+<br/>
 🔁 Params
 > :id = ID do curso
-
+<br/>
 📤 Response
 ```
 {
@@ -397,30 +407,31 @@ Authorization: Bearer {token}
 }
 ```
 > image/png ou image/jpeg (para exibir direto no "<img src="..." />")
-
+<br/><br/>
 ##📌 GET /certificate/:id/pdf
 Retorna o PDF do certificado para download.
-
+<br/>
 🔐 Headers
 ```
 Authorization: Bearer {token}
 ```
-
+<br/>
 🔁 Params
 > :id = ID do curso
-
+<br/>
 📤 Response
 ```
 {
   response: "certificado.pdf"
 }
 ```
+<br/><br/><br/>
+##✏️ Editar Perfil (Todos precisam de token, menos o get de interesses):
 
-##✏️ Editar Perfil
-
+<br/><br/>
 ##📌 GET /interests
 Retorna a lista de interesses disponíveis para o usuário escolher (máximo de 5 na hora de salvar).
-
+<br/>
 📤 Response
 ```
 [
@@ -433,28 +444,28 @@ Retorna a lista de interesses disponíveis para o usuário escolher (máximo de 
   { "id": 7, "name": "Mecânica" }
 ]
 ```
-
+<br/><br/>
 ##📌 PUT /profile
 Permite que o usuário edite sua foto de perfil e/ou seus interesses (até 5).
-
+<br/>
 🔐 Headers
 ```
 Authorization: Bearer {token}
 ```
-
+<br/>
 📥 Request Body
 
 - photoUser (opcional): arquivo de imagem (.jpg, .png, etc.)
 - interests (opcional): array de strings com até 5 interesses, mas podem ser menos de 5
 
 > O usuário pode mandar apenas a foto, apenas os interesses, ou os dois.
-
+<br/>
 📤 Exemplo usando FormData
 ```
 photoUser: (arquivo .png/.jpg)
 interests: [1, 2, 4, 6, 7]
 ```
-
+<br/>
 📤 Response
 ```
 {
@@ -464,28 +475,28 @@ interests: [1, 2, 4, 6, 7]
 
 > ⚠️ Se forem enviados mais de 5 interesses, deve retornar um erro!
 
-
-##📘 Detalhes do curso
-
+<br/><br/><br/>
+##📘 Detalhes do curso (Todos precisam de token):
+<br/><br/>
 ##📌 GET /courses/:id
 Retorna as informações gerais de um curso + lista de módulos.
-
+<br/>
 Type:
 1 - Aula escrita
 2 - Aula em vídeo
 3 - Atividade múltipla escolha
 4 - Atividade PDF
 5 - Prova
-
+<br/>
 
 🔐 Headers
 ```
 Authorization: Bearer {token}
 ```
-
+<br/>
 🔁 Params:
 > :id = ID do curso
-
+<br/>
 📤 Response:
 ```
 {
@@ -556,21 +567,21 @@ Authorization: Bearer {token}
 ```
 
 > Se o usuário não tiver iniciado o curso, o "Progress" fica em 0
-
-##📘 Aulas
-
+<br/><br/><br/>
+##📘 Aulas (Todos precisam de token):
+<br/><br/>
 ##📌 GET /lessons/:id
 Retorna os dados completos de uma aula (escrita ou em vídeo) + info sobre a próxima aula (se tiver).
 
-
+<br/>
 🔐 Headers
 ```
 Authorization: Bearer {token}
 ```
-
+<br/>
 🔁 Params
 > :id = ID da aula
-
+<br/>
 📤 Response:
 ```
 {
@@ -601,7 +612,7 @@ Authorization: Bearer {token}
   }
 }
 ```
-
+<br/>
 ##🧠 Se for vídeo (type 2):
 
 ```
@@ -612,7 +623,7 @@ Authorization: Bearer {token}
   }
 ]
 ```
-
+<br/>
 ##🧠 Se for atividade de múltipla escolha (type 3):
 
 ```
@@ -646,7 +657,7 @@ Authorization: Bearer {token}
   ]
 }
 ```
-
+<br/>
 ##🧠 Se for atividade de PDF (type 3):
 
 ```
@@ -661,10 +672,10 @@ Authorization: Bearer {token}
   "description": "Send a PDF explaining how you initialized and committed your project using Git."
 }
 ```
-
+<br/><br/>
 ##📌 POST /activities/:id/submitQuiz
 Para atividades de múltipla escolha.
-
+<br/>
 📥 Request Body
 ```
 {
@@ -674,19 +685,19 @@ Para atividades de múltipla escolha.
   ]
 }
 ```
-
+<br/>
 📤 Response:
 ```
 {
     "response": true
 }
 ```
-
+<br/><br/>
 ##📌 POST /activities/:id/upload
-
+<br/>
 📥 Request Body
 > file: PDF enviado pelo usuário
-
+<br/>
 📤 Response:
 ```
 {
