@@ -2,7 +2,7 @@ using Iduca.Domain.Models;
 
 namespace Iduca.Application.Repository
 {
-    public interface IBaseRepository<T> where T : BaseEntity
+    public interface IBaseRepository<TEntity> where TEntity : BaseModel
     {
         void Create(TEntity entity);
         void Update(TEntity entity);

@@ -1,13 +1,13 @@
-using Iduca.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Iduca.Domain.Models;
 
-namespace Iduca.Persistence.Tables
+namespace Iduca.Persistence.Tables;
 
 public static class BaseTableConfigurationExtensios
 {
     public static void ConfigurBaseTableProps<T>(this EntityTypeBuilder<T> builder)
-        where T : BaseTable
+        where T : BaseModel
     {
         builder.HasKey(t => t.Id);
 
