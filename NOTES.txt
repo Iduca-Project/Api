@@ -19,10 +19,10 @@ Application
         Repository
             UserRepository                          --Onde ficará o a interface do repositório em questão
                 IUserRepository.cs
-            IBaseRepository.cs                      --Interface base com funções simples para outras interfaces de repositorio                                  || IBaseRepository<T> where T : BaseModel
-            IUnitOfWork.cs                          <> ????????????????? <>
-            IProject.Application.csproj             --Configurações desta camada do projeto
-            ServiceExtensions.cs                    <> ????????????????? <>
+        IBaseRepository.cs                      --Interface base com funções simples para outras interfaces de repositorio                                  || IBaseRepository<T> where T : BaseModel
+        IUnitOfWork.cs                          <> ????????????????? <>
+        IProject.Application.csproj             --Configurações desta camada do projeto
+        ServiceExtensions.cs                    <> ????????????????? <>
 
 
 Domain
