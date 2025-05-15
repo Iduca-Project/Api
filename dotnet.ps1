@@ -1,1 +1,0 @@
-C:\Users\Aluno\Downloads\DOTNET\dotnet.exe $args
