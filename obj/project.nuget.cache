@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "X6MGx3jZ3/k=",
+  "dgSpecHash": "CWpJaZvmQ1w=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Aluno\\Desktop\\CR\\repositories\\Api\\Api.csproj",
+  "projectFilePath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aluno\\.nuget\\packages\\awssdk.core\\4.0.0.3\\awssdk.core.4.0.0.3.nupkg.sha512",
     "C:\\Users\\Aluno\\.nuget\\packages\\awssdk.rds\\4.0.0.2\\awssdk.rds.4.0.0.2.nupkg.sha512",
