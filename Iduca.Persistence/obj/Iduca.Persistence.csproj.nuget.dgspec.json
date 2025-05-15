@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Aluno\\Desktop\\cr\\repositories\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj": {}
+    "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\Iduca.Persistence.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Aluno\\Desktop\\cr\\repositories\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj": {
+    "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\Iduca.Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\cr\\repositories\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj",
+        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\Iduca.Persistence.csproj",
         "projectName": "Iduca.Persistence",
-        "projectPath": "C:\\Users\\Aluno\\Desktop\\cr\\repositories\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj",
+        "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\Iduca.Persistence.csproj",
         "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aluno\\Desktop\\cr\\repositories\\Api\\Iduca.Persistence\\obj\\",
+        "outputPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,6 +45,16 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "target": "Package",
+              "version": "[9.0.5, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
