@@ -1,1 +1,59 @@
-Pesquisar como iremos salvar imagens
+Api
+Application
+    Common
+        Behaviors                                   <> ????????????????? <>
+            ValidationBehavior.cs                   <> ????????????????? <>
+        Exceptions
+            AppException.cs                         --Classe base para exceções
+            BadRequestException.cs                                                                                                                              ||BadRequestException(string message = ExceptionMessages.BadRequest.Default,string? details = null) : AppException(StatusCode.BadRequest, message, details)
+        Config
+            DotEnv.cs                               --Lida com variáveis de ambiente, conforme o .env irá definir elas caso ainda não estejam definidas
+        Features                                    <> ????????????????? <>
+            User            
+                Create                              
+                    CreateUserHandler.cs            <> ????????????????? <>
+                    CreateUserMapper.cs             <> ????????????????? <>
+                    CreateUserRequest.cs            <> ????????????????? <>
+                    CreateUserResponse.cs           <> ????????????????? <>
+                    CreateUserValidator.cs          <> ????????????????? <>
+        Repository
+            UserRepository                          --Onde ficará o a interface do repositório em questão
+                IUserRepository.cs
+        IBaseRepository.cs                      --Interface base com funções simples para outras interfaces de repositorio                                  || IBaseRepository<T> where T : BaseModel
+        IUnitOfWork.cs                          <> ????????????????? <>
+        IProject.Application.csproj             --Configurações desta camada do projeto
+        ServiceExtensions.cs                    <> ????????????????? <>
+
+
+Domain
+    Common
+        Enums
+            StatusCode.cs   
+        Messages
+            ExceptionMessages.cs                    --Múltiplas classes separadas por tipo_de_erro->autoridade/entidade
+    Models
+        BaseModel.cs                                --Modelo base para outros modelos
+        UserModel.cs                                --UserModel : BaseModel
+    Project.Domain.csproj                           --Configurações desta camada do projeto
+
+
+
+Persistence
+    Context
+        ProjectContext.cs                                                                                                                                   || ProjectContext(DbContextOptions<ProjectContext> options) : DbContext(option)
+        ProjectContextFactory.cs                   --Possui relação com DesignPattern, pesquisar sobre                                                      || ProjectContextFactory : IDesignTimeDbContextFactory<ProjectContext>
+    Migrations
+        ____.cs                                     --Arquivo gerado da migration realizada
+    Repositories
+        User                                        --Pasta opcional para organização   
+            UserRepository.cs                                                                                                                               || UserRepository(DbContext dbContext) : BaseRepository<User>(context), IUserRepository
+        BaseRepository.cs                           --Modelo base com operações simples de um repositório                                                   || BaseRepository<T>(ProjectContext context) : IBaseRepository<T> where T : BaseModel
+        UnitOfWork.cs                               <> ????????????????? <>
+    Tables                                          --Onde está a mapeação das entidades 
+        BaseTable.cs                                --Classe base mapeando caracterisiticas simples e padrões                                               || Faz uma extensão da funcionalidade da classe EntityTypeBuilder
+        UserTable.cs                                --Onde a tabela User será mapeada                                                               
+    Project.Persistence.csproj                      --Configurações desta camada do projeto
+    ServiceExtension.cs                             --Onde os services serão configurados corretamente com seus tempos de vida corretos
+
+
+

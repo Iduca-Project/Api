@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Backend-NEW.csproj": {}
+    "C:\\Users\\Aluno\\Desktop\\CR\\repositories\\Backend-NEW\\Backend-NEW.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Backend-NEW.csproj": {
+    "C:\\Users\\Aluno\\Desktop\\CR\\repositories\\Backend-NEW\\Backend-NEW.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Backend-NEW.csproj",
+        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\CR\\repositories\\Backend-NEW\\Backend-NEW.csproj",
         "projectName": "Backend-NEW",
-        "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Backend-NEW.csproj",
+        "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\repositories\\Backend-NEW\\Backend-NEW.csproj",
         "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\obj\\",
+        "outputPath": "C:\\Users\\Aluno\\Desktop\\CR\\repositories\\Backend-NEW\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -53,10 +53,6 @@
             "AWSSDK.RDS": {
               "target": "Package",
               "version": "[4.0.0.2, )"
-            },
-            "MYSQL.DATA": {
-              "target": "Package",
-              "version": "[9.3.0, )"
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
