@@ -14,6 +14,29 @@ public class BaseRepository<TModel>(IducaContext Context) : IBaseRepository<TMod
 
     public void Update(TModel entity)
         => context.Update(entity);
+
+    public Task<TModel?> Get(Guid id, CancellationToken cancellationToken)
+        => context
+            .Set<TModel>()
+            .Where(entity => entity.DisabledAt == null)
+            .FirstOrDefaultAsync(entity => entity.Id == id, cancellationToken);
+
+    public Task<List<TModel>> GetAll(CancellationToken cancellationToken)
+        => context
+            .Set<TModel>()
+            .Where(entity => entity.DisabledAt == null)
+            .ToListAsync(cancellationToken);
+
+    public void Delete(TModel entity)
+    {
+        entity.DisabledAt = DateTime.UtcNow;
+        context.Update(entity);
+    }
     
-    
+    public Task<bool> Exists(Guid id, CancellationToken cancellationToken)
+        => dbSet.AnyAsync(e => 
+            EF.Property<Guid>(e, "Id") == id && 
+            EF.Property<Guid?>(e, "DeletedAt") == null, 
+            cancellationToken
+        );
 }
