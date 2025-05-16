@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Iduca.Persistence.Context;
-using Iduca.Application.Repository;
 using Iduca.Domain.Models;
 using Iduca.Application.Repositories;
 

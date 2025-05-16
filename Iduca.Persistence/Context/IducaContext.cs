@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Iduca.Persistence.Tables;
+// using MySql.Data.MySqlClient.Interceptors;
 
 namespace Iduca.Persistence.Context;
 
@@ -8,6 +10,6 @@ public class IducaContext(DbContextOptions<IducaContext> options) : DbContext(op
     {
         base.OnModelCreating(modelBuilder);
 
-        // ! Fazer a configuração de todas as tables nessa área
+        modelBuilder.
     }
 }

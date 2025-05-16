@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hP/YdQ8a57A=",
+  "dgSpecHash": "paacZmfsb0o=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\Iduca.Persistence.csproj",
+  "projectFilePath": "C:\\Users\\Aluno\\Desktop\\CR\\repositorie\\api\\Iduca.Persistence\\Iduca.Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aluno\\.nuget\\packages\\bouncycastle.cryptography\\2.5.1\\bouncycastle.cryptography.2.5.1.nupkg.sha512",
     "C:\\Users\\Aluno\\.nuget\\packages\\fluentvalidation\\12.0.0\\fluentvalidation.12.0.0.nupkg.sha512",
@@ -75,12 +75,5 @@
     "C:\\Users\\Aluno\\.nuget\\packages\\system.windows.extensions\\8.0.0\\system.windows.extensions.8.0.0.nupkg.sha512",
     "C:\\Users\\Aluno\\.nuget\\packages\\zstdsharp.port\\0.8.5\\zstdsharp.port.0.8.5.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }

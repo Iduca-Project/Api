@@ -1,11 +1,10 @@
-
-using Api.Core.Repositories;
-using Iduca.Application.Config;
-using Iduca.Application.Repository;
+using Iduca.Application.Repositories;
 using Iduca.Persistence.Context;
 using Iduca.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Iduca.Application.Config;
+
 
 namespace IAgro.Persistence;
 
@@ -18,7 +17,7 @@ public static class ServiceExtensions
         services.AddDbContext<IducaContext>(opt => opt.UseMySQL(connection));
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-        services.AddScoped</* IUserRepository */, UserRepository>();
-        services.AddScoped</* ICompanyRepository */, CompanyRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ICompanyRepository, CompanyRepository>();
     }
 }
