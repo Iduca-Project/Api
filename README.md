@@ -8,10 +8,7 @@
 
 
 
-## Login/forgotPass:
-
-
-## 🔐 Autenticação (Login e Recuperação de Senha)
+## 🔐 Login/forgotPass:
 
 ### 📌 POST /auth/login
 Realiza o login do usuário com e-mail corporativo e senha.
@@ -129,7 +126,7 @@ Retorna o progresso geral do usuário nos cursos. Requer o token de autenticaç�
 Authorization: Bearer {token}
 ```
 
-📤 Response
+📤 Response Aluno
 ```
 {
   "username": "João da Silva",
@@ -141,7 +138,28 @@ Authorization: Bearer {token}
   "percenteGeneral": 60
 }
 ```
+📤 Response Gestor
+```
+{
+  "username": "João da Silva",
+  "isManager": true,
+  "isAdmin": false,
+  "totalEmployees": 10,
+  "totalCourses": 25,
+  "totalRegistrationss": 8,
+  "completionRate": 60
+}
+```
 
+📤 Response Admin
+```
+{
+  "username": "João da Silva",
+  "isManager": false,
+  "isAdmin": true,
+  "não_sei_ainda": 10
+}
+```
 
 
 ### 📌 GET /home/coursesInProgress
@@ -190,9 +208,9 @@ Authorization: Bearer {token}
 Retorna os lembretes do usuário e as datas de prazos de atividades/provas.
 
 Type:
-1 - Lembrete do usuário
-2 - Atividade
-3 - Prova
+- 1 - Lembrete do usuário
+- 2 - Atividade
+- 3 - Prova
 
 🔐 Headers
 ```
@@ -272,11 +290,27 @@ Authorization: Bearer {token}
 }
 ```
 
+### 📌 GET /categories
+Retorna a lista de categorias disponíveis para o usuário escolher.
+
+📤 Response
+```
+[
+  { "id": 1, "name": "Programação" },
+  { "id": 2, "name": "UX/UI" },
+  { "id": 3, "name": "DevOps" },
+  { "id": 4, "name": "Gestão" },
+  { "id": 5, "name": "Banco de Dados" },
+  { "id": 6, "name": "Inteligência Artificial" },
+  { "id": 7, "name": "Mecânica" }
+]
+```
+
 
 ## 🗓️ Calendário
 
 ### 📌 GET /calendar
-Retorna todos os eventos do usuário: lembretes, prazos de atividades e provas.
+Retorna todos os eventos do usuário em até 1 ano (6 meses antes e 6 meses depois do dia atual): lembretes, prazos de atividades e provas.
 
 🔐 Headers
 ```
@@ -460,10 +494,12 @@ Authorization: Bearer {token}
 
 > O usuário pode mandar apenas a foto, apenas os interesses, ou os dois.
 
-📤 Exemplo usando FormData
+📤 Exemplo
 ```
-photoUser: (arquivo .png/.jpg)
-interests: [1, 2, 4, 6, 7]
+{
+  "photoUser": arquivo.png/.jpg
+  "interests": [1, 2, 4, 6, 7]
+}
 ```
 
 📤 Response
@@ -482,11 +518,10 @@ interests: [1, 2, 4, 6, 7]
 Retorna as informações gerais de um curso + lista de módulos.
 
 Type:
-1 - Aula escrita
-2 - Aula em vídeo
-3 - Atividade múltipla escolha
-4 - Atividade PDF
-5 - Prova
+- 1 - Aula escrita
+- 2 - Aula em vídeo
+- 3 - Atividade múltipla escolha
+- 4 - Atividade PDF
 
 🔐 Headers
 ```
@@ -506,10 +541,10 @@ Authorization: Bearer {token}
   "rating": 4.6,
   "participants": 98,
   "progress": 20,
-  "totalTime": "3h 45min",
   "difficulty": 1,
   "duration": "10:00:00",
   "category": "Tools",
+  "haveExam": true,
   "modules": [
     {
       "id": 1,
@@ -579,7 +614,7 @@ Authorization: Bearer {token}
 🔁 Params
 > :id = ID da aula
 
-📤 Response:
+📤 Response (Se for aula de texto):
 ```
 {
   "id": 101,
@@ -609,6 +644,10 @@ Authorization: Bearer {token}
   }
 }
 ```
+
+> Se não tiver próxima aula, retorna nextLesson como false
+
+
 ## 🧠 Se for vídeo (type 2):
 
 ```
@@ -652,7 +691,7 @@ Authorization: Bearer {token}
   ]
 }
 ```
-## 🧠 Se for atividade de PDF (type 3):
+## 🧠 Se for atividade de PDF (type 4):
 
 ```
 {
@@ -666,9 +705,10 @@ Authorization: Bearer {token}
   "description": "Send a PDF explaining how you initialized and committed your project using Git."
 }
 ```
+
 ### 📌 POST /activities/:id/submitQuiz
 
-Para atividades de múltipla escolha.
+Para enviar as respostas do usuário nas atividades de múltipla escolha.
 
 📥 Request Body
 ```
@@ -693,5 +733,38 @@ Para atividades de múltipla escolha.
 ```
 {
     "response": true
+}
+```
+
+### 📌 GET /test/:id
+
+> :id é o id do Curso!
+
+Para pegar as questões e alternativas de uma prova.
+
+```
+{
+"id": 1,
+"title": "Prova Final",
+"questions": [
+    {
+      "id": 1,
+      "question": "What is the command to initialize a Git repository?",
+      "options": [
+        { "id": "1", "text": "git start", "alternative": "a" },
+        { "id": "2", "text": "git init", "alternative": "b" },
+        { "id": "3", "text": "git begin", "alternative": "c" }
+      ]
+    },
+    {
+      "id": 2,
+      "question": "What file tracks your commits?",
+      "options": [
+        { "id": "1", "text": ".git/config", "alternative": "a" },
+        { "id": "2", "text": ".gitignore", "alternative": "b" },
+        { "id": "3", "text": ".git", "alternative": "c" }
+      ]
+    }
+  }
 }
 ```
