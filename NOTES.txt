@@ -6,23 +6,23 @@ Application
         Exceptions
             AppException.cs                         --Classe base para exceções
             BadRequestException.cs                                                                                                                              ||BadRequestException(string message = ExceptionMessages.BadRequest.Default,string? details = null) : AppException(StatusCode.BadRequest, message, details)
-        Config
-            DotEnv.cs                               --Lida com variáveis de ambiente, conforme o .env irá definir elas caso ainda não estejam definidas
-        Features                                    <> ????????????????? <>
-            User            
-                Create                              
-                    CreateUserHandler.cs            <> ????????????????? <>
-                    CreateUserMapper.cs             <> ????????????????? <>
-                    CreateUserRequest.cs            <> ????????????????? <>
-                    CreateUserResponse.cs           <> ????????????????? <>
-                    CreateUserValidator.cs          <> ????????????????? <>
-        Repository
-            UserRepository                          --Onde ficará o a interface do repositório em questão
-                IUserRepository.cs
-        IBaseRepository.cs                      --Interface base com funções simples para outras interfaces de repositorio                                  || IBaseRepository<T> where T : BaseModel
-        IUnitOfWork.cs                          <> ????????????????? <>
-        IProject.Application.csproj             --Configurações desta camada do projeto
-        ServiceExtensions.cs                    <> ????????????????? <>
+    Config
+        DotEnv.cs                               --Lida com variáveis de ambiente, conforme o .env irá definir elas caso ainda não estejam definidas
+    Features                                    <> ????????????????? <>
+        User            
+            Create                              
+                CreateUserHandler.cs            <> ????????????????? <>
+                CreateUserMapper.cs             <> ????????????????? <>
+                CreateUserRequest.cs            <> ????????????????? <>
+                CreateUserResponse.cs           <> ????????????????? <>
+                CreateUserValidator.cs          <> ????????????????? <>
+    Repository
+        UserRepository                          --Onde ficará o a interface do repositório em questão
+            IUserRepository.cs
+    IBaseRepository.cs                      --Interface base com funções simples para outras interfaces de repositorio                                  || IBaseRepository<T> where T : BaseModel
+    IUnitOfWork.cs                          <> ????????????????? <>
+    IProject.Application.csproj             --Configurações desta camada do projeto
+    ServiceExtensions.cs                    <> ????????????????? <>
 
 
 Domain
