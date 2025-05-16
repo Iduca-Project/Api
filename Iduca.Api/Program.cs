@@ -2,7 +2,7 @@ using System;
 using System.Data;
 using MySql.Data;
 using MySql.Data.MySqlClient;
-using Amazon;
+// using Amazon;
 
 var builder = WebApplication.CreateBuilder(args);
 

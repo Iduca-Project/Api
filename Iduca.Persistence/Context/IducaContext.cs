@@ -1,4 +1,3 @@
-using Iduca.Persistence.Tables;
 using Microsoft.EntityFrameworkCore;
 
 namespace Iduca.Persistence.Context;
