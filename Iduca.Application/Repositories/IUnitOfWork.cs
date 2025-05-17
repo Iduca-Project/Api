@@ -1,4 +1,4 @@
-namespace Iduca.Application.Repository;
+namespace Iduca.Application.Repositories;
 
 public interface IUnitOfWork
 {

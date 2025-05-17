@@ -1,42 +1,43 @@
-using System;
-using System.Data;
-using MySql.Data;
-using MySql.Data.MySqlClient;
-// using Amazon;
+using Iduca.Persistence.Context;
+using Microsoft.EntityFrameworkCore;
+using Iduca.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
-try
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.ConfigurePersistence();
+
+var app = builder.Build();
+
+using var serviceScope = app.Services.CreateScope();
+var context = serviceScope.ServiceProvider.GetRequiredService<IducaContext>();
+
+context.Database.Migrate();
+
+const string sql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'iducadb'";
+var tableNames = new List<string>();
+
+using (var command = context.Database.GetDbConnection().CreateCommand())
 {
-    var conn = new MySqlConnection(
-        "server=iducadb.cres2a24ikk2.us-east-1.rds.amazonaws.com;" +
-        "user=admin;" +
-        "database=IducaDB;" +
-        "port=3306;" +
-        "password=admin1234");
+    command.CommandText = sql;
+    command.CommandType = System.Data.CommandType.Text;
 
+    context.Database.OpenConnection();
+
+    using (var result = command.ExecuteReader())
     {
-        conn.Open();
-        Console.WriteLine("Conectado com sucesso!");
-
-        var cmd = new MySqlCommand("SHOW DATABASES;", conn);
-        var reader = cmd.ExecuteReader();
+        while (result.Read())
         {
-            while (reader.Read())
-            {
-                Console.WriteLine(reader[0]);
-            }
+            tableNames.Add(result.GetString(0));
         }
     }
 }
-catch (Exception ex)
+
+Console.WriteLine("Tabelas no banco MySQL:");
+foreach (var table in tableNames)
 {
-    Console.WriteLine($"Erro na conexão ou execução: {ex.Message}");
+    Console.WriteLine($"- {table}");
 }
-
-builder.Services.AddEndpointsApiExplorer();
-
-var app = builder.Build();
 
 app.UseHttpsRedirection();
 app.Run();
