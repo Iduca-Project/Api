@@ -1,39 +1,36 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Api\\Iduca.Api.csproj": {}
+    "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Api\\Iduca.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Api\\Iduca.Api.csproj": {
+    "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Api\\Iduca.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Api\\Iduca.Api.csproj",
+        "projectUniqueName": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Api\\Iduca.Api.csproj",
         "projectName": "Iduca.Api",
-        "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Api\\Iduca.Api.csproj",
-        "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Api\\obj\\",
+        "projectPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Api\\Iduca.Api.csproj",
+        "packagesPath": "C:\\Users\\amilt\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\amilt\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Application\\Iduca.Application.csproj": {
-                "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Application\\Iduca.Application.csproj"
+              "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Application\\Iduca.Application.csproj": {
+                "projectPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Application\\Iduca.Application.csproj"
               },
-              "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\Iduca.Persistence.csproj": {
-                "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\Iduca.Persistence.csproj"
+              "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj": {
+                "projectPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj"
               }
             }
           }
@@ -47,7 +44,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -83,6 +81,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[8.0.13, 8.0.13]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -91,37 +107,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Application\\Iduca.Application.csproj": {
+    "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Application\\Iduca.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Application\\Iduca.Application.csproj",
+        "projectUniqueName": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Application\\Iduca.Application.csproj",
         "projectName": "Iduca.Application",
-        "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Application\\Iduca.Application.csproj",
-        "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Application\\obj\\",
+        "projectPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Application\\Iduca.Application.csproj",
+        "packagesPath": "C:\\Users\\amilt\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\amilt\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\Iduca.Domain.csproj": {
-                "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\Iduca.Domain.csproj"
+              "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Domain\\Iduca.Domain.csproj": {
+                "projectPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Domain\\Iduca.Domain.csproj"
               }
             }
           }
@@ -135,7 +148,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -151,34 +165,45 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\Iduca.Domain.csproj": {
+    "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Domain\\Iduca.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\Iduca.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Domain\\Iduca.Domain.csproj",
         "projectName": "Iduca.Domain",
-        "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\Iduca.Domain.csproj",
-        "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\obj\\",
+        "projectPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Domain\\Iduca.Domain.csproj",
+        "packagesPath": "C:\\Users\\amilt\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\amilt\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -196,7 +221,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -212,45 +238,56 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\Iduca.Persistence.csproj": {
+    "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\Iduca.Persistence.csproj",
+        "projectUniqueName": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj",
         "projectName": "Iduca.Persistence",
-        "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\Iduca.Persistence.csproj",
-        "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\obj\\",
+        "projectPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj",
+        "packagesPath": "C:\\Users\\amilt\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\amilt\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Application\\Iduca.Application.csproj": {
-                "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Application\\Iduca.Application.csproj"
+              "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Application\\Iduca.Application.csproj": {
+                "projectPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Application\\Iduca.Application.csproj"
               },
-              "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\Iduca.Domain.csproj": {
-                "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\Iduca.Domain.csproj"
+              "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Domain\\Iduca.Domain.csproj": {
+                "projectPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Domain\\Iduca.Domain.csproj"
               }
             }
           }
@@ -264,7 +301,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -310,12 +348,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
