@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Iduca.Application.Config;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace Iduca.Persistence.Context;
 
@@ -12,8 +13,11 @@ public class IducaDbContextFactory : IDesignTimeDbContextFactory<IducaContext>
         DotEnv.Load();
 
         var optionsBuilder = new DbContextOptionsBuilder<IducaContext>();
-        
-        // Adicionar nessa linha o comando para conexão com o banco MySql
+
+        optionsBuilder.UseMySql(
+            DotEnv.Get("DATABASE_URL"),
+            ServerVersion.AutoDetect(DotEnv.Get("DATABASE_URL"))
+        );
 
         return new IducaContext(optionsBuilder.Options);
     }
