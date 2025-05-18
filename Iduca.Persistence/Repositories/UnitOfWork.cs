@@ -1,5 +1,5 @@
 using System.ComponentModel;
-using Iduca.Application.Repositories;
+using Iduca.Application.Repository;
 using Iduca.Persistence.Context;
 
 namespace Iduca.Persistence.Repositories;

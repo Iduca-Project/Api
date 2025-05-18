@@ -7,4 +7,6 @@ public static class APIRoutes
         Colocar aqui as rotas no padrão:
         public const string RouteName = "url/algo";
     */
+
+    public const string Companies = "api/company";
 }

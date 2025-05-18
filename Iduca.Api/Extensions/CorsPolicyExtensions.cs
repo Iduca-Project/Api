@@ -1,4 +1,4 @@
-namespace Iduca.API.Extensions;
+namespace Iduca.Api.Extensions;
 
 public static class CorsPolicyExtensions
 {

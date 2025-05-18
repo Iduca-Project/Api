@@ -9,7 +9,7 @@ namespace Iduca.Application;
 
 public static class ServiceExtensions
 {
-    public static void ConfigurApplication(this IServiceCollection services)
+    public static void ConfigureApplication(this IServiceCollection services)
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
