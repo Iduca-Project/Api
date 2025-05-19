@@ -3,6 +3,9 @@ using Iduca.Domain.Models;
 namespace Iduca.Application.Features.Companies.GetAll;
 
 public sealed record GetAllCompanyResponse(
-    List<Company> companies,
+    Guid Id,
+    DateTime CreatedAt,
+    DateTime UpdatedAt,
+    DateTime? DisabledAt,
     string Name
 );
