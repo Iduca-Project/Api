@@ -3,6 +3,7 @@ using Iduca.Application.Features.Companies.Create;
 using Iduca.Application.Features.Companies.Delete;
 using Iduca.Application.Features.Companies.Get;
 using Iduca.Application.Features.Companies.GetAll;
+using Iduca.Application.Features.Companies.GetById;
 using Iduca.Application.Features.Companies.Update;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -53,6 +54,17 @@ public class CompaniesController(IMediator mediator) : ControllerBase
     )
     {
         var response = await mediator.Send(new GetAllCompanyRequest(), cancellationToken);
+
+        return Ok(response);
+    }
+
+    [HttpGet]
+    [Route("{Id}")]
+    public async Task<ActionResult<GetCompanyResponse>> GetById(
+        [FromRoute] Guid Id, CancellationToken cancellationToken
+    )
+    {
+        var response = await mediator.Send(new GetByIdCompanyRequest(Id), cancellationToken);
 
         return Ok(response);
     }

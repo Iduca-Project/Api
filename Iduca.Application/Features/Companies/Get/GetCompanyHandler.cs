@@ -1,11 +1,7 @@
 using AutoMapper;
-using Iduca.Application.Repository;
 using Iduca.Application.Repository.CompanyRepository;
 using Iduca.Domain.Models;
-using Iduca.Domain.Common.Messages;
-using Iduca.Application.Common.Exceptions;
 using MediatR;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Iduca.Application.Features.Companies.Get;
 

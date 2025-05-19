@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\Iduca.Domain.csproj": {}
+    "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Domain\\Iduca.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\Iduca.Domain.csproj": {
+    "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Domain\\Iduca.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\Iduca.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Domain\\Iduca.Domain.csproj",
         "projectName": "Iduca.Domain",
-        "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\Iduca.Domain.csproj",
+        "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Domain\\Iduca.Domain.csproj",
         "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\obj\\",
+        "outputPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
