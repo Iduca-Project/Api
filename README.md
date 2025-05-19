@@ -626,6 +626,7 @@ Authorization: Bearer {token}
   "content": [
     {
       "type": 1,
+      "title": "Git x Github",
       "value": "Git is a distributed version control system..."
     },
     {
@@ -634,6 +635,7 @@ Authorization: Bearer {token}
     },
     {
       "type": "text",
+      "title": "Pessoas usando o github",
       "value": "It allows multiple people to collaborate on code..."
     }
   ],
