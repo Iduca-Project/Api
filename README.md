@@ -653,25 +653,37 @@ Authorization: Bearer {token}
 ## 🧠 Se for vídeo (type 2):
 
 ```
-"content": [
-  {
+{
+  "id": 101,
+  "type": 1,
+  "title": "Introduction to Git",
+  "courseId": 5,
+  "moduleId": 1,
+  "completed": true,
+  "content": [
+    {
+      "type": 2,
+      "value": "https://cdn.exemplo.com/videos/lesson102.mp4"
+    }
+  ]
+  "nextLesson": {
+    "id": 102,
     "type": 2,
-    "value": "https://cdn.exemplo.com/videos/lesson102.mp4"
+    "title": "Installing Git"
   }
-]
+}
 ```
 ## 🧠 Se for atividade de múltipla escolha (type 3):
 
 ```
 {
-  "id": 103,
-  "type": 3,
+  "id": 101,
+  "type": 1,
   "title": "Practice: Git Init",
   "courseId": 5,
   "moduleId": 1,
-  "activityType": 3,
-  "completed": false,
-  "questions": [
+  "completed": true,
+  "content": [
     {
       "id": 1,
       "question": "What is the command to initialize a Git repository?",
@@ -691,6 +703,11 @@ Authorization: Bearer {token}
       ]
     }
   ]
+  "nextLesson": {
+    "id": 102,
+    "type": 2,
+    "title": "Installing Git"
+  }
 }
 ```
 ## 🧠 Se for atividade de PDF (type 4):
