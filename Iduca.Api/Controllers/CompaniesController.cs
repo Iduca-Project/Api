@@ -39,17 +39,18 @@ public class CompaniesController(IMediator mediator) : ControllerBase
 
     [HttpGet]
     public async Task<ActionResult<GetCompanyResponse>> Get(
-        GetCompanyRequest request, CancellationToken cancellationToken
+        [FromQuery] string Name,
+        CancellationToken cancellationToken
     )
     {
-        var response = await mediator.Send(new GetCompanyRequest(request.Name), cancellationToken);
+        var response = await mediator.Send(new GetCompanyRequest(Name), cancellationToken);
 
         return Ok(response);
     }
 
     [HttpGet]
     [Route("all")]
-    public async Task<ActionResult<GetAllCompanyResponse>> GetAll(
+    public async Task<ActionResult<List<GetAllCompanyResponse>>> GetAll(
         CancellationToken cancellationToken
     )
     {

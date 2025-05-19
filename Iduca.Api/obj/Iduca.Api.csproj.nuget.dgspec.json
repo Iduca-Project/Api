@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Api\\Iduca.Api.csproj": {}
+    "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Api\\Iduca.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Api\\Iduca.Api.csproj": {
+    "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Api\\Iduca.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Api\\Iduca.Api.csproj",
+        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Api\\Iduca.Api.csproj",
         "projectName": "Iduca.Api",
-        "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Api\\Iduca.Api.csproj",
+        "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Api\\Iduca.Api.csproj",
         "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Api\\obj\\",
+        "outputPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -29,11 +29,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Application\\Iduca.Application.csproj": {
-                "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Application\\Iduca.Application.csproj"
+              "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Application\\Iduca.Application.csproj": {
+                "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Application\\Iduca.Application.csproj"
               },
-              "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj": {
-                "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj"
+              "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\Iduca.Persistence.csproj": {
+                "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\Iduca.Persistence.csproj"
               }
             }
           }
@@ -101,14 +101,14 @@
         }
       }
     },
-    "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Application\\Iduca.Application.csproj": {
+    "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Application\\Iduca.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Application\\Iduca.Application.csproj",
+        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Application\\Iduca.Application.csproj",
         "projectName": "Iduca.Application",
-        "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Application\\Iduca.Application.csproj",
+        "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Application\\Iduca.Application.csproj",
         "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Application\\obj\\",
+        "outputPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -126,8 +126,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Domain\\Iduca.Domain.csproj": {
-                "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Domain\\Iduca.Domain.csproj"
+              "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\Iduca.Domain.csproj": {
+                "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\Iduca.Domain.csproj"
               }
             }
           }
@@ -188,14 +188,14 @@
         }
       }
     },
-    "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Domain\\Iduca.Domain.csproj": {
+    "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\Iduca.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Domain\\Iduca.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\Iduca.Domain.csproj",
         "projectName": "Iduca.Domain",
-        "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Domain\\Iduca.Domain.csproj",
+        "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\Iduca.Domain.csproj",
         "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Domain\\obj\\",
+        "outputPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -249,14 +249,14 @@
         }
       }
     },
-    "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj": {
+    "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\Iduca.Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj",
+        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\Iduca.Persistence.csproj",
         "projectName": "Iduca.Persistence",
-        "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj",
+        "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\Iduca.Persistence.csproj",
         "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Persistence\\obj\\",
+        "outputPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -274,11 +274,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Application\\Iduca.Application.csproj": {
-                "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Application\\Iduca.Application.csproj"
+              "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Application\\Iduca.Application.csproj": {
+                "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Application\\Iduca.Application.csproj"
               },
-              "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Domain\\Iduca.Domain.csproj": {
-                "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Domain\\Iduca.Domain.csproj"
+              "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\Iduca.Domain.csproj": {
+                "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Domain\\Iduca.Domain.csproj"
               }
             }
           }

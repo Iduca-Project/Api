@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rz7epIAXuyY=",
+  "dgSpecHash": "QbFGx1HZlMQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Api\\Iduca.Api.csproj",
+  "projectFilePath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Backend-NEW\\Iduca.Api\\Iduca.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aluno\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Aluno\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

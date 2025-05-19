@@ -1,6 +1,5 @@
 using AutoMapper;
 using Iduca.Application.Repository.CompanyRepository;
-using Iduca.Domain.Models;
 using MediatR;
 
 namespace Iduca.Application.Features.Companies.Get;
@@ -15,13 +14,8 @@ public class GetCompanyHandler (
 
     public async Task<GetCompanyResponse> Handle(GetCompanyRequest request, CancellationToken cancellationToken)
     {
-        var company = mapper.Map<Company>(request);
+        var findCompanies = await companyRepository.GetCompanyByName(request.Name, cancellationToken);
 
-        var findCompany = await companyRepository.GetCompanyByName(company.Name, cancellationToken);
-
-        if (findCompany is null)
-            return mapper.Map<GetCompanyResponse>(null);
-
-        return mapper.Map<GetCompanyResponse>(findCompany);
+        return mapper.Map<GetCompanyResponse>(findCompanies);
     }
 }
