@@ -2,6 +2,7 @@ using Iduca.Api.Enums;
 using Iduca.Application.Features.Companies.Create;
 using Iduca.Application.Features.Companies.Delete;
 using Iduca.Application.Features.Companies.Get;
+using Iduca.Application.Features.Companies.GetById;
 using Iduca.Application.Features.Companies.Update;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -41,6 +42,16 @@ public class CompaniesController(IMediator mediator) : ControllerBase
     )
     {
         var response = await mediator.Send(new GetCompanyRequest(request.Name), cancellationToken);
+
+        return Ok(response);
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<GetCompanyResponse>> GetById(
+        GetByIdCompanyRequest request, CancellationToken cancellationToken
+    )
+    {
+        var response = await mediator.Send(new GetByIdCompanyRequest(request.Id), cancellationToken);
 
         return Ok(response);
     }
