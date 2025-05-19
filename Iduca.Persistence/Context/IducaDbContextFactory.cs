@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Iduca.Application.Config;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace Iduca.Persistence.Context;
 

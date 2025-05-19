@@ -4212,11 +4212,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Api\\Iduca.Api.csproj",
+      "projectUniqueName": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.APi\\Iduca.Api.csproj",
       "projectName": "Iduca.Api",
-      "projectPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Api\\Iduca.Api.csproj",
+      "projectPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.APi\\Iduca.Api.csproj",
       "packagesPath": "C:\\Users\\amilt\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Api\\obj\\",
+      "outputPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.APi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\amilt\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -4321,13 +4321,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Api\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }

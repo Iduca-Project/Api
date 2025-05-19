@@ -2,6 +2,7 @@ using Iduca.Persistence.Context;
 using Iduca.Persistence;
 
 using Iduca.Api.Extensions;
+using Iduca.Api.Middlewares.ExceptionHandlers;
 
 using Iduca.Application;
 using Iduca.Application.Config;
@@ -36,4 +37,5 @@ context.Database.EnsureCreated();
 
 app.UseCors();
 app.MapControllers();
+app.UseErrorHandler();
 app.Run();

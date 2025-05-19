@@ -38,7 +38,7 @@ public class BaseRepository<TModel>(IducaContext Context) : IBaseRepository<TMod
     public Task<bool> Exists(Guid id, CancellationToken cancellationToken)
         => dbSet.AnyAsync(e =>
             EF.Property<Guid>(e, "Id") == id &&
-            EF.Property<Guid?>(e, "DeletedAt") == null,
+            EF.Property<Guid?>(e, "DisabledAt") == null,
             cancellationToken
         );
 }

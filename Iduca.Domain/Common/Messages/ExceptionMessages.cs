@@ -1,9 +1,26 @@
 namespace Iduca.Domain.Common.Messages;
 
-public static class ExceptionMessage 
+public static class ExceptionMessage
 {
     public static class BadRequest
     {
         public const string Default = "Bad request";
+    }
+
+    public static class DuplicityModel
+    {
+        public const string Default = "It's already exists!";
+        public const string EmailUserDuplicity = "An user with that e-mail already exists!";
+        public const string CompanyNameDuplicity = "An company with that name already exists!";
+    }
+
+    public static class InternalServerError
+    {
+        public const string Default = "Internal server error";
+    }
+
+    public static class NotFound
+    {
+        public const string Default = "Item not found";
     }
 }

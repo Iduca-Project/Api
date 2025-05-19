@@ -2,6 +2,8 @@ using AutoMapper;
 using Iduca.Application.Repository;
 using Iduca.Application.Repository.CompanyRepository;
 using Iduca.Domain.Models;
+using Iduca.Domain.Common.Messages;
+using Iduca.Application.Common.Exceptions;
 using MediatR;
 
 namespace Iduca.Application.Features.Companies.Create;
@@ -19,6 +21,11 @@ public class CreateCompanyHandler (
     public async Task<CreateCompanyResponse> Handle(CreateCompanyRequest request, CancellationToken cancellationToken)
     {
         var company = mapper.Map<Company>(request);
+
+        var findCompany = await companyRepository.GetCompanyByName(company.Name, cancellationToken);
+
+        if (findCompany is not null)
+            throw new DuplicityException(ExceptionMessage.DuplicityModel.CompanyNameDuplicity);
 
         companyRepository.Create(company);
 
