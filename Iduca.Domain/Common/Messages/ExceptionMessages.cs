@@ -12,6 +12,7 @@ public static class ExceptionMessage
         public const string Default = "It's already exists!";
         public const string EmailUserDuplicity = "An user with that e-mail already exists!";
         public const string CompanyNameDuplicity = "An company with that name already exists!";
+        public const string CategoryNameDuplicity = "An category with that name already exists!";
     }
 
     public static class InternalServerError

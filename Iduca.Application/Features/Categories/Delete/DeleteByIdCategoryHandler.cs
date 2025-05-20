@@ -25,6 +25,6 @@ public class DeleteByIdCategoryHandler(
 
         await unitOfWork.Save(cancellationToken);
 
-        return mapper.Map<DeleteByIdCategoryResponse>(findCategory);
+        return new DeleteByIdCategoryResponse();
     }
 }

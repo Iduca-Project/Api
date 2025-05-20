@@ -21,10 +21,10 @@ public class CreateCategory(
     {
         var category = mapper.Map<Category>(request);
 
-        var findCategory = categoryRepository.GetCategoryByEqualName(category.Name, cancellationToken);
+        var findCategory = await categoryRepository.GetCategoryByEqualName(category.Name, cancellationToken);
 
         if (findCategory is not null)
-            throw new DuplicityException(ExceptionMessage.DuplicityModel.CompanyNameDuplicity);
+            throw new DuplicityException(ExceptionMessage.DuplicityModel.CategoryNameDuplicity);
 
         categoryRepository.Create(category);
         await unitOfWork.Save(cancellationToken);
