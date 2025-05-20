@@ -22,7 +22,6 @@ public class CompaniesController(IMediator mediator) : ControllerBase
     )
     {
         var response = await mediator.Send(request, cancellationToken);
-
         return Created(APIRoutes.Companies, response);
     }
 
