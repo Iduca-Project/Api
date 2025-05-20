@@ -621,7 +621,6 @@ Authorization: Bearer {token}
   "type": 1,
   "title": "Introduction to Git",
   "courseId": 5,
-  "moduleId": 1,
   "completed": true,
   "content": [
     {
@@ -655,10 +654,9 @@ Authorization: Bearer {token}
 ```
 {
   "id": 101,
-  "type": 1,
+  "type": 2,
   "title": "Introduction to Git",
   "courseId": 5,
-  "moduleId": 1,
   "completed": true,
   "content": [
     {
@@ -678,10 +676,9 @@ Authorization: Bearer {token}
 ```
 {
   "id": 101,
-  "type": 1,
+  "type": 3,
   "title": "Practice: Git Init",
   "courseId": 5,
-  "moduleId": 1,
   "completed": true,
   "content": [
     {
@@ -718,8 +715,7 @@ Authorization: Bearer {token}
   "type": 3,
   "title": "Upload your Git Project",
   "courseId": 5,
-  "moduleId": 1,
-  "activityType": 4,
+  "type": 4,
   "completed": false,
   "description": "Send a PDF explaining how you initialized and committed your project using Git."
 }
@@ -765,6 +761,7 @@ Para pegar as questões e alternativas de uma prova.
 {
 "id": 1,
 "title": "Prova Final",
+"courseId": 5,
 "questions": [
     {
       "id": 1,
