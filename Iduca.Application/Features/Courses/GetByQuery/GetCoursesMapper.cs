@@ -3,11 +3,10 @@ using AutoMapper;
 
 namespace Iduca.Application.Features.Companies.Get;
 
-public class GetCompanyMapper : Profile
+public class GetCourseByQueryCompanyMapper : Profile
 {
-    public GetCompanyMapper()
+    public GetCourseByQueryCompanyMapper()
     {
-        CreateMap<GetCompanyRequest, Company>();
-        CreateMap<Company, GetCompanyResponse>();
+        CreateMap<Course, GetCompanyResponse>();
     }
 }

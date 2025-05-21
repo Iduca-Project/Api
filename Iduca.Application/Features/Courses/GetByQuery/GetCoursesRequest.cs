@@ -5,7 +5,7 @@ using MediatR;
 namespace Iduca.Application.Features.Courses.GetByQuery;
 
 public sealed record GetCoursesRequest(
-    string Name,
-    CourseDifficulty Difficulty,
-    List<Category> Categories
+    string? Name,
+    CourseDifficulty? Difficulty,
+    Guid? Category
 ) : IRequest<GetCoursesResponse>;

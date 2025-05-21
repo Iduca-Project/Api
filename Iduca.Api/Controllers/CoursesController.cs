@@ -39,14 +39,15 @@ public class CoursesController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<GetCoursesResponse>>> Get(
-        [FromQuery] string Name,
-        [FromQuery] CourseDifficulty Difficulty,
-        [FromBody] List<Category> Categories,
+    [Route("all")]
+    public async Task<ActionResult<List<GetCoursesResponse>>> GetAll(
+        [FromQuery] string? Name,
+        [FromQuery] CourseDifficulty? Difficulty,
+        [FromQuery] Guid? Category,
         CancellationToken cancellationToken
     )
     {
-        var response = await mediator.Send(new GetCoursesRequest(Name, Difficulty, Categories), cancellationToken);
+        var response = await mediator.Send(new GetCoursesRequest(Name, Difficulty, Category), cancellationToken);
 
         return Ok(response);
     }
