@@ -19,8 +19,8 @@ public class GetCoursesHandler (
     public async Task<GetCoursesResponse> Handle(GetCoursesRequest request, CancellationToken cancellationToken)
     {
     
-        
-        
+        var findCourses = await courseRepository.GetCoursesByQuery(request.Name, request.Difficulty, request.Categories, request.Page, request.MaxItens, cancellationToken)
+            ?? throw new NotFoundException(ExceptionMessage.NotFound.Default);
 
         return mapper.Map<GetCoursesResponse>(findCourses);
     }
