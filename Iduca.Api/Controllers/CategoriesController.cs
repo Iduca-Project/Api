@@ -23,10 +23,10 @@ public class CategoriesController(IMediator mediator) : ControllerBase
     }
     [HttpGet]
     public async Task<ActionResult<CreateCategoryResponse>> GetBySimilarName(
-        GetByNameCategoryRequest request, CancellationToken cancellationToken
+        [FromQuery] string Name, CancellationToken cancellationToken
     )
     {
-        var response = await mediator.Send(request, cancellationToken);
+        var response = await mediator.Send(new GetByNameCategoryRequest(Name), cancellationToken);
         return Ok(response);
     }
     [HttpDelete]
