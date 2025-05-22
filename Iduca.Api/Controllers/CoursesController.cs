@@ -38,16 +38,21 @@ public class CoursesController(IMediator mediator) : ControllerBase
         return NoContent();
     }
 
-    [HttpGet]
+    [HttpPost]
     [Route("all")]
     public async Task<ActionResult<List<GetCoursesResponse>>> GetAll(
         [FromQuery] string? Name,
+        [FromBody] List<Guid>? Categories,
+        [FromQuery] int Page,
+        [FromQuery] int MaxItens,
         [FromQuery] CourseDifficulty? Difficulty,
-        [FromQuery] Guid? Category,
         CancellationToken cancellationToken
     )
     {
-        var response = await mediator.Send(new GetCoursesRequest(Name, Difficulty, Category), cancellationToken);
+        if (Page < 1 && MaxItens < 1)
+            return BadRequest("Page and MaxItens must be greater than 0.");
+
+        var response = await mediator.Send(new GetCoursesRequest(Name, Difficulty, Categories, Page, MaxItens), cancellationToken);
 
         return Ok(response);
     }

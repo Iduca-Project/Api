@@ -1,3 +1,4 @@
+using System.Text.Json.Nodes;
 using AutoMapper;
 using Iduca.Application.Common.Exceptions;
 using Iduca.Application.Repository.CourseRepository;
@@ -17,9 +18,10 @@ public class GetCoursesHandler (
 
     public async Task<GetCoursesResponse> Handle(GetCoursesRequest request, CancellationToken cancellationToken)
     {
-        var findCompanies = await courseRepository.GetCoursesByQuery(request.Name, request.Difficulty, request.Category, cancellationToken)
-            ?? throw new NotFoundException(ExceptionMessage.NotFound.Default);
+    
+        
+        
 
-        return mapper.Map<GetCoursesResponse>(findCompanies);
+        return mapper.Map<GetCoursesResponse>(findCourses);
     }
 }

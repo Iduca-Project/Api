@@ -11,5 +11,5 @@ public sealed record CreateCourseRequest(
     CourseDifficulty Difficulty,
     string Image,
     int TotalHours,
-    List<Category> Categories
+    List<Guid> Categories
 ) : IRequest<CreateCourseResponse>;

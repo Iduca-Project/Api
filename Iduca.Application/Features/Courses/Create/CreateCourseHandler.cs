@@ -25,19 +25,29 @@ public class CreateCourseHandler (
 
     public async Task<CreateCourseResponse> Handle(CreateCourseRequest request, CancellationToken cancellationToken)
     {
-        var course = mapper.Map<Course>(request);
+        var course = new Course()
+        {
+            Name = request.Name,
+            Description = request.Description,
+            Difficulty = (int)request.Difficulty,
+            Image = request.Image,
+            TotalHours = request.TotalHours,
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
+        };
 
         var findCourse = await courseRepository.GetCourseByEqualName(request.Name, cancellationToken);
 
         if (findCourse is not null)
             throw new DuplicityException(ExceptionMessage.DuplicityModel.Default);
 
-        var categoryIds = request.Categories.Select(c => c.Id).ToList();
         var categoriesFromDb = new List<Category>();
-        foreach (var id in categoryIds)
+
+        foreach (var id in request.Categories)
         {
             var findCategory = await categoryRepository.Get(id, cancellationToken)
                 ?? throw new NotFoundException(ExceptionMessage.NotFound.Default);
+
             categoriesFromDb.Add(findCategory);
         }
 

@@ -8,7 +8,6 @@ public class CreateCourseMapper : Profile
 {
     public CreateCourseMapper()
     {
-        CreateMap<CreateCourseRequest, Course>();
         CreateMap<Course, CreateCourseResponse>();
     }
 }
