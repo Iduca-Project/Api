@@ -13,6 +13,7 @@ public class GetCategoryByName(
     private readonly IMapper mapper = mapper;
     public async Task<GetByNameCategoryResponse> Handle(GetByNameCategoryRequest request, CancellationToken cancellationToken)
     {
+        Console.WriteLine("\n\n\n"+request.Name+"\n\n\n");
         var findCategories = await categoryRepository.GetCategoriesBySimilarName(request.Name, cancellationToken);
         return mapper.Map<GetByNameCategoryResponse>(findCategories);
     }

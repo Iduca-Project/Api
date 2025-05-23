@@ -9,5 +9,5 @@ public sealed record CreateModuleResponse(
     DateTime? DisabledAt,
     string Name,
     string Description,
-    Course Course
+    Guid CourseId
 );

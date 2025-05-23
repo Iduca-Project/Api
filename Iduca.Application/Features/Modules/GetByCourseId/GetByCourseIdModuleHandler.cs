@@ -10,28 +10,18 @@ using MediatR;
 
 namespace Iduca.Application.Features.Modules.Create;
 
-public class CreateModule(
+public class GetByCourseIdModule(
     IUnitOfWork unitOfWork,
     IModuleRepository moduleRepository,
-    ICourseRepository courseRepository,
     IMapper mapper
 ) : IRequestHandler<CreateModuleRequest, CreateModuleResponse>
 {
     private readonly IUnitOfWork unitOfWork = unitOfWork;
     private readonly IModuleRepository moduleRepository = moduleRepository;
-    private readonly ICourseRepository courseRepository = courseRepository;
     private readonly IMapper mapper = mapper;
 
     public async Task<CreateModuleResponse> Handle(CreateModuleRequest request, CancellationToken cancellationToken)
     {
-        Module module = mapper.Map<Module>(request);
-
-        Module? findModule = await moduleRepository.GetModuleByEqualName(request.Name, cancellationToken);
-        if (findModule is not null)
-            throw new DuplicityException(ExceptionMessage.DuplicityModel.ModuleNameDuplicity);
-
-        moduleRepository.Create(module);
-        await unitOfWork.Save(cancellationToken);
-        return mapper.Map<CreateModuleResponse>(module);
+        throw new NotImplementedException();
     }
 }

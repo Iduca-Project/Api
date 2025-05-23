@@ -3,8 +3,6 @@ using MediatR;
 
 namespace Iduca.Application.Features.Modules.Create;
 
-public sealed record CreateModuleRequest(
-    string Name,
-    string Description,
+public sealed record GetByCourseIdModuleRequest(
     Guid CourseId
 ) : IRequest<CreateModuleResponse>;

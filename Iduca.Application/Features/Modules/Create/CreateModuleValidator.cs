@@ -15,5 +15,8 @@ public class CreateModuleValidator : AbstractValidator<CreateModuleRequest>
             .NotEmpty()
             .MaximumLength(511)
             .MinimumLength(8);
+
+        RuleFor(m => m.CourseId)
+            .NotEmpty();
     }
 }
