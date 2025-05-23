@@ -1,9 +1,7 @@
-using System.Text.Json.Nodes;
 using AutoMapper;
 using Iduca.Application.Common.Exceptions;
 using Iduca.Application.Repository.CourseRepository;
 using Iduca.Domain.Common.Messages;
-using Iduca.Domain.Models;
 using MediatR;
 
 namespace Iduca.Application.Features.Courses.GetByQuery;
@@ -22,6 +20,7 @@ public class GetCoursesHandler (
         var findCourses = await courseRepository.GetCoursesByQuery(request.Name, request.Difficulty, request.Categories, request.Page, request.MaxItens, cancellationToken)
             ?? throw new NotFoundException(ExceptionMessage.NotFound.Default);
 
-        return mapper.Map<GetCoursesResponse>(findCourses);
+        var courses = mapper.Map<List<GetCourseProps>>(findCourses);
+        return new GetCoursesResponse(courses);
     }
 }

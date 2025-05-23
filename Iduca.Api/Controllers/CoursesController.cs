@@ -1,11 +1,9 @@
 using Iduca.Api.Enums;
 using Iduca.Application.Features.Companies.Create;
-using Iduca.Application.Features.Companies.Delete;
 using Iduca.Application.Features.Courses.Create;
 using Iduca.Application.Features.Courses.Delete;
 using Iduca.Application.Features.Courses.GetByQuery;
 using Iduca.Domain.Common.Enums;
-using Iduca.Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,7 +36,7 @@ public class CoursesController(IMediator mediator) : ControllerBase
         return NoContent();
     }
 
-    [HttpPost]
+    [HttpGet]
     [Route("all")]
     public async Task<ActionResult<List<GetCoursesResponse>>> GetAll(
         [FromQuery] string? Name,

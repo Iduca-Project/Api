@@ -1,12 +1,15 @@
 using Iduca.Domain.Models;
 using AutoMapper;
 
-namespace Iduca.Application.Features.Companies.Get;
+namespace Iduca.Application.Features.Courses.GetByQuery;
 
-public class GetCourseByQueryCompanyMapper : Profile
+public class GetCoursesMapper : Profile
 {
-    public GetCourseByQueryCompanyMapper()
+    public GetCoursesMapper()
     {
-        CreateMap<Course, GetCompanyResponse>();
+        CreateMap<Course, GetCoursesResponse>();
+        CreateMap<Category, CategoryProps>();
+        CreateMap<Course, GetCourseProps>()
+            .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.Categories));
     }
 }

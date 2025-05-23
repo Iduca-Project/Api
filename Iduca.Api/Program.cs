@@ -7,6 +7,8 @@ using Iduca.Api.Middlewares.ExceptionHandlers;
 using Iduca.Application;
 using Iduca.Application.Config;
 using System.Text.Json.Serialization;
+using Iduca.Application.Features.Companies.Get;
+using Iduca.Application.Features.Courses.GetByQuery;
 
 DotEnv.Load();
 
@@ -16,6 +18,8 @@ builder.Services.ConfigurePersistence();
 builder.Services.ConfigureApplication();
 
 builder.Services.ConfigureCorsPolicy();
+
+builder.Services.AddAutoMapper(typeof(GetCoursesMapper));
 
 builder.Services.AddControllers().AddJsonOptions(op =>
 {
