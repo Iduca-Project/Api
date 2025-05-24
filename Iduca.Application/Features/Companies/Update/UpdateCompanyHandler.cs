@@ -25,6 +25,8 @@ public class UpdateCompanyHandler (
 
         company.Name = request.Props.NewName;
 
+        company.UpdatedAt = DateTime.Now;
+
         await unitOfWork.Save(cancellationToken);
 
         return mapper.Map<UpdateCompanyResponse>(company);
