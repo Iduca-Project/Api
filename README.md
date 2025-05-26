@@ -762,6 +762,7 @@ Para pegar as questões e alternativas de uma prova.
 "id": 1,
 "title": "Prova Final",
 "courseId": 5,
+completed: false,
 "questions": [
     {
       "id": 1,
