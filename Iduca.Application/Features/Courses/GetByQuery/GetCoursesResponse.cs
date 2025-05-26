@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using Iduca.Domain.Models;
 
 namespace Iduca.Application.Features.Courses.GetByQuery;
@@ -12,6 +13,7 @@ public sealed record GetCourseProps (
     int Difficulty,
     string Image,
     int TotalHours,
+    int Students,
     List<CategoryProps> Categories
 );
 

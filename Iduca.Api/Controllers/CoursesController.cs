@@ -2,6 +2,7 @@ using Iduca.Api.Enums;
 using Iduca.Application.Features.Companies.Create;
 using Iduca.Application.Features.Courses.Create;
 using Iduca.Application.Features.Courses.Delete;
+using Iduca.Application.Features.Courses.Get;
 using Iduca.Application.Features.Courses.GetByQuery;
 using Iduca.Domain.Common.Enums;
 using MediatR;
@@ -51,6 +52,17 @@ public class CoursesController(IMediator mediator) : ControllerBase
             return BadRequest("Page and MaxItens must be greater than 0.");
 
         var response = await mediator.Send(new GetCoursesRequest(Name, Difficulty, Categories, Page, MaxItens), cancellationToken);
+
+        return Ok(response);
+    }
+
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<ActionResult<GetCourseResponse>> GetById(
+        [FromRoute] Guid id, CancellationToken cancellationToken
+    )
+    {
+        var response = await mediator.Send(new GetCourseRequest(id), cancellationToken);
 
         return Ok(response);
     }
