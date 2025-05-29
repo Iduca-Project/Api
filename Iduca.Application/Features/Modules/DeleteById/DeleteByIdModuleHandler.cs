@@ -9,13 +9,11 @@ namespace Iduca.Application.Features.Module_.DeleteById;
 
 public class DeleteByIdModule(
     IUnitOfWork unitOfWork,
-    IModuleRepository moduleRepository,
-    IMapper mapper
+    IModuleRepository moduleRepository
 ) : IRequestHandler<DeleteByIdModuleRequest, DeleteByIdModuleResponse>
 {
     private readonly IUnitOfWork unitOfWork = unitOfWork;
     private readonly IModuleRepository moduleRepository = moduleRepository;
-    private readonly IMapper mapper = mapper;
 
     public async Task<DeleteByIdModuleResponse> Handle(DeleteByIdModuleRequest request, CancellationToken cancellationToken)
     {
