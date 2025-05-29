@@ -5,4 +5,4 @@ namespace Iduca.Application.Features.Modules.Create;
 
 public sealed record GetByCourseIdModuleRequest(
     Guid CourseId
-) : IRequest<CreateModuleResponse>;
+) : IRequest<GetByCourseIdModuleResponse>;
