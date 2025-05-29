@@ -1,4 +1,5 @@
 using Iduca.Api.Enums;
+using Iduca.Application.Features.Module_.DeleteById;
 using Iduca.Application.Features.Modules.Create;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,5 +19,25 @@ public class ModulesController(IMediator mediator) : ControllerBase
     {
         var response = await mediator.Send(request, cancellationToken);
         return Ok(response);
+    }
+    
+    [HttpGet]
+    [Route("{Id}")]
+    public async Task<ActionResult<GetByCourseIdModuleResponse>> GetByCourseId(
+        [FromRoute] Guid Id, CancellationToken cancellationToken
+    )
+    {
+        var response = await mediator.Send(new GetByCourseIdModuleRequest(Id), cancellationToken);
+        return Ok(response);
+    }
+
+    [HttpDelete]
+    [Route("{Id}")]
+    public async Task<ActionResult<DeleteByIdModuleResponse>> DeleteById(
+        [FromRoute] Guid Id, CancellationToken cancellationToken
+    )
+    {
+        await mediator.Send(new DeleteByIdModuleRequest(Id), cancellationToken);
+        return NoContent();
     }
 }
