@@ -3,6 +3,7 @@ using System;
 using Iduca.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Iduca.Persistence.Migrations
 {
     [DbContext(typeof(IducaContext))]
-    partial class IducaContextModelSnapshot : ModelSnapshot
+    [Migration("20250530185420_AddModuleIndex")]
+    partial class AddModuleIndex
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

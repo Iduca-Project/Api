@@ -26,9 +26,12 @@ public class CreateModule(
     {
         Module module = mapper.Map<Module>(request);
 
-        Module? findModule = await moduleRepository.GetModuleByEqualName(request.Name, cancellationToken);
+        Module? findModule = await moduleRepository.GetModuleByEqualNameInCourse(request.Name, request.CourseId, cancellationToken);
         if (findModule is not null)
             throw new DuplicityException(ExceptionMessage.DuplicityModel.ModuleNameDuplicity);
+
+        int lastIndex = await moduleRepository.GetLastModuleIndexInCourse(request.CourseId, cancellationToken);
+        module.Index = lastIndex + 1;
 
         moduleRepository.Create(module);
         await unitOfWork.Save(cancellationToken);
