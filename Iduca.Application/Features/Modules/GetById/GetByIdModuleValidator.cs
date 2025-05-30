@@ -1,7 +1,7 @@
 
 using FluentValidation;
 
-namespace Iduca.Application.Features.Module_.GetById;
+namespace Iduca.Application.Features.Modules.GetById;
 
 public class GetByIdModuleValidator : AbstractValidator<GetByIdModuleRequest>
 {

@@ -1,19 +1,16 @@
 
 using Iduca.Domain.Models;
 using AutoMapper;
-using Iduca.Application.Repository;
 using Iduca.Application.Repository.ModuleRepository;
 using MediatR;
 
-namespace Iduca.Application.Features.Module_.GetById;
+namespace Iduca.Application.Features.Modules.GetById;
 
 public class GetByIdModule(
-    IUnitOfWork unitOfWork,
     IModuleRepository moduleRepository,
     IMapper mapper
 ) : IRequestHandler<GetByIdModuleRequest, GetByIdModuleResponse>
 {
-    private readonly IUnitOfWork unitOfWork = unitOfWork;
     private readonly IModuleRepository moduleRepository = moduleRepository;
     private readonly IMapper mapper = mapper;
 

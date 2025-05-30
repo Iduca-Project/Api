@@ -2,7 +2,7 @@
 using AutoMapper;
 using Iduca.Domain.Models;
 
-namespace Iduca.Application.Features.Module_.GetById;
+namespace Iduca.Application.Features.Modules.GetById;
 
 public class GetByIdModuleMapper : Profile
 {

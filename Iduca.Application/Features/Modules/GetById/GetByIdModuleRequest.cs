@@ -1,7 +1,7 @@
 
 using MediatR;
 
-namespace Iduca.Application.Features.Module_.GetById;
+namespace Iduca.Application.Features.Modules.GetById;
 
 public sealed record GetByIdModuleRequest(
     Guid Id

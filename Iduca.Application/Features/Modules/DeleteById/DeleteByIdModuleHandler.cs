@@ -5,7 +5,7 @@ using Iduca.Application.Repository.ModuleRepository;
 using Iduca.Domain.Models;
 using MediatR;
 
-namespace Iduca.Application.Features.Module_.DeleteById;
+namespace Iduca.Application.Features.Modules.DeleteById;
 
 public class DeleteByIdModule(
     IUnitOfWork unitOfWork,
