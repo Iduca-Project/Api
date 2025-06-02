@@ -29,6 +29,7 @@ using Iduca.Application.Repository.UserCourseRepository;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Iduca.Application.Repository.ExamRepository;
 
 namespace Iduca.Persistence;
 
@@ -55,5 +56,6 @@ public static class ServiceExtensions
         services.AddScoped<IModuleRepository, ModuleRepository>();
         services.AddScoped<IReminderRepository, ReminderRepository>();
         services.AddScoped<IUserCourseRepository, UserCourseRepository>();
+        services.AddScoped<IExamRepository, ExamRepository>();
     }
 }
