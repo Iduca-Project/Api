@@ -8,7 +8,7 @@ public class GetByNameCategoryValidator : AbstractValidator<GetByNameCategoryReq
     {
         RuleFor(c => c.Name)
             .NotEmpty()
-            .MinimumLength(2)
+            .MinimumLength(1)
             .MaximumLength(50);
     }
 }

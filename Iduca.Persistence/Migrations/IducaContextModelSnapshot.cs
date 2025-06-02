@@ -455,6 +455,9 @@ namespace Iduca.Persistence.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("disabled_at");
 
+                    b.Property<int>("Index")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(64)

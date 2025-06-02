@@ -13,6 +13,7 @@ public static class ExceptionMessage
         public const string EmailUserDuplicity = "An user with that e-mail already exists!";
         public const string CompanyNameDuplicity = "An company with that name already exists!";
         public const string CategoryNameDuplicity = "An category with that name already exists!";
+        public const string ModuleNameDuplicity = "An module with that name already exists!";
     }
 
     public static class InternalServerError
@@ -23,5 +24,6 @@ public static class ExceptionMessage
     public static class NotFound
     {
         public const string Default = "Item not found";
+        public const string CourseIdNotFound = "A course with that Id does not exist";
     }
 }
