@@ -14,7 +14,6 @@ public class IducaContext(DbContextOptions<IducaContext> options) : DbContext(op
         modelBuilder.ConfigureCompanyTable();
         modelBuilder.ConfigureContentTable();
         modelBuilder.ConfigureCourseTable();
-        modelBuilder.ConfigureExamTable();
         modelBuilder.ConfigureExerciseTable();
         modelBuilder.ConfigureLessonTable();
         modelBuilder.ConfigureLogTable();

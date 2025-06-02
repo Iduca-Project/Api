@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Api\\Iduca.Api.csproj": {}
+    "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\iduca.api\\Iduca.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Api\\Iduca.Api.csproj": {
+    "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\iduca.api\\Iduca.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Api\\Iduca.Api.csproj",
+        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\iduca.api\\Iduca.Api.csproj",
         "projectName": "Iduca.Api",
-        "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Api\\Iduca.Api.csproj",
+        "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\iduca.api\\Iduca.Api.csproj",
         "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Api\\obj\\",
+        "outputPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\iduca.api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
