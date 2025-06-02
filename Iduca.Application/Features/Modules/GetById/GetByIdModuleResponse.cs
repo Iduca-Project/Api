@@ -8,5 +8,6 @@ public sealed record GetByIdModuleResponse(
     string Name,
     string Description,
     Guid CourseId,
-    List<Exercise> Exercises
+    List<Exercise> Exercises,
+    List<Lesson> Lessons
 );
