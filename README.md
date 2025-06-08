@@ -943,6 +943,7 @@ Authorization: Bearer {token}
     "coursesInProgress": 2,
     "averageScore": 87, // Média das notas dos cursos
     "topCategory": "Programação", // Onde ela tem melhor desempenho
+    "isManager": false
   },
   {
     "id": 22,
@@ -952,6 +953,7 @@ Authorization: Bearer {token}
     "coursesInProgress": 1,
     "averageScore": 59,
     "topCategory": "DevOps",
+    "isManager": false
   }
 ]
 ```
