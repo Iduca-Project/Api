@@ -1,14 +1,8 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "whGTQr6C3ek=",
   "success": true,
   "projectFilePath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj",
-=======
-  "dgSpecHash": "AcbaxMMKrwI=",
-  "success": true,
-  "projectFilePath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj",
->>>>>>> CourseFeaturesAndController
   "expectedPackageFiles": [
     "C:\\Users\\Aluno\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Aluno\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
@@ -91,10 +85,16 @@
   ],
   "logs": [
     {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problema ao ler o arquivo de cache C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Persistence\\obj\\project.nuget.cache: Invalid property identifier character: <. Path 'version', line 3, position 0."
+    },
+    {
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Iduca.Persistence depends on Microsoft.EntityFrameworkCore (>= 7.0.21) but Microsoft.EntityFrameworkCore 7.0.21 was not found. An approximate best match of Microsoft.EntityFrameworkCore 8.0.0 was resolved.",
+      "message": "Iduca.Persistence depende de Microsoft.EntityFrameworkCore (>= 7.0.21), mas Microsoft.EntityFrameworkCore 7.0.21 não foi encontrado. A melhor correspondência aproximada de Microsoft.EntityFrameworkCore 8.0.0 foi resolvida.",
       "libraryId": "Microsoft.EntityFrameworkCore",
       "targetGraphs": [
         "net8.0"
@@ -104,7 +104,7 @@
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Iduca.Persistence depends on Microsoft.EntityFrameworkCore.Design (>= 7.0.21) but Microsoft.EntityFrameworkCore.Design 7.0.21 was not found. An approximate best match of Microsoft.EntityFrameworkCore.Design 8.0.0 was resolved.",
+      "message": "Iduca.Persistence depende de Microsoft.EntityFrameworkCore.Design (>= 7.0.21), mas Microsoft.EntityFrameworkCore.Design 7.0.21 não foi encontrado. A melhor correspondência aproximada de Microsoft.EntityFrameworkCore.Design 8.0.0 foi resolvida.",
       "libraryId": "Microsoft.EntityFrameworkCore.Design",
       "targetGraphs": [
         "net8.0"
@@ -114,7 +114,7 @@
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Iduca.Persistence depends on Microsoft.EntityFrameworkCore.Tools (>= 7.0.21) but Microsoft.EntityFrameworkCore.Tools 7.0.21 was not found. An approximate best match of Microsoft.EntityFrameworkCore.Tools 8.0.0 was resolved.",
+      "message": "Iduca.Persistence depende de Microsoft.EntityFrameworkCore.Tools (>= 7.0.21), mas Microsoft.EntityFrameworkCore.Tools 7.0.21 não foi encontrado. A melhor correspondência aproximada de Microsoft.EntityFrameworkCore.Tools 8.0.0 foi resolvida.",
       "libraryId": "Microsoft.EntityFrameworkCore.Tools",
       "targetGraphs": [
         "net8.0"

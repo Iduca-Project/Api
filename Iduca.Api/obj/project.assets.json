@@ -4212,19 +4212,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Api\\Iduca.Api.csproj",
       "projectName": "Iduca.Api",
       "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Api\\Iduca.Api.csproj",
       "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Api\\obj\\",
-=======
-      "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\Amilton\\Api\\Iduca.Api\\Iduca.Api.csproj",
-      "projectName": "Iduca.Api",
-      "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Api\\Iduca.Api\\Iduca.Api.csproj",
-      "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Api\\Iduca.Api\\obj\\",
->>>>>>> CourseFeaturesAndController
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4242,19 +4234,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-<<<<<<< HEAD
             "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Application\\Iduca.Application.csproj": {
               "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Application\\Iduca.Application.csproj"
             },
             "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj": {
               "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj"
-=======
-            "C:\\Users\\Aluno\\Desktop\\Amilton\\Api\\Iduca.Application\\Iduca.Application.csproj": {
-              "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Api\\Iduca.Application\\Iduca.Application.csproj"
-            },
-            "C:\\Users\\Aluno\\Desktop\\Amilton\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj": {
-              "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Api\\Iduca.Persistence\\Iduca.Persistence.csproj"
->>>>>>> CourseFeaturesAndController
             }
           }
         }
