@@ -4,6 +4,7 @@ using Iduca.Application.Features.Courses.Create;
 using Iduca.Application.Features.Courses.Delete;
 using Iduca.Application.Features.Courses.Get;
 using Iduca.Application.Features.Courses.GetByQuery;
+using Iduca.Application.Features.Courses.Update;
 using Iduca.Domain.Common.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -63,6 +64,16 @@ public class CoursesController(IMediator mediator) : ControllerBase
     )
     {
         var response = await mediator.Send(new GetCourseRequest(id), cancellationToken);
+
+        return Ok(response);
+    }
+
+    [HttpPatch]
+    public async Task<ActionResult<UpdateCourseRequest>> Update(
+        [FromBody] UpdateCourseRequest request, CancellationToken cancellationToken
+    )
+    {
+        var response = await mediator.Send(request, cancellationToken);
 
         return Ok(response);
     }

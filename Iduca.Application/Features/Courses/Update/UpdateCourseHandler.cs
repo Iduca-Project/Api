@@ -4,6 +4,7 @@ using Iduca.Application.Repository;
 using Iduca.Application.Repository.CourseRepository;
 using Iduca.Application.Repository.UserCourseRepository;
 using Iduca.Domain.Common.Messages;
+using Iduca.Domain.Models;
 using MediatR;
 
 namespace Iduca.Application.Features.Courses.Update;
@@ -35,13 +36,14 @@ public class UpdateCourseHandler (
         course.Difficulty = (int)request.Difficulty;
         course.Image = request.Image;
         course.TotalHours = request.TotalHours;
+        // course.Categories = categories; ! Necessário fazer essa parte ainda!
 
         var students = userCourseRepository.GetAllByCourseId(course.Id, cancellationToken);
 
         await unitOfWork.Save(cancellationToken);
 
         return new UpdateCourseResponse(
-            course.Name,
+            course.Name,    
             course.Id,
             course.UpdatedAt,
             course.Categories,

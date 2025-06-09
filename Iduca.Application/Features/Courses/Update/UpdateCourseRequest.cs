@@ -9,5 +9,6 @@ public sealed record UpdateCourseRequest (
     string Description,
     CourseDifficulty Difficulty,
     string Image,
-    int TotalHours
+    int TotalHours,
+    List<Guid> Categories
 ) : IRequest<UpdateCourseResponse>;

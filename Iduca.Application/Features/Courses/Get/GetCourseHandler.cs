@@ -25,7 +25,7 @@ public class GetCourseHandler (
 
         var userCourses = await userCourseRepository.GetAllByCourseId(findCourse.Id, cancellationToken);
 
-        var studentsCount = userCourses.Count();
+        var studentsCount = userCourses.Count;
 
         var response = new GetCourseResponse(
             findCourse.Name,
