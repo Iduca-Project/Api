@@ -22,7 +22,7 @@ public class CreateCompanyHandler (
     {
         var company = mapper.Map<Company>(request);
 
-        var findCompany = await companyRepository.GetCompanyByName(company.Name, cancellationToken);
+        var findCompany = await companyRepository.GetCompanyByEqualName(company.Name, cancellationToken);
 
         if (findCompany is not null)
             throw new DuplicityException(ExceptionMessage.DuplicityModel.CompanyNameDuplicity);

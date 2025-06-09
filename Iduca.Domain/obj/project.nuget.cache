@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "PcFc42X0XOc=",
   "success": true,
   "projectFilePath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Domain\\Iduca.Domain.csproj",
+=======
+  "dgSpecHash": "wqQLCxBe8kU=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Api\\Iduca.Domain\\Iduca.Domain.csproj",
+>>>>>>> CourseFeaturesAndController
   "expectedPackageFiles": [],
   "logs": []
 }
