@@ -7,9 +7,12 @@ public class CreateLessonValidator : AbstractValidator<CreateLessonRequest>
 {
     public CreateLessonValidator()
     {
-        //RuleFor(m => m.[propertie])
-        //    .NotEmpty()
-        //    .MaximumLength(64)
-        //    .MinimumLength(8);
+        RuleFor(l => l.Title)
+           .NotEmpty()
+           .MaximumLength(64);
+
+        RuleFor(l => l.Description)
+           .NotEmpty()
+           .MaximumLength(511);
     }
 }
