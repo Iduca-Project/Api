@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Domain\\Iduca.Domain.csproj": {}
   },
   "projects": {
@@ -12,6 +13,19 @@
         "projectPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Domain\\Iduca.Domain.csproj",
         "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Aluno\\Desktop\\CR\\Repositories\\Api\\Iduca.Domain\\obj\\",
+=======
+    "C:\\Users\\Aluno\\Desktop\\Amilton\\Api\\Iduca.Domain\\Iduca.Domain.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Aluno\\Desktop\\Amilton\\Api\\Iduca.Domain\\Iduca.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Aluno\\Desktop\\Amilton\\Api\\Iduca.Domain\\Iduca.Domain.csproj",
+        "projectName": "Iduca.Domain",
+        "projectPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Api\\Iduca.Domain\\Iduca.Domain.csproj",
+        "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Aluno\\Desktop\\Amilton\\Api\\Iduca.Domain\\obj\\",
+>>>>>>> CourseFeaturesAndController
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -7,6 +7,8 @@ using Iduca.Api.Middlewares.ExceptionHandlers;
 using Iduca.Application;
 using Iduca.Application.Config;
 using System.Text.Json.Serialization;
+using Iduca.Application.Features.Companies.Get;
+using Iduca.Application.Features.Courses.GetByQuery;
 
 DotEnv.Load();
 
@@ -17,13 +19,13 @@ builder.Services.ConfigureApplication();
 
 builder.Services.ConfigureCorsPolicy();
 
-builder.Services
-    .AddControllers()
-    .AddJsonOptions(options => options
-        .JsonSerializerOptions
-        .Converters
-        .Add(new JsonStringEnumConverter())
-    );
+builder.Services.AddAutoMapper(typeof(GetCoursesMapper));
+
+builder.Services.AddControllers().AddJsonOptions(op =>
+{
+    op.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    op.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 
 builder.Services.AddEndpointsApiExplorer();
 
