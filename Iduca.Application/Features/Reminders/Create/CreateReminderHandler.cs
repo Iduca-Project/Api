@@ -1,8 +1,8 @@
 
 using AutoMapper;
 using Iduca.Application.Repository;
-using Iduca.Application.Repository.reminderRepository;
-using Iduca.Domain.Models.Reminder;
+using Iduca.Application.Repository.ReminderRepository;
+using Iduca.Domain.Models;
 using MediatR;
 
 namespace Iduca.Application.Features.Reminders.Create;

@@ -2,6 +2,7 @@ using Iduca.Api.Enums;
 using Iduca.Application.Features.Categories.Create;
 using Iduca.Application.Features.Categories.DeleteById;
 using Iduca.Application.Features.Categories.GetByName;
+using Iduca.Application.Features.Categories.GetAll;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,6 +37,16 @@ public class CategoriesController(IMediator mediator) : ControllerBase
     )
     {
         await mediator.Send(new DeleteByIdCategoryRequest(Id), cancellationToken);
+        return Ok();
+    }
+
+    [HttpGet]
+    [Route("all")]
+    public async Task<ActionResult<GetAllCategoryResponse>> GetByQuery(
+        GetAllCategoryRequest request, CancellationToken cancellationToken
+    )
+    {
+        await mediator.Send(request, cancellationToken);
         return Ok();
     }
 }
