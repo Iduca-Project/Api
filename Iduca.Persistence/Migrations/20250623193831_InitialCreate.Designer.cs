@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Iduca.Persistence.Migrations
+namespace Iduca.Migrations
 {
     [DbContext(typeof(IducaContext))]
-    [Migration("20250517182614_init")]
-    partial class init
+    [Migration("20250623193831_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -206,10 +206,6 @@ namespace Iduca.Persistence.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("disabled_at");
 
-                    b.Property<Guid?>("ExamId")
-                        .HasColumnType("char(36)")
-                        .HasColumnName("exam_id");
-
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasMaxLength(64)
@@ -234,9 +230,6 @@ namespace Iduca.Persistence.Migrations
                     b.HasKey("Id")
                         .HasName("course_id");
 
-                    b.HasIndex("ExamId")
-                        .IsUnique();
-
                     b.ToTable("tb_course", (string)null);
                 });
 
@@ -244,46 +237,37 @@ namespace Iduca.Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
-                        .HasColumnName("id");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("CourseId")
-                        .HasColumnType("char(36)")
-                        .HasColumnName("course_id");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("created_at");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("date");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(511)
-                        .HasColumnType("varchar(511)")
-                        .HasColumnName("description");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime?>("DisabledAt")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("disabled_at");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
-                        .HasColumnName("title");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .IsRequired()
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("updated_at");
+                        .HasColumnType("datetime(6)");
 
-                    b.HasKey("Id")
-                        .HasName("exam_id");
+                    b.HasKey("Id");
 
-                    b.ToTable("tb_exam", (string)null);
+                    b.HasIndex("CourseId")
+                        .IsUnique();
+
+                    b.ToTable("Exam");
                 });
 
             modelBuilder.Entity("Iduca.Domain.Models.Exercise", b =>
@@ -457,6 +441,9 @@ namespace Iduca.Persistence.Migrations
                     b.Property<DateTime?>("DisabledAt")
                         .HasColumnType("datetime(6)")
                         .HasColumnName("disabled_at");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -784,13 +771,15 @@ namespace Iduca.Persistence.Migrations
                     b.Navigation("Lesson");
                 });
 
-            modelBuilder.Entity("Iduca.Domain.Models.Course", b =>
+            modelBuilder.Entity("Iduca.Domain.Models.Exam", b =>
                 {
-                    b.HasOne("Iduca.Domain.Models.Exam", "Exam")
-                        .WithOne("Course")
-                        .HasForeignKey("Iduca.Domain.Models.Course", "ExamId");
+                    b.HasOne("Iduca.Domain.Models.Course", "Course")
+                        .WithOne("Exam")
+                        .HasForeignKey("Iduca.Domain.Models.Exam", "CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Exam");
+                    b.Navigation("Course");
                 });
 
             modelBuilder.Entity("Iduca.Domain.Models.Exercise", b =>
@@ -981,15 +970,11 @@ namespace Iduca.Persistence.Migrations
 
             modelBuilder.Entity("Iduca.Domain.Models.Course", b =>
                 {
+                    b.Navigation("Exam");
+
                     b.Navigation("Modules");
 
                     b.Navigation("UserCourses");
-                });
-
-            modelBuilder.Entity("Iduca.Domain.Models.Exam", b =>
-                {
-                    b.Navigation("Course")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Iduca.Domain.Models.Lesson", b =>

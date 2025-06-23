@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Iduca.Persistence.Migrations
+namespace Iduca.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -49,23 +49,25 @@ namespace Iduca.Persistence.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "tb_exam",
+                name: "tb_course",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    title = table.Column<string>(type: "varchar(64)", maxLength: 64, nullable: false)
+                    name = table.Column<string>(type: "varchar(64)", maxLength: 64, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     description = table.Column<string>(type: "varchar(511)", maxLength: 511, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    course_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    difficulty = table.Column<int>(type: "int", nullable: false),
+                    image = table.Column<string>(type: "varchar(64)", maxLength: 64, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    total_hours = table.Column<int>(type: "int", nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     disabled_at = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("exam_id", x => x.id);
+                    table.PrimaryKey("course_id", x => x.id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -125,7 +127,59 @@ namespace Iduca.Persistence.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "tb_course",
+                name: "course_category",
+                columns: table => new
+                {
+                    category_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    course_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_course_category", x => new { x.category_id, x.course_id });
+                    table.ForeignKey(
+                        name: "FK_course_category_tb_category_category_id",
+                        column: x => x.category_id,
+                        principalTable: "tb_category",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_course_category_tb_course_course_id",
+                        column: x => x.course_id,
+                        principalTable: "tb_course",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Exam",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Title = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Description = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    CourseId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    DisabledAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Exam", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Exam_tb_course_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "tb_course",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "tb_module",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
@@ -133,48 +187,20 @@ namespace Iduca.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     description = table.Column<string>(type: "varchar(511)", maxLength: 511, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    difficulty = table.Column<int>(type: "int", nullable: false),
-                    image = table.Column<string>(type: "varchar(64)", maxLength: 64, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    total_hours = table.Column<int>(type: "int", nullable: false),
-                    exam_id = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    Index = table.Column<int>(type: "int", nullable: false),
+                    CourseId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     created_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     disabled_at = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("course_id", x => x.id);
+                    table.PrimaryKey("module_id", x => x.id);
                     table.ForeignKey(
-                        name: "FK_tb_course_tb_exam_exam_id",
-                        column: x => x.exam_id,
-                        principalTable: "tb_exam",
+                        name: "FK_tb_module_tb_course_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "tb_course",
                         principalColumn: "id");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "exam_questions",
-                columns: table => new
-                {
-                    exam_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    question_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_exam_questions", x => new { x.exam_id, x.question_id });
-                    table.ForeignKey(
-                        name: "FK_exam_questions_tb_exam_exam_id",
-                        column: x => x.exam_id,
-                        principalTable: "tb_exam",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_exam_questions_tb_question_question_id",
-                        column: x => x.question_id,
-                        principalTable: "tb_question",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -256,81 +282,6 @@ namespace Iduca.Persistence.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "user_interest",
-                columns: table => new
-                {
-                    user_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    category_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_user_interest", x => new { x.user_id, x.category_id });
-                    table.ForeignKey(
-                        name: "FK_user_interest_tb_category_category_id",
-                        column: x => x.category_id,
-                        principalTable: "tb_category",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_user_interest_tb_user_user_id",
-                        column: x => x.user_id,
-                        principalTable: "tb_user",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "course_category",
-                columns: table => new
-                {
-                    category_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    course_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_course_category", x => new { x.category_id, x.course_id });
-                    table.ForeignKey(
-                        name: "FK_course_category_tb_category_category_id",
-                        column: x => x.category_id,
-                        principalTable: "tb_category",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_course_category_tb_course_course_id",
-                        column: x => x.course_id,
-                        principalTable: "tb_course",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "tb_module",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    name = table.Column<string>(type: "varchar(64)", maxLength: 64, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    description = table.Column<string>(type: "varchar(511)", maxLength: 511, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CourseId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    disabled_at = table.Column<DateTime>(type: "datetime(6)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("module_id", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_tb_module_tb_course_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "tb_course",
-                        principalColumn: "id");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "tb_usercourse",
                 columns: table => new
                 {
@@ -362,25 +313,50 @@ namespace Iduca.Persistence.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "user_alternative",
+                name: "user_interest",
                 columns: table => new
                 {
                     user_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    alternative_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
+                    category_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user_alternative", x => new { x.user_id, x.alternative_id });
+                    table.PrimaryKey("PK_user_interest", x => new { x.user_id, x.category_id });
                     table.ForeignKey(
-                        name: "FK_user_alternative_tb_alternative_alternative_id",
-                        column: x => x.alternative_id,
-                        principalTable: "tb_alternative",
+                        name: "FK_user_interest_tb_category_category_id",
+                        column: x => x.category_id,
+                        principalTable: "tb_category",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_user_alternative_tb_user_user_id",
+                        name: "FK_user_interest_tb_user_user_id",
                         column: x => x.user_id,
                         principalTable: "tb_user",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "exam_questions",
+                columns: table => new
+                {
+                    exam_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    question_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_exam_questions", x => new { x.exam_id, x.question_id });
+                    table.ForeignKey(
+                        name: "FK_exam_questions_Exam_exam_id",
+                        column: x => x.exam_id,
+                        principalTable: "Exam",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_exam_questions_tb_question_question_id",
+                        column: x => x.question_id,
+                        principalTable: "tb_question",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -436,6 +412,31 @@ namespace Iduca.Persistence.Migrations
                         column: x => x.ModuleId,
                         principalTable: "tb_module",
                         principalColumn: "id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "user_alternative",
+                columns: table => new
+                {
+                    user_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    alternative_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_user_alternative", x => new { x.user_id, x.alternative_id });
+                    table.ForeignKey(
+                        name: "FK_user_alternative_tb_alternative_alternative_id",
+                        column: x => x.alternative_id,
+                        principalTable: "tb_alternative",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_user_alternative_tb_user_user_id",
+                        column: x => x.user_id,
+                        principalTable: "tb_user",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -523,6 +524,12 @@ namespace Iduca.Persistence.Migrations
                 column: "course_id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Exam_CourseId",
+                table: "Exam",
+                column: "CourseId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_exam_questions_question_id",
                 table: "exam_questions",
                 column: "question_id");
@@ -541,12 +548,6 @@ namespace Iduca.Persistence.Migrations
                 name: "IX_tb_content_lesson_id",
                 table: "tb_content",
                 column: "lesson_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_tb_course_exam_id",
-                table: "tb_course",
-                column: "exam_id",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_tb_exercise_module_id",
@@ -638,6 +639,9 @@ namespace Iduca.Persistence.Migrations
                 name: "user_lesson");
 
             migrationBuilder.DropTable(
+                name: "Exam");
+
+            migrationBuilder.DropTable(
                 name: "tb_exercise");
 
             migrationBuilder.DropTable(
@@ -663,9 +667,6 @@ namespace Iduca.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "tb_course");
-
-            migrationBuilder.DropTable(
-                name: "tb_exam");
         }
     }
 }

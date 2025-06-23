@@ -1,0 +1,70 @@
+-- RECRIA O BANCO
+DROP DATABASE IF EXISTS iducadb;
+CREATE DATABASE iducadb;
+USE iducadb;
+SHOW TABLES;
+
+-- CRIA AS TABELAS (assumindo que isso já foi feito via EF migrations)
+
+-- INSERE EMPRESAS COM UUIDS FIXOS
+INSERT INTO tb_company VALUES
+('be62a947-5069-11f0-b52d-0a002700000b', 'BOSCH', NOW(), NOW(), NULL),
+('df7ca75b-5069-11f0-b52d-0a002700000b', 'FIFA', NOW(), NOW(), NULL);
+
+-- USUÁRIOS DA BOSCH
+-- chefe Matias
+INSERT INTO tb_user VALUES 
+-- BOSCH
+(
+  '0ed8cdb1-506b-11f0-b52d-0a002700000b',
+  'Matias o chefe', '12345678900', 'chefe_matias@email.com', 'P-A-S-S-W-O-R-D',
+  true, NULL, 'be62a947-5069-11f0-b52d-0a002700000b', NULL,
+  NOW(), NOW(), NULL
+),
+(
+  UUID(),
+  'Sampaio o nao chefe', '12345678901', 'nao_chefe_sampaio@email.com', 'P-A-S-S-W-O-R-D',
+  true, '0ed8cdb1-506b-11f0-b52d-0a002700000b', 'be62a947-5069-11f0-b52d-0a002700000b', NULL,
+  NOW(), NOW(), NULL
+),
+-- FIFA 
+( 
+  '0d0610f1-506b-11f0-b52d-0a002700000b',
+  'Neymar o chefe', '12345678902', 'chefe_joao@email.com', 'P-A-S-S-W-O-R-D',
+  true, NULL, 'df7ca75b-5069-11f0-b52d-0a002700000b', NULL,
+  NOW(), NOW(), NULL
+),
+(
+  UUID(),
+  'Cassio o nao chefe', '12345678903', 'nao_chefe_pedro@email.com', 'P-A-S-S-W-O-R-D',
+  true, '0d0610f1-506b-11f0-b52d-0a002700000b', 'df7ca75b-5069-11f0-b52d-0a002700000b', NULL,
+  NOW(), NOW(), NULL
+);
+
+
+-- Cursos
+INSERT INTO tb_course 
+VALUES (
+  '368fa082-506e-11f0-b52d-0a002700000b', 'Curso de C# Básico',
+  'Aprenda fundamentos do C# do zero.', 1,
+  'csharp_basico.png',40,NOW(),NOW(),NULL
+),
+(
+  '368fa082-506e-11f0-b52d-c2442700d00b', 'Curso de IA',
+  'Aprenda fundamentos de IA feito por IA.', 1,
+  'inteligencia_artificial.png',40,NOW(),NOW(),NULL
+),
+(
+  '368fa082-506e-11f0-ba2d-k0442700d00b', 'Curso de Power BI',
+  'Aprenda POWER BI', 1,
+  'power_bi.png',40,NOW(),NOW(),NULL
+),
+(
+  '421fa08k-506e-11f0-k52d-k5442700d00b', 'Curso de mochila',
+  'Aprenda MOCHILA', 1,
+  'dora_aventureira.png',40,NOW(),NOW(),NULL
+);
+-- VERIFICAÇÃO
+SELECT * FROM tb_company;
+SELECT * FROM tb_user;
+SELECT * FROM tb_course;

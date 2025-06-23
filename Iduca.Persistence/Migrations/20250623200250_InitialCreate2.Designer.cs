@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Iduca.Persistence.Migrations
+namespace Iduca.Migrations
 {
     [DbContext(typeof(IducaContext))]
-    [Migration("20250602174728_updateDatabase")]
-    partial class updateDatabase
+    [Migration("20250623200250_InitialCreate2")]
+    partial class InitialCreate2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -233,6 +233,43 @@ namespace Iduca.Persistence.Migrations
                     b.ToTable("tb_course", (string)null);
                 });
 
+            modelBuilder.Entity("Iduca.Domain.Models.Exam", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("DisabledAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId")
+                        .IsUnique();
+
+                    b.ToTable("Exam");
+                });
+
             modelBuilder.Entity("Iduca.Domain.Models.Exercise", b =>
                 {
                     b.Property<Guid>("Id")
@@ -262,9 +299,6 @@ namespace Iduca.Persistence.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("module_id");
 
-                    b.Property<Guid>("QuestionId")
-                        .HasColumnType("char(36)");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(64)
@@ -280,8 +314,6 @@ namespace Iduca.Persistence.Migrations
                         .HasName("exercise_id");
 
                     b.HasIndex("ModuleId");
-
-                    b.HasIndex("QuestionId");
 
                     b.ToTable("tb_exercise", (string)null);
                 });
@@ -572,6 +604,8 @@ namespace Iduca.Persistence.Migrations
                     b.HasKey("Id")
                         .HasName("user_id");
 
+                    b.HasIndex("CompanyId");
+
                     b.HasIndex("ResponsibleId");
 
                     b.ToTable("tb_user", (string)null);
@@ -642,6 +676,36 @@ namespace Iduca.Persistence.Migrations
                     b.ToTable("course_category", (string)null);
                 });
 
+            modelBuilder.Entity("exam_questions", b =>
+                {
+                    b.Property<Guid>("exam_id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("question_id")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("exam_id", "question_id");
+
+                    b.HasIndex("question_id");
+
+                    b.ToTable("exam_questions", (string)null);
+                });
+
+            modelBuilder.Entity("exercise_questions", b =>
+                {
+                    b.Property<Guid>("exercise_id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("question_id")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("exercise_id", "question_id");
+
+                    b.HasIndex("question_id");
+
+                    b.ToTable("exercise_questions", (string)null);
+                });
+
             modelBuilder.Entity("user_alternative", b =>
                 {
                     b.Property<Guid>("user_id")
@@ -709,6 +773,17 @@ namespace Iduca.Persistence.Migrations
                     b.Navigation("Lesson");
                 });
 
+            modelBuilder.Entity("Iduca.Domain.Models.Exam", b =>
+                {
+                    b.HasOne("Iduca.Domain.Models.Course", "Course")
+                        .WithOne("Exam")
+                        .HasForeignKey("Iduca.Domain.Models.Exam", "CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
             modelBuilder.Entity("Iduca.Domain.Models.Exercise", b =>
                 {
                     b.HasOne("Iduca.Domain.Models.Module", "Module")
@@ -717,15 +792,7 @@ namespace Iduca.Persistence.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Iduca.Domain.Models.Question", "Question")
-                        .WithMany("Exercises")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Module");
-
-                    b.Navigation("Question");
                 });
 
             modelBuilder.Entity("Iduca.Domain.Models.Lesson", b =>
@@ -776,8 +843,9 @@ namespace Iduca.Persistence.Migrations
                 {
                     b.HasOne("Iduca.Domain.Models.Company", "Company")
                         .WithMany("Users")
-                        .HasForeignKey("ResponsibleId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("Iduca.Domain.Models.User", "Responsible")
                         .WithMany()
@@ -819,6 +887,36 @@ namespace Iduca.Persistence.Migrations
                     b.HasOne("Iduca.Domain.Models.Course", null)
                         .WithMany()
                         .HasForeignKey("course_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("exam_questions", b =>
+                {
+                    b.HasOne("Iduca.Domain.Models.Exam", null)
+                        .WithMany()
+                        .HasForeignKey("exam_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Iduca.Domain.Models.Question", null)
+                        .WithMany()
+                        .HasForeignKey("question_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("exercise_questions", b =>
+                {
+                    b.HasOne("Iduca.Domain.Models.Exercise", null)
+                        .WithMany()
+                        .HasForeignKey("exercise_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Iduca.Domain.Models.Question", null)
+                        .WithMany()
+                        .HasForeignKey("question_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -875,6 +973,8 @@ namespace Iduca.Persistence.Migrations
 
             modelBuilder.Entity("Iduca.Domain.Models.Course", b =>
                 {
+                    b.Navigation("Exam");
+
                     b.Navigation("Modules");
 
                     b.Navigation("UserCourses");
@@ -895,8 +995,6 @@ namespace Iduca.Persistence.Migrations
             modelBuilder.Entity("Iduca.Domain.Models.Question", b =>
                 {
                     b.Navigation("Alternatives");
-
-                    b.Navigation("Exercises");
                 });
 
             modelBuilder.Entity("Iduca.Domain.Models.User", b =>
