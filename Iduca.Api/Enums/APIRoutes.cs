@@ -13,4 +13,5 @@ public static class APIRoutes
     public const string Modules = "api/modules";
     public const string Lessons = "api/lessons";
     public const string Courses = "api/course";
+    public const string Reminders = "api/reminders";
 }

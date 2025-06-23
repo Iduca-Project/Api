@@ -1,4 +1,3 @@
-
 using AutoMapper;
 using Iduca.Domain.Models;
 
@@ -9,6 +8,9 @@ public class GetAllCategoryMapper : Profile
     public GetAllCategoryMapper()
     {
         CreateMap<GetAllCategoryRequest, Category>();
-        CreateMap<Category, GetAllCategoryResponse>();
+        CreateMap<Category, CategoryDto>();
+        CreateMap<Category, GetAllCategoryResponse>()
+            .ForMember(dest => dest.Categories,
+                opt => opt.MapFrom(src => src));
     }
 }

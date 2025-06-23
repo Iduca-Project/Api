@@ -43,10 +43,13 @@ public class CategoriesController(IMediator mediator) : ControllerBase
     [HttpGet]
     [Route("all")]
     public async Task<ActionResult<GetAllCategoryResponse>> GetByQuery(
-        GetAllCategoryRequest request, CancellationToken cancellationToken
+        [FromQuery] string? Name,
+        [FromQuery] int Page,
+        [FromQuery] int MaxItens,
+        CancellationToken cancellationToken
     )
     {
-        await mediator.Send(request, cancellationToken);
-        return Ok();
+        var response = await mediator.Send(new GetAllCategoryRequest(Page, MaxItens, Name), cancellationToken);
+        return Ok(response);
     }
 }
