@@ -23,7 +23,7 @@ public class LesosnsController(IMediator mediator) : ControllerBase
         return Ok(response);
     }
 
-    [HttpGet("all/{Id}")]
+    [HttpGet("module/{Id}")]
     public async Task<ActionResult<GetByModuleIdLessonResponse>> GetByModule(
         [FromRoute] Guid Id, CancellationToken cancellationToken
     )
@@ -37,7 +37,7 @@ public class LesosnsController(IMediator mediator) : ControllerBase
         [FromRoute] Guid Id, CancellationToken cancellationToken
     )
     {
-        var response = await mediator.Send(new GetByModuleByUserLessonRequest(Id, new Guid()/*"idUser-pego-pelo-JWT"*/), cancellationToken);
+        var response = await mediator.Send(new GetByModuleByUserLessonRequest(Id, new Guid("5374148b-5061-11f0-b52d-0a002700000b")), cancellationToken);
         return Ok(response);
     }
 
