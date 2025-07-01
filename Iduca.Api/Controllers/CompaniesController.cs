@@ -43,7 +43,6 @@ public class CompaniesController(IMediator mediator) : ControllerBase
     )
     {
         var response = await mediator.Send(new GetCompanyRequest(Name), cancellationToken);
-
         return Ok(response);
     }
 
