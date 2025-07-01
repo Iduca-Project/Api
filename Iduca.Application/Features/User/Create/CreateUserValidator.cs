@@ -1,0 +1,41 @@
+using FluentValidation;
+
+namespace Iduca.Application.Features.User.Create;
+
+public class CreateUserValidator : AbstractValidator<CreateUserRequest>
+{
+    public CreateUserValidator()
+    {
+        RuleFor(u => u.Name)
+            .NotEmpty()
+            .WithMessage("Nome é obrigatório")
+            .MinimumLength(2)
+            .WithMessage("Nome deve ter pelo menos 2 caracteres")
+            .MaximumLength(100)
+            .WithMessage("Nome deve ter no máximo 100 caracteres");
+
+        RuleFor(u => u.Identity)
+            .NotEmpty()
+            .WithMessage("Identidade é obrigatória")
+            .MinimumLength(3)
+            .WithMessage("Identidade deve ter pelo menos 3 caracteres")
+            .MaximumLength(20)
+            .WithMessage("Identidade deve ter no máximo 20 caracteres");
+
+        RuleFor(u => u.Email)
+            .NotEmpty()
+            .WithMessage("Email é obrigatório")
+            .EmailAddress()
+            .WithMessage("Email deve ter um formato válido");
+
+        RuleFor(u => u.Password)
+            .NotEmpty()
+            .WithMessage("Senha é obrigatória")
+            .MinimumLength(6)
+            .WithMessage("Senha deve ter pelo menos 6 caracteres");
+
+        RuleFor(u => u.CompanyId)
+            .NotEmpty()
+            .WithMessage("Empresa é obrigatória");
+    }
+}

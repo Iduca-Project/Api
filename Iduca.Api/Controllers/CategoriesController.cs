@@ -2,6 +2,8 @@ using Iduca.Api.Enums;
 using Iduca.Application.Features.Categories.Create;
 using Iduca.Application.Features.Categories.DeleteById;
 using Iduca.Application.Features.Categories.GetByName;
+using Iduca.Application.Features.Categories.Get;
+using Iduca.Application.Features.Categories.GetAll;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +23,9 @@ public class CategoriesController(IMediator mediator) : ControllerBase
         var response = await mediator.Send(request, cancellationToken);
         return Created(APIRoutes.Categories, response);
     }
+
     [HttpGet]
+    [Route("search")]
     public async Task<ActionResult<CreateCategoryResponse>> GetBySimilarName(
         [FromQuery] string Name, CancellationToken cancellationToken
     )
@@ -29,6 +33,27 @@ public class CategoriesController(IMediator mediator) : ControllerBase
         var response = await mediator.Send(new GetByNameCategoryRequest(Name), cancellationToken);
         return Ok(response);
     }
+
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<ActionResult<GetCategoryResponse>> GetById(
+        [FromRoute] Guid id, CancellationToken cancellationToken
+    )
+    {
+        var response = await mediator.Send(new GetCategoryRequest(id), cancellationToken);
+        return Ok(response);
+    }
+
+    [HttpGet]
+    [Route("all")]
+    public async Task<ActionResult<List<GetAllCategoriesResponse>>> GetAll(
+        CancellationToken cancellationToken
+    )
+    {
+        var response = await mediator.Send(new GetAllCategoriesRequest(), cancellationToken);
+        return Ok(response);
+    }
+
     [HttpDelete]
     [Route("{Id}")]
     public async Task<ActionResult<DeleteByIdCategoryResponse>> DeleteById(

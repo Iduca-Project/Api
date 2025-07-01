@@ -24,14 +24,23 @@ public class CreateModule(
 
     public async Task<CreateModuleResponse> Handle(CreateModuleRequest request, CancellationToken cancellationToken)
     {
-        Module module = mapper.Map<Module>(request);
+        var course = await courseRepository.Get(request.CourseId, cancellationToken)
+            ?? throw new NotFoundException("Curso não encontrado.");
 
         Module? findModule = await moduleRepository.GetModuleByEqualNameInCourse(request.Name, request.CourseId, cancellationToken);
         if (findModule is not null)
             throw new DuplicityException(ExceptionMessage.DuplicityModel.ModuleNameDuplicity);
 
-        int lastIndex = await moduleRepository.GetLastModuleIndexInCourse(request.CourseId, cancellationToken);
-        module.Index = lastIndex + 1;
+        var module = new Module
+        {
+            Name = request.Name,
+            Description = request.Description,
+            Index = request.Index,
+            Course = course,
+            CourseId = request.CourseId,
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
+        };
 
         moduleRepository.Create(module);
         await unitOfWork.Save(cancellationToken);

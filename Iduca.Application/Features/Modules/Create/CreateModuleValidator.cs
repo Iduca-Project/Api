@@ -16,6 +16,10 @@ public class CreateModuleValidator : AbstractValidator<CreateModuleRequest>
             .MaximumLength(511)
             .MinimumLength(8);
 
+        RuleFor(m => m.Index)
+            .GreaterThan(0)
+            .WithMessage("Índice deve ser maior que 0");
+
         RuleFor(m => m.CourseId)
             .NotEmpty();
     }
