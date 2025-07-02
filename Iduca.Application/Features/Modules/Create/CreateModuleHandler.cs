@@ -31,11 +31,19 @@ public class CreateModule(
         if (findModule is not null)
             throw new DuplicityException(ExceptionMessage.DuplicityModel.ModuleNameDuplicity);
 
+        // Se o índice não foi fornecido, calcular automaticamente
+        var moduleIndex = request.Index;
+        if (moduleIndex is null)
+        {
+            var lastIndex = await moduleRepository.GetLastModuleIndexInCourse(request.CourseId, cancellationToken);
+            moduleIndex = lastIndex + 1;
+        }
+
         var module = new Module
         {
             Name = request.Name,
             Description = request.Description,
-            Index = request.Index,
+            Index = moduleIndex.Value,
             Course = course,
             CourseId = request.CourseId,
             CreatedAt = DateTime.UtcNow,

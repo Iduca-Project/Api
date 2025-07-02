@@ -9,5 +9,5 @@ public sealed record GetCoursesRequest(
     CourseDifficulty? Difficulty,
     List<Guid> Categories,
     int Page,
-    int MaxItens
+    int MaxItems
 ) : IRequest<GetCoursesResponse>;

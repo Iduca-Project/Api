@@ -8,6 +8,7 @@ public sealed record GetCoursesResponse(
 );
 
 public sealed record GetCourseProps (
+    Guid Id,
     string Name,
     string Description,
     int Difficulty,

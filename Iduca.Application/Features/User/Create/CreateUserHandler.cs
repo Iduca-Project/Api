@@ -3,6 +3,7 @@ using Iduca.Application.Repository;
 using Iduca.Application.Repository.UserRepository;
 using Iduca.Application.Repository.CompanyRepository;
 using Iduca.Application.Repository.CategoryRepository;
+using Iduca.Application.Common.Services;
 using Iduca.Domain.Models;
 using Iduca.Domain.Common.Messages;
 using Iduca.Application.Common.Exceptions;
@@ -16,7 +17,8 @@ public class CreateUserHandler(
     ICompanyRepository companyRepository,
     ICategoryRepository categoryRepository,
     IUnitOfWork unitOfWork,
-    IMapper mapper
+    IMapper mapper,
+    ILogService logService
 ) : IRequestHandler<CreateUserRequest, CreateUserResponse>
 {
     private readonly IUserRepository userRepository = userRepository;
@@ -24,6 +26,7 @@ public class CreateUserHandler(
     private readonly ICategoryRepository categoryRepository = categoryRepository;
     private readonly IUnitOfWork unitOfWork = unitOfWork;
     private readonly IMapper mapper = mapper;
+    private readonly ILogService logService = logService;
 
     public async Task<CreateUserResponse> Handle(CreateUserRequest request, CancellationToken cancellationToken)
     {
@@ -72,6 +75,9 @@ public class CreateUserHandler(
 
         userRepository.Create(user);
         await unitOfWork.Save(cancellationToken);
+
+        // Log da criação do usuário
+        await logService.LogCreateAsync("User", user.Id, user.Id, cancellationToken);
 
         return mapper.Map<CreateUserResponse>(user);
     }

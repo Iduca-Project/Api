@@ -3,9 +3,11 @@ using Iduca.Persistence;
 
 using Iduca.Api.Extensions;
 using Iduca.Api.Middlewares.ExceptionHandlers;
+using Iduca.Api.Middlewares;
 
 using Iduca.Application;
 using Iduca.Application.Config;
+using Iduca.Application.Common.Services;
 using System.Text.Json.Serialization;
 using Iduca.Application.Features.Companies.Get;
 using Iduca.Application.Features.Courses.GetByQuery;
@@ -18,6 +20,12 @@ builder.Services.ConfigurePersistence();
 builder.Services.ConfigureApplication();
 
 builder.Services.ConfigureCorsPolicy();
+
+// Configurar autenticação JWT customizada
+builder.Services.AddAuthentication("Bearer")
+.AddScheme<Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions, CustomJwtAuthenticationHandler>("Bearer", options => { });
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddAutoMapper(typeof(GetCoursesMapper));
 
@@ -37,7 +45,18 @@ var context = serviceScope.ServiceProvider.GetRequiredService<IducaContext>()
 
 context.Database.EnsureCreated();
 
+// Executar seed de dados iniciais
+var seedService = serviceScope.ServiceProvider.GetRequiredService<ISeedService>();
+await seedService.EnsureDefaultDataAsync();
+
+serviceScope.Dispose();
+
 app.UseCors();
+
+// Configurar middlewares na ordem correta
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 app.UseErrorHandler();
 app.Run();

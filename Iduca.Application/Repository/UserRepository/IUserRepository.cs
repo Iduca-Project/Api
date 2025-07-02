@@ -9,4 +9,8 @@ public interface IUserRepository : IBaseRepository<User>
     Task<List<User>> GetUsersByCompany(Guid companyId, CancellationToken cancellationToken);
     Task<User?> GetUserWithDetails(Guid id, CancellationToken cancellationToken);
     Task<List<User>> GetUsersByQuery(string? name, string? email, Guid? companyId, bool? isAdmin, int page, int maxItems, CancellationToken cancellationToken);
+    
+    // Métodos para autenticação
+    Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken);
+    Task<bool> IsFirstAccessAsync(Guid userId, CancellationToken cancellationToken);
 }

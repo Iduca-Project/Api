@@ -20,8 +20,13 @@ public class GetCoursesHandler (
     public async Task<GetCoursesResponse> Handle(GetCoursesRequest request, CancellationToken cancellationToken)
     {
     
-        var findCourses = await courseRepository.GetCoursesByQuery(request.Name, request.Difficulty, request.Categories, request.Page, request.MaxItens, cancellationToken)
-            ?? throw new NotFoundException(ExceptionMessage.NotFound.Default);
+        var findCourses = await courseRepository.GetCoursesByQuery(request.Name, request.Difficulty, request.Categories, request.Page, request.MaxItems, cancellationToken);
+
+        // Se não encontrar cursos, retornar lista vazia ao invés de exception
+        if (findCourses == null || !findCourses.Any())
+        {
+            return new GetCoursesResponse(new List<GetCourseProps>());
+        }
 
         var coursePropsList = new List<GetCourseProps>();
 
@@ -32,6 +37,7 @@ public class GetCoursesHandler (
             var studentsCount = userCourses.Count;
 
             coursePropsList.Add(new GetCourseProps(
+                course.Id,
                 course.Name,
                 course.Description,
                 (int)course.Difficulty,

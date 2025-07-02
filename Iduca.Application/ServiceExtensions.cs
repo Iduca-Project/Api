@@ -1,5 +1,7 @@
 using System.Reflection;
 using Iduca.Application.Common.Exceptions;
+using Iduca.Application.Common.Services;
+using Iduca.Application.Contracts;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,5 +19,14 @@ public static class ServiceExtensions
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+        
+        // Registrar serviços de autenticação
+        services.AddScoped<IAuthenticator, JwtAuthenticator>();
+        
+        // Registrar serviços de auditoria
+        services.AddScoped<ILogService, LogService>();
+        
+        // Registrar serviço de seed
+        services.AddScoped<ISeedService, SeedService>();
     }
 }

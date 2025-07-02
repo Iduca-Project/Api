@@ -2,7 +2,10 @@
 
 ## 📋 Resumo das Rotas Implementadas
 
-### 👥 **Users (Usuários)**
+### � **Auth (Autenticação)**
+- `POST /api/auth/login` - Login do usuário
+
+### �👥 **Users (Usuários)**
 - `POST /api/users` - Criar usuário
 - `GET /api/users/{id}` - Buscar usuário por ID
 - `GET /api/users/all` - Listar usuários com filtros e paginação
@@ -109,6 +112,17 @@ Content-Type: application/json
 {
   "name": "Tecnologia",
   "description": "Categoria sobre tecnologia"
+}
+```
+
+### Login de Usuário
+```http
+POST http://localhost:5284/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "joao.silva@teste.com",
+  "password": "123456"
 }
 ```
 

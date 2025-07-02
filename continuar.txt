@@ -1,0 +1,7 @@
+Preciso poder cadastrar um usuário em um curso, análise as tabelas e seus relacioanamentos, já deve existir algo assim, mas adicione ao postman tambem.
+
+Na rota de get dos cursos preciso ter tanto os cursos em que já estou matriculado com porcentagem de quanto já foi concluído com base nas lessons, modules, exercesises.
+
+crie um arquivo .md especial para as rotas do course para eu poder ver melhor como vc vai estruturar essas rotas.
+
+Também preciso de uma rota que com base na empresa que o usuário cadastrado e em uma categoria especificada pelo usuário irá retornar estatisticas de outros usuários, de suas notas em exercicios e provas

@@ -1,4 +1,5 @@
 using Iduca.Api.Enums;
+using Iduca.Api.Attributes;
 using Iduca.Application.Features.Companies.Create;
 using Iduca.Application.Features.Companies.Delete;
 using Iduca.Application.Features.Companies.Get;
@@ -12,13 +13,14 @@ namespace Iduca.Api.Controllers;
 
 [ApiController]
 [Route(APIRoutes.Companies)]
+[CustomAuthorize] // Todas as rotas de empresa precisam de autenticação
 public class CompaniesController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator mediator = mediator;
 
     [HttpPost]
     public async Task<ActionResult<CreateCompanyResponse>> Create(
-        CreateCompanyRequest request, CancellationToken cancellationToken
+        [FromBody] CreateCompanyRequest request, CancellationToken cancellationToken
     )
     {
         var response = await mediator.Send(request, cancellationToken);

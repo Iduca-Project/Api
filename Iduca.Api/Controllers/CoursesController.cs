@@ -2,6 +2,7 @@ using Iduca.Api.Enums;
 using Iduca.Application.Features.Companies.Create;
 using Iduca.Application.Features.Courses.Create;
 using Iduca.Application.Features.Courses.Delete;
+using Iduca.Application.Features.Courses.Enroll;
 using Iduca.Application.Features.Courses.Get;
 using Iduca.Application.Features.Courses.GetByQuery;
 using Iduca.Application.Features.Courses.Update;
@@ -42,17 +43,17 @@ public class CoursesController(IMediator mediator) : ControllerBase
     [Route("all")]
     public async Task<ActionResult<List<GetCoursesResponse>>> GetAll(
         [FromQuery] string? Name,
-        [FromBody] List<Guid>? Categories,
-        [FromQuery] int Page,
-        [FromQuery] int MaxItens,
         [FromQuery] CourseDifficulty? Difficulty,
-        CancellationToken cancellationToken
+        [FromQuery] int Page = 1,
+        [FromQuery] int MaxItems = 10,
+        CancellationToken cancellationToken = default
     )
     {
-        if (Page < 1 && MaxItens < 1)
-            return BadRequest("Page and MaxItens must be greater than 0.");
+        if (Page < 1 || MaxItems < 1)
+            return BadRequest("Page and MaxItems must be greater than 0.");
 
-        var response = await mediator.Send(new GetCoursesRequest(Name, Difficulty, Categories, Page, MaxItens), cancellationToken);
+        // Para simplificar, vamos deixar Categories como lista vazia por enquanto
+        var response = await mediator.Send(new GetCoursesRequest(Name, Difficulty, new List<Guid>(), Page, MaxItems), cancellationToken);
 
         return Ok(response);
     }
@@ -75,6 +76,22 @@ public class CoursesController(IMediator mediator) : ControllerBase
     {
         var response = await mediator.Send(request, cancellationToken);
 
+        return Ok(response);
+    }
+
+    [HttpPost]
+    [Route("{courseId}/enroll")]
+    public async Task<ActionResult<EnrollCourseResponse>> Enroll(
+        [FromRoute] Guid courseId,
+        [FromBody] EnrollCourseRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        // Verificar se o courseId da rota coincide com o do body
+        if (courseId != request.CourseId)
+            return BadRequest("CourseId na rota deve coincidir com o CourseId no body.");
+
+        var response = await mediator.Send(request, cancellationToken);
         return Ok(response);
     }
 }

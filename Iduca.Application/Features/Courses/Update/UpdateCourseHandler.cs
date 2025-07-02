@@ -3,6 +3,7 @@ using Iduca.Application.Common.Exceptions;
 using Iduca.Application.Repository;
 using Iduca.Application.Repository.CourseRepository;
 using Iduca.Application.Repository.UserCourseRepository;
+using Iduca.Application.Repository.CategoryRepository;
 using Iduca.Domain.Common.Messages;
 using Iduca.Domain.Models;
 using MediatR;
@@ -12,12 +13,14 @@ namespace Iduca.Application.Features.Courses.Update;
 public class UpdateCourseHandler (
     ICourseRepository courseRepository,
     IUserCourseRepository userCourseRepository,
+    ICategoryRepository categoryRepository,
     IUnitOfWork unitOfWork,
     IMapper mapper
 ) : IRequestHandler<UpdateCourseRequest, UpdateCourseResponse>
 {
     private readonly ICourseRepository courseRepository = courseRepository;
     private readonly IUserCourseRepository userCourseRepository = userCourseRepository;
+    private readonly ICategoryRepository categoryRepository = categoryRepository;
     private readonly IUnitOfWork unitOfWork = unitOfWork;
     private readonly IMapper mapper = mapper;
 
@@ -36,9 +39,19 @@ public class UpdateCourseHandler (
         course.Difficulty = (int)request.Difficulty;
         course.Image = request.Image;
         course.TotalHours = request.TotalHours;
-        // course.Categories = categories; ! Necessário fazer essa parte ainda!
 
-        var students = userCourseRepository.GetAllByCourseId(course.Id, cancellationToken);
+        // Atualizar categorias
+        var categoriesFromDb = new List<Category>();
+        foreach (var categoryId in request.Categories)
+        {
+            var findCategory = await categoryRepository.Get(categoryId, cancellationToken)
+                ?? throw new NotFoundException($"Categoria com ID {categoryId} não encontrada");
+
+            categoriesFromDb.Add(findCategory);
+        }
+        course.Categories = categoriesFromDb;
+
+        var students = await userCourseRepository.GetAllByCourseId(course.Id, cancellationToken);
 
         await unitOfWork.Save(cancellationToken);
 
@@ -47,8 +60,8 @@ public class UpdateCourseHandler (
             course.Id,
             course.UpdatedAt,
             course.Categories,
-            course.Modules,
-            students.Result.Count
+            course.Modules.Cast<Module?>().ToList(),
+            students.Count
         );
     }
 }

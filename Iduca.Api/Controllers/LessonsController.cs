@@ -1,4 +1,5 @@
 using Iduca.Api.Enums;
+using Iduca.Application.Features.Lessons.Complete;
 using Iduca.Application.Features.Lessons.Create;
 using Iduca.Application.Features.Lessons.DeleteById;
 using Iduca.Application.Features.Lessons.GetByModuleId;
@@ -48,5 +49,21 @@ public class LesosnsController(IMediator mediator) : ControllerBase
     {
         await mediator.Send(new DeleteByIdLessonRequest(Id), cancellationToken);
         return NoContent();
+    }
+
+    [HttpPost]
+    [Route("{lessonId}/complete")]
+    public async Task<ActionResult<CompleteLessonResponse>> CompleteLesson(
+        [FromRoute] Guid lessonId,
+        [FromBody] CompleteLessonRequest request,
+        CancellationToken cancellationToken
+    )
+    {
+        // Verificar se o lessonId da rota coincide com o do body
+        if (lessonId != request.LessonId)
+            return BadRequest("LessonId na rota deve coincidir com o LessonId no body.");
+
+        var response = await mediator.Send(request, cancellationToken);
+        return Ok(response);
     }
 }

@@ -1,0 +1,1483 @@
+{
+	"info": {
+		"name": "API Iduca - Coleção Organizada por Permissões",
+		"description": "Coleção da API Iduca com organizaçao por controller e níveis de permissão (Usuário/Admin)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_postman_id": "iduca-api-organized-collection"
+	},
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{auth_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5284",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "company_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "category_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "course_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "module_id",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "🔐 Auth Controller",
+			"description": "Rotas de autenticação (públicas)",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.environment.set('auth_token', response.token);",
+									"    pm.collectionVariables.set('auth_token', response.token);",
+									"    console.log('Token salvo:', response.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"joao.santos.atualizado@teste.com\",\n  \"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "login"]
+						},
+						"description": "Fazer login de usuário. O token retornado será automaticamente salvo para usar nas outras requisições."
+					}
+				},
+				{
+					"name": "Login - Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.environment.set('auth_token', response.token);",
+									"    pm.collectionVariables.set('auth_token', response.token);",
+									"    console.log('Token Admin salvo:', response.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@iduca.com\",\n  \"password\": \"admin123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "login"]
+						},
+						"description": "Login como administrador"
+					}
+				},
+				{
+					"name": "❌ Login - Credenciais Inválidas",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"inexistente@teste.com\",\n  \"password\": \"senhaerrada\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "login"]
+						},
+						"description": "Teste de login com credenciais inválidas (deve retornar erro 400)"
+					}
+				}
+			]
+		},
+		{
+			"name": "👥 Users Controller",
+			"description": "CRUD de usuários com separação por permissões",
+			"item": [
+				{
+					"name": "👤 Requisições de Usuário",
+					"description": "Operações que usuários comuns podem realizar",
+					"item": [
+						{
+							"name": "Buscar Meu Perfil",
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/users/{{user_id}}",
+									"host": ["{{base_url}}"],
+									"path": ["api", "users", "{{user_id}}"]
+								},
+								"description": "Buscar dados do próprio usuário (usuários podem ver apenas seu próprio perfil)"
+							}
+						}
+					]
+				},
+				{
+					"name": "🔧 Requisições de Admin",
+					"description": "Operações exclusivas de administradores",
+					"item": [
+						{
+							"name": "Criar Usuário",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (pm.response.code === 201) {",
+											"    const response = pm.response.json();",
+											"    pm.collectionVariables.set('user_id', response.id);",
+											"    console.log('User ID salvo:', response.id);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Usuário Teste Admin {{$timestamp}}\",\n  \"identity\": \"{{$randomInt}}\",\n  \"email\": \"usuario.admin.{{$timestamp}}@exemplo.com\",\n  \"password\": \"123456\",\n  \"isAdmin\": false,\n  \"responsibleId\": null,\n  \"companyId\": \"{{company_id}}\",\n  \"image\": \"https://example.com/avatar.jpg\",\n  \"interests\": []\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/users",
+									"host": ["{{base_url}}"],
+									"path": ["api", "users"]
+								},
+								"description": "Criar novo usuário (apenas admins podem criar usuários)"
+							}
+						},
+						{
+							"name": "Listar Todos os Usuários",
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/users/all?Page=1&MaxItems=10",
+									"host": ["{{base_url}}"],
+									"path": ["api", "users", "all"],
+									"query": [
+										{
+											"key": "Page",
+											"value": "1"
+										},
+										{
+											"key": "MaxItems",
+											"value": "10"
+										}
+									]
+								},
+								"description": "Listar todos os usuários com paginação (apenas admins)"
+							}
+						},
+						{
+							"name": "Buscar Usuário por ID",
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/users/{{user_id}}",
+									"host": ["{{base_url}}"],
+									"path": ["api", "users", "{{user_id}}"]
+								},
+								"description": "Buscar qualquer usuário por ID (apenas admins podem ver dados de outros usuários)"
+							}
+						},
+						{
+							"name": "Listar Usuários com Filtros",
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/users/all?Name=João&IsAdmin=false&Page=1&MaxItems=5",
+									"host": ["{{base_url}}"],
+									"path": ["api", "users", "all"],
+									"query": [
+										{
+											"key": "Name",
+											"value": "João"
+										},
+										{
+											"key": "IsAdmin",
+											"value": "false"
+										},
+										{
+											"key": "Page",
+											"value": "1"
+										},
+										{
+											"key": "MaxItems",
+											"value": "5"
+										}
+									]
+								},
+								"description": "Buscar usuários com filtros específicos (apenas admins)"
+							}
+						},
+						{
+							"name": "Atualizar Usuário",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"{{user_id}}\",\n  \"name\": \"Usuário Atualizado pelo Admin\",\n  \"identity\": \"12345678901\",\n  \"email\": \"usuario.atualizado.admin@exemplo.com\",\n  \"isAdmin\": false,\n  \"responsibleId\": null,\n  \"companyId\": \"{{company_id}}\",\n  \"image\": \"https://example.com/new-avatar.jpg\",\n  \"interests\": []\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/users",
+									"host": ["{{base_url}}"],
+									"path": ["api", "users"]
+								},
+								"description": "Atualizar dados de qualquer usuário (apenas admins)"
+							}
+						},
+						{
+							"name": "Deletar Usuário",
+							"request": {
+								"method": "DELETE",
+								"url": {
+									"raw": "{{base_url}}/api/users/{{user_id}}",
+									"host": ["{{base_url}}"],
+									"path": ["api", "users", "{{user_id}}"]
+								},
+								"description": "Deletar usuário (soft delete - apenas admins)"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "🏢 Companies Controller",
+			"description": "CRUD de empresas com separação por permissões",
+			"item": [
+				{
+					"name": "👤 Requisições de Usuário",
+					"description": "Operações que usuários comuns podem realizar",
+					"item": [
+						{
+							"name": "Listar Todas as Empresas",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (pm.response.code === 200) {",
+											"    const response = pm.response.json();",
+											"    if (response.length > 0) {",
+											"        pm.collectionVariables.set('company_id', response[0].id);",
+											"        console.log('Company ID do primeiro item salvo:', response[0].id);",
+											"    }",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/company/all",
+									"host": ["{{base_url}}"],
+									"path": ["api", "company", "all"]
+								},
+								"description": "Listar todas as empresas (usuários podem visualizar)"
+							}
+						},
+						{
+							"name": "Buscar Empresa por ID",
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/company/{{company_id}}",
+									"host": ["{{base_url}}"],
+									"path": ["api", "company", "{{company_id}}"]
+								},
+								"description": "Buscar empresa específica por ID (usuários podem visualizar)"
+							}
+						}
+					]
+				},
+				{
+					"name": "🔧 Requisições de Admin",
+					"description": "Operações exclusivas de administradores",
+					"item": [
+						{
+							"name": "Criar Empresa",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (pm.response.code === 201) {",
+											"    const response = pm.response.json();",
+											"    pm.collectionVariables.set('company_id', response.id);",
+											"    console.log('Company ID salvo:', response.id);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Empresa Admin {{$timestamp}}\",\n  \"description\": \"Empresa criada por administrador via Postman\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/company",
+									"host": ["{{base_url}}"],
+									"path": ["api", "company"]
+								},
+								"description": "Criar nova empresa (apenas admins)"
+							}
+						},
+						{
+							"name": "Atualizar Empresa",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"{{company_id}}\",\n  \"name\": \"Empresa Atualizada pelo Admin\",\n  \"description\": \"Descrição atualizada por administrador\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/company",
+									"host": ["{{base_url}}"],
+									"path": ["api", "company"]
+								},
+								"description": "Atualizar dados da empresa (apenas admins)"
+							}
+						},
+						{
+							"name": "Deletar Empresa",
+							"request": {
+								"method": "DELETE",
+								"url": {
+									"raw": "{{base_url}}/api/company/{{company_id}}",
+									"host": ["{{base_url}}"],
+									"path": ["api", "company", "{{company_id}}"]
+								},
+								"description": "Deletar empresa (apenas admins)"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "📂 Categories Controller",
+			"description": "CRUD de categorias com separação por permissões",
+			"item": [
+				{
+					"name": "👤 Requisições de Usuário",
+					"description": "Operações que usuários comuns podem realizar",
+					"item": [
+						{
+							"name": "Listar Todas as Categorias",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (pm.response.code === 200) {",
+											"    const response = pm.response.json();",
+											"    if (response.length > 0) {",
+											"        pm.collectionVariables.set('category_id', response[0].id);",
+											"        console.log('Category ID do primeiro item salvo:', response[0].id);",
+											"    }",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/categories/all",
+									"host": ["{{base_url}}"],
+									"path": ["api", "categories", "all"]
+								},
+								"description": "Listar todas as categorias (usuários podem visualizar)"
+							}
+						},
+						{
+							"name": "Buscar Categoria por ID",
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/categories/{{category_id}}",
+									"host": ["{{base_url}}"],
+									"path": ["api", "categories", "{{category_id}}"]
+								},
+								"description": "Buscar categoria específica por ID (usuários podem visualizar)"
+							}
+						},
+						{
+							"name": "Buscar Categoria por Nome",
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/categories/search?Name=Tecnologia",
+									"host": ["{{base_url}}"],
+									"path": ["api", "categories", "search"],
+									"query": [
+										{
+											"key": "Name",
+											"value": "Tecnologia"
+										}
+									]
+								},
+								"description": "Buscar categoria por nome específico (usuários podem visualizar)"
+							}
+						}
+					]
+				},
+				{
+					"name": "🔧 Requisições de Admin",
+					"description": "Operações exclusivas de administradores",
+					"item": [
+						{
+							"name": "Criar Categoria",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (pm.response.code === 201) {",
+											"    const response = pm.response.json();",
+											"    pm.collectionVariables.set('category_id', response.id);",
+											"    console.log('Category ID salvo:', response.id);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Categoria Admin {{$timestamp}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/categories",
+									"host": ["{{base_url}}"],
+									"path": ["api", "categories"]
+								},
+								"description": "Criar nova categoria (apenas admins)"
+							}
+						},
+						{
+							"name": "Deletar Categoria",
+							"request": {
+								"method": "DELETE",
+								"url": {
+									"raw": "{{base_url}}/api/categories/{{category_id}}",
+									"host": ["{{base_url}}"],
+									"path": ["api", "categories", "{{category_id}}"]
+								},
+								"description": "Deletar categoria (apenas admins)"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "📚 Courses Controller",
+			"description": "CRUD de cursos com separação por permissões",
+			"item": [
+				{
+					"name": "👤 Requisições de Usuário",
+					"description": "Operações que usuários comuns podem realizar",
+					"item": [
+						{
+							"name": "Listar Todos os Cursos",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (pm.response.code === 200) {",
+											"    const response = pm.response.json();",
+											"    if (response.courses && response.courses.length > 0) {",
+											"        pm.collectionVariables.set('course_id', response.courses[0].id);",
+											"        console.log('Course ID do primeiro item salvo:', response.courses[0].id);",
+											"    }",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/course/all?Page=1&MaxItems=10",
+									"host": ["{{base_url}}"],
+									"path": ["api", "course", "all"],
+									"query": [
+										{
+											"key": "Page",
+											"value": "1"
+										},
+										{
+											"key": "MaxItems",
+											"value": "10"
+										}
+									]
+								},
+								"description": "Listar todos os cursos com paginação (usuários podem visualizar)"
+							}
+						},
+						{
+							"name": "Buscar Curso por ID",
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/course/{{course_id}}",
+									"host": ["{{base_url}}"],
+									"path": ["api", "course", "{{course_id}}"]
+								},
+								"description": "Buscar curso específico por ID (usuários podem visualizar)"
+							}
+						},
+						{
+							"name": "Listar Cursos com Filtros",
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/course/all?Name=Programação&CategoryId={{category_id}}&Page=1&MaxItems=5",
+									"host": ["{{base_url}}"],
+									"path": ["api", "course", "all"],
+									"query": [
+										{
+											"key": "Name",
+											"value": "Programação"
+										},
+										{
+											"key": "CategoryId",
+											"value": "{{category_id}}"
+										},
+										{
+											"key": "Page",
+											"value": "1"
+										},
+										{
+											"key": "MaxItems",
+											"value": "5"
+										}
+									]
+								},
+								"description": "Buscar cursos com filtros específicos (usuários podem visualizar)"
+							}
+						}
+					]
+				},
+				{
+					"name": "🔧 Requisições de Admin",
+					"description": "Operações exclusivas de administradores",
+					"item": [
+						{
+							"name": "Criar Curso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (pm.response.code === 201) {",
+											"    const response = pm.response.json();",
+											"    pm.collectionVariables.set('course_id', response.id);",
+											"    console.log('Course ID salvo:', response.id);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Curso Admin {{$timestamp}}\",\n  \"description\": \"Curso criado por administrador via Postman\",\n  \"categoryId\": \"{{category_id}}\",\n  \"companyId\": \"{{company_id}}\",\n  \"image\": \"https://example.com/curso-admin.jpg\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/course",
+									"host": ["{{base_url}}"],
+									"path": ["api", "course"]
+								},
+								"description": "Criar novo curso (apenas admins)"
+							}
+						},
+						{
+							"name": "Atualizar Curso",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"{{course_id}}\",\n  \"name\": \"Curso Atualizado pelo Admin\",\n  \"description\": \"Descrição atualizada por administrador\",\n  \"categoryId\": \"{{category_id}}\",\n  \"companyId\": \"{{company_id}}\",\n  \"image\": \"https://example.com/novo-curso-admin.jpg\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/course",
+									"host": ["{{base_url}}"],
+									"path": ["api", "course"]
+								},
+								"description": "Atualizar dados do curso (apenas admins)"
+							}
+						},
+						{
+							"name": "Deletar Curso",
+							"request": {
+								"method": "DELETE",
+								"url": {
+									"raw": "{{base_url}}/api/course/{{course_id}}",
+									"host": ["{{base_url}}"],
+									"path": ["api", "course", "{{course_id}}"]
+								},
+								"description": "Deletar curso (apenas admins)"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "📖 Modules Controller",
+			"description": "CRUD de módulos com separação por permissões",
+			"item": [
+				{
+					"name": "👤 Requisições de Usuário",
+					"description": "Operações que usuários comuns podem realizar",
+					"item": [
+						{
+							"name": "Listar Módulos por Curso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (pm.response.code === 200) {",
+											"    const response = pm.response.json();",
+											"    if (response.length > 0) {",
+											"        pm.collectionVariables.set('module_id', response[0].id);",
+											"        console.log('Module ID do primeiro item salvo:', response[0].id);",
+											"    }",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/modules/course/{{course_id}}",
+									"host": ["{{base_url}}"],
+									"path": ["api", "modules", "course", "{{course_id}}"]
+								},
+								"description": "Listar todos os módulos de um curso específico (usuários podem visualizar)"
+							}
+						},
+						{
+							"name": "Buscar Módulo por ID",
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/modules/{{module_id}}",
+									"host": ["{{base_url}}"],
+									"path": ["api", "modules", "{{module_id}}"]
+								},
+								"description": "Buscar módulo específico por ID (usuários podem visualizar)"
+							}
+						}
+					]
+				},
+				{
+					"name": "🔧 Requisições de Admin",
+					"description": "Operações exclusivas de administradores",
+					"item": [
+						{
+							"name": "Criar Módulo",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (pm.response.code === 201) {",
+											"    const response = pm.response.json();",
+											"    pm.collectionVariables.set('module_id', response.id);",
+											"    console.log('Module ID salvo:', response.id);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Módulo Admin {{$timestamp}}\",\n  \"description\": \"Módulo criado por administrador via Postman\",\n  \"courseId\": \"{{course_id}}\",\n  \"order\": 1\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/modules",
+									"host": ["{{base_url}}"],
+									"path": ["api", "modules"]
+								},
+								"description": "Criar novo módulo (apenas admins)"
+							}
+						},
+						{
+							"name": "Atualizar Módulo",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"{{module_id}}\",\n  \"name\": \"Módulo Atualizado pelo Admin\",\n  \"description\": \"Descrição atualizada por administrador\",\n  \"courseId\": \"{{course_id}}\",\n  \"order\": 2\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/modules",
+									"host": ["{{base_url}}"],
+									"path": ["api", "modules"]
+								},
+								"description": "Atualizar dados do módulo (apenas admins)"
+							}
+						},
+						{
+							"name": "Deletar Módulo",
+							"request": {
+								"method": "DELETE",
+								"url": {
+									"raw": "{{base_url}}/api/modules/{{module_id}}",
+									"host": ["{{base_url}}"],
+									"path": ["api", "modules", "{{module_id}}"]
+								},
+								"description": "Deletar módulo (apenas admins)"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "📝 Lessons Controller",
+			"description": "CRUD de aulas com separação por permissões",
+			"item": [
+				{
+					"name": "👤 Requisições de Usuário",
+					"description": "Operações que usuários comuns podem realizar",
+					"item": [
+						{
+							"name": "Listar Aulas por Módulo",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (pm.response.code === 200) {",
+											"    const response = pm.response.json();",
+											"    if (response.length > 0) {",
+											"        pm.collectionVariables.set('lesson_id', response[0].id);",
+											"        console.log('Lesson ID do primeiro item salvo:', response[0].id);",
+											"    }",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/lessons/module/{{module_id}}",
+									"host": ["{{base_url}}"],
+									"path": ["api", "lessons", "module", "{{module_id}}"]
+								},
+								"description": "Listar todas as aulas de um módulo específico (usuários podem visualizar)"
+							}
+						},
+						{
+							"name": "Buscar Aula por ID",
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/lessons/{{lesson_id}}",
+									"host": ["{{base_url}}"],
+									"path": ["api", "lessons", "{{lesson_id}}"]
+								},
+								"description": "Buscar aula específica por ID (usuários podem visualizar)"
+							}
+						}
+					]
+				},
+				{
+					"name": "🔧 Requisições de Admin",
+					"description": "Operações exclusivas de administradores",
+					"item": [
+						{
+							"name": "Criar Aula",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (pm.response.code === 201) {",
+											"    const response = pm.response.json();",
+											"    pm.collectionVariables.set('lesson_id', response.id);",
+											"    console.log('Lesson ID salvo:', response.id);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Aula Admin {{$timestamp}}\",\n  \"description\": \"Aula criada por administrador\",\n  \"moduleId\": \"{{module_id}}\",\n  \"order\": 1,\n  \"duration\": 30\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/lessons",
+									"host": ["{{base_url}}"],
+									"path": ["api", "lessons"]
+								},
+								"description": "Criar nova aula (apenas admins)"
+							}
+						},
+						{
+							"name": "Atualizar Aula",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"{{lesson_id}}\",\n  \"name\": \"Aula Atualizada pelo Admin\",\n  \"description\": \"Descrição atualizada por administrador\",\n  \"moduleId\": \"{{module_id}}\",\n  \"order\": 2,\n  \"duration\": 45\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/lessons",
+									"host": ["{{base_url}}"],
+									"path": ["api", "lessons"]
+								},
+								"description": "Atualizar dados da aula (apenas admins)"
+							}
+						},
+						{
+							"name": "Deletar Aula",
+							"request": {
+								"method": "DELETE",
+								"url": {
+									"raw": "{{base_url}}/api/lessons/{{lesson_id}}",
+									"host": ["{{base_url}}"],
+									"path": ["api", "lessons", "{{lesson_id}}"]
+								},
+								"description": "Deletar aula (apenas admins)"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "🧪 Testes de Autenticação e Autorização",
+			"description": "Testes específicos de segurança, autenticação e autorização",
+			"item": [
+				{
+					"name": "❌ Testes de Acesso Negado",
+					"description": "Testes que devem falhar por problemas de autenticação",
+					"item": [
+						{
+							"name": "Acesso Sem Token",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/users/all",
+									"host": ["{{base_url}}"],
+									"path": ["api", "users", "all"]
+								},
+								"description": "Teste de acesso negado sem token (deve retornar 401)"
+							}
+						},
+						{
+							"name": "Acesso com Token Inválido",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "token-invalido-123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/users/all",
+									"host": ["{{base_url}}"],
+									"path": ["api", "users", "all"]
+								},
+								"description": "Teste de acesso negado com token inválido (deve retornar 401)"
+							}
+						},
+						{
+							"name": "Usuário Comum tentando Operação Admin",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Teste Não Autorizado\",\n  \"identity\": \"99999999999\",\n  \"email\": \"nao.autorizado@teste.com\",\n  \"password\": \"123456\",\n  \"isAdmin\": false,\n  \"responsibleId\": null,\n  \"companyId\": \"{{company_id}}\",\n  \"image\": null,\n  \"interests\": []\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/users",
+									"host": ["{{base_url}}"],
+									"path": ["api", "users"]
+								},
+								"description": "Usuário comum tentando criar usuário (apenas admins podem - deve retornar 403)"
+							}
+						}
+					]
+				},
+				{
+					"name": "✅ Testes de Autorização Correta",
+					"description": "Testes que validam o funcionamento correto das permissões",
+					"item": [
+						{
+							"name": "Admin pode Criar Usuário",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Usuário Teste Autorização\",\n  \"identity\": \"{{$randomInt}}\",\n  \"email\": \"teste.auth.{{$timestamp}}@exemplo.com\",\n  \"password\": \"123456\",\n  \"isAdmin\": false,\n  \"responsibleId\": null,\n  \"companyId\": \"{{company_id}}\",\n  \"image\": null,\n  \"interests\": []\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/users",
+									"host": ["{{base_url}}"],
+									"path": ["api", "users"]
+								},
+								"description": "Admin pode criar usuário (deve retornar 201) - Execute após fazer login como admin"
+							}
+						},
+						{
+							"name": "Usuário pode Ver Próprio Perfil",
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/users/{{user_id}}",
+									"host": ["{{base_url}}"],
+									"path": ["api", "users", "{{user_id}}"]
+								},
+								"description": "Usuário pode ver próprio perfil (deve retornar 200)"
+							}
+						},
+						{
+							"name": "Usuário pode Ver Cursos",
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{base_url}}/api/course/all?Page=1&MaxItems=5",
+									"host": ["{{base_url}}"],
+									"path": ["api", "course", "all"],
+									"query": [
+										{
+											"key": "Page",
+											"value": "1"
+										},
+										{
+											"key": "MaxItems",
+											"value": "5"
+										}
+									]
+								},
+								"description": "Usuário pode visualizar cursos (deve retornar 200)"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "🔄 Fluxo Completo de Testes",
+			"description": "Sequência de testes que simula um fluxo completo da aplicação",
+			"item": [
+				{
+					"name": "1️⃣ Setup - Login Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Login Admin bem-sucedido', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.collectionVariables.set('auth_token', response.token);",
+									"    console.log('✅ Token Admin configurado para fluxo completo');",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@iduca.com\",\n  \"password\": \"admin123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "login"]
+						}
+					}
+				},
+				{
+					"name": "2️⃣ Criar Empresa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Empresa criada', function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"if (pm.response.code === 201) {",
+									"    const response = pm.response.json();",
+									"    pm.collectionVariables.set('company_id', response.id);",
+									"    console.log('✅ Empresa criada:', response.name);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Empresa Fluxo Organizado {{$timestamp}}\",\n  \"description\": \"Empresa criada no fluxo completo da coleção organizada\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/company",
+							"host": ["{{base_url}}"],
+							"path": ["api", "company"]
+						}
+					}
+				},
+				{
+					"name": "3️⃣ Criar Categoria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Categoria criada', function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"if (pm.response.code === 201) {",
+									"    const response = pm.response.json();",
+									"    pm.collectionVariables.set('category_id', response.id);",
+									"    console.log('✅ Categoria criada:', response.name);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Categoria Fluxo Organizado {{$timestamp}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/categories",
+							"host": ["{{base_url}}"],
+							"path": ["api", "categories"]
+						}
+					}
+				},
+				{
+					"name": "4️⃣ Criar Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Usuário criado', function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"if (pm.response.code === 201) {",
+									"    const response = pm.response.json();",
+									"    pm.collectionVariables.set('user_id', response.id);",
+									"    console.log('✅ Usuário criado:', response.name);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Usuário Fluxo Organizado\",\n  \"identity\": \"{{$randomInt}}\",\n  \"email\": \"fluxo.organizado.{{$timestamp}}@teste.com\",\n  \"password\": \"123456\",\n  \"isAdmin\": false,\n  \"responsibleId\": null,\n  \"companyId\": \"{{company_id}}\",\n  \"image\": null,\n  \"interests\": [\"{{category_id}}\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users"]
+						}
+					}
+				},
+				{
+					"name": "5️⃣ Criar Curso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Curso criado', function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"if (pm.response.code === 201) {",
+									"    const response = pm.response.json();",
+									"    pm.collectionVariables.set('course_id', response.id);",
+									"    console.log('✅ Curso criado:', response.name);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Curso Fluxo Organizado {{$timestamp}}\",\n  \"description\": \"Curso criado no fluxo completo da coleção organizada\",\n  \"categoryId\": \"{{category_id}}\",\n  \"companyId\": \"{{company_id}}\",\n  \"image\": \"https://example.com/curso-fluxo-organizado.jpg\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/course",
+							"host": ["{{base_url}}"],
+							"path": ["api", "course"]
+						}
+					}
+				},
+				{
+					"name": "6️⃣ Criar Módulo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Módulo criado', function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"if (pm.response.code === 201) {",
+									"    const response = pm.response.json();",
+									"    pm.collectionVariables.set('module_id', response.id);",
+									"    console.log('✅ Módulo criado:', response.name);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Módulo 1: Introdução Organizada\",\n  \"description\": \"Primeiro módulo do curso no fluxo organizado\",\n  \"courseId\": \"{{course_id}}\",\n  \"order\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/modules",
+							"host": ["{{base_url}}"],
+							"path": ["api", "modules"]
+						}
+					}
+				},
+				{
+					"name": "7️⃣ Login como Usuário Comum",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Login Usuário bem-sucedido', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.collectionVariables.set('auth_token', response.token);",
+									"    console.log('✅ Token Usuário configurado - agora testando permissões de usuário');",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"joao.santos.atualizado@teste.com\",\n  \"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "login"]
+						}
+					}
+				},
+				{
+					"name": "8️⃣ Usuário Visualiza Cursos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Usuário pode ver cursos', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"console.log('✅ Usuário consegue visualizar cursos - permissão correta');",
+									"console.log('🎉 Fluxo completo da coleção organizada executado com sucesso!');"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/course/all?Page=1&MaxItems=5",
+							"host": ["{{base_url}}"],
+							"path": ["api", "course", "all"],
+							"query": [
+								{
+									"key": "Page",
+									"value": "1"
+								},
+								{
+									"key": "MaxItems",
+									"value": "5"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	]
+}

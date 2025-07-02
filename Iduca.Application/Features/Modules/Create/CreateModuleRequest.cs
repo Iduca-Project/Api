@@ -6,6 +6,6 @@ namespace Iduca.Application.Features.Modules.Create;
 public sealed record CreateModuleRequest(
     string Name,
     string Description,
-    int Index,
-    Guid CourseId
+    Guid CourseId,
+    int? Index = null
 ) : IRequest<CreateModuleResponse>;
