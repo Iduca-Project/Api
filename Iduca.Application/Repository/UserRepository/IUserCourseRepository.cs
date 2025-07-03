@@ -9,4 +9,5 @@ public interface IUserCourseRepository : IBaseRepository<UserCourse>
     Task<List<UserCourse>> GetAllByUserId(Guid userId, CancellationToken cancellationToken);
     Task<int> GetCompletedLessonsCount(Guid userId, Guid courseId, CancellationToken cancellationToken);
     Task<List<Guid>> GetCompletedLessonIds(Guid userId, Guid courseId, CancellationToken cancellationToken);
+    Task<List<UserCourse>> GetAllByCompanyId(Guid companyId, CancellationToken cancellationToken);
 }

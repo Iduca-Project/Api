@@ -13,4 +13,5 @@ public interface IUserRepository : IBaseRepository<User>
     // Métodos para autenticação
     Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken);
     Task<bool> IsFirstAccessAsync(Guid userId, CancellationToken cancellationToken);
+    Task MarkFirstAccessCompleteAsync(Guid userId, CancellationToken cancellationToken);
 }

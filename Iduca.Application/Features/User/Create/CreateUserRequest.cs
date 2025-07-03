@@ -11,5 +11,5 @@ public sealed record CreateUserRequest(
     Guid? ResponsibleId,
     Guid CompanyId,
     string? Image,
-    List<Guid> Interests
+    List<Guid>? Interests
 ) : IRequest<CreateUserResponse>;

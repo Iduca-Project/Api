@@ -1,19 +1,36 @@
 using Iduca.Api.Enums;
+using Iduca.Api.Attributes;
 using Iduca.Application.Features.Lessons.Complete;
 using Iduca.Application.Features.Lessons.Create;
 using Iduca.Application.Features.Lessons.DeleteById;
 using Iduca.Application.Features.Lessons.GetByModuleId;
 using Iduca.Application.Features.Lessons.GetByModuleByUser;
+using Iduca.Application.Features.Lessons.GetDetails;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Iduca.Api.Controllers;
 
 [ApiController]
-[Route(APIRoutes.Lessons)]
-public class LesosnsController(IMediator mediator) : ControllerBase
+[Route("api")]
+[CustomAuthorize] // Requer autenticação para todas as rotas
+public class LessonsController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator mediator = mediator;
+
+    /// <summary>
+    /// Retorna os dados completos de uma aula + info sobre a próxima aula
+    /// </summary>
+    [HttpGet("lessons/{id}")]
+    public async Task<ActionResult<GetLessonDetailsResponse>> GetLessonById(
+        [FromRoute] Guid id,
+        [FromQuery] Guid? userId = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await mediator.Send(new GetLessonDetailsRequest(id, userId), cancellationToken);
+        return Ok(response);
+    }
 
     [HttpPost]
     public async Task<ActionResult<CreateLessonResponse>> Create(

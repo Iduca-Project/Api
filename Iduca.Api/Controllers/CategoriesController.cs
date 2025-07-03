@@ -7,62 +7,76 @@ using Iduca.Application.Features.Categories.Get;
 using Iduca.Application.Features.Categories.GetAll;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Iduca.Api.Controllers;
 
 [ApiController]
 [Route(APIRoutes.Categories)]
-[CustomAuthorize] // Todas as rotas de categoria precisam de autenticação
-public class CategoriesController(IMediator mediator) : ControllerBase
+[CustomAuthorize] // Requer autenticação para todas as rotas
+public class CategoriesController : ControllerBase
 {
-    private readonly IMediator mediator = mediator;
+    private readonly IMediator _mediator;
 
-    [HttpPost]
-    public async Task<ActionResult<CreateCategoryResponse>> Create(
-        [FromBody] CreateCategoryRequest request, CancellationToken cancellationToken
-    )
+    public CategoriesController(IMediator mediator)
     {
-        var response = await mediator.Send(request, cancellationToken);
-        return Created(APIRoutes.Categories, response);
+        _mediator = mediator;
     }
 
+    /// <summary>
+    /// Retorna a lista de categorias disponíveis para o usuário escolher
+    /// </summary>
     [HttpGet]
-    [Route("search")]
+    public ActionResult GetCategories(CancellationToken cancellationToken = default)
+    {
+        // TODO: Implementar GetCategoriesRequest e Handler
+        var mockResponse = new object[]
+        {
+            new { id = 1, name = "Programação" },
+            new { id = 2, name = "UX/UI" },
+            new { id = 3, name = "DevOps" },
+            new { id = 4, name = "Gestão" },
+            new { id = 5, name = "Banco de Dados" },
+            new { id = 6, name = "Inteligência Artificial" },
+            new { id = 7, name = "Mecânica" }
+        };
+
+        return Ok(mockResponse);
+    }
+
+    /// <summary>
+    /// Buscar categorias por nome similar
+    /// </summary>
+    [HttpGet("search")]
     public async Task<ActionResult<CreateCategoryResponse>> GetBySimilarName(
         [FromQuery] string Name, CancellationToken cancellationToken
     )
     {
-        var response = await mediator.Send(new GetByNameCategoryRequest(Name), cancellationToken);
+        var response = await _mediator.Send(new GetByNameCategoryRequest(Name), cancellationToken);
         return Ok(response);
     }
 
-    [HttpGet]
-    [Route("{id}")]
+    /// <summary>
+    /// Obter categoria por ID
+    /// </summary>
+    [HttpGet("{id}")]
     public async Task<ActionResult<GetCategoryResponse>> GetById(
         [FromRoute] Guid id, CancellationToken cancellationToken
     )
     {
-        var response = await mediator.Send(new GetCategoryRequest(id), cancellationToken);
+        var response = await _mediator.Send(new GetCategoryRequest(id), cancellationToken);
         return Ok(response);
     }
 
-    [HttpGet]
-    [Route("all")]
+    /// <summary>
+    /// Listar todas as categorias
+    /// </summary>
+    [HttpGet("all")]
     public async Task<ActionResult<List<GetAllCategoriesResponse>>> GetAll(
         CancellationToken cancellationToken
     )
     {
-        var response = await mediator.Send(new GetAllCategoriesRequest(), cancellationToken);
+        var response = await _mediator.Send(new GetAllCategoriesRequest(), cancellationToken);
         return Ok(response);
-    }
-
-    [HttpDelete]
-    [Route("{Id}")]
-    public async Task<ActionResult<DeleteByIdCategoryResponse>> DeleteById(
-        [FromRoute] Guid Id, CancellationToken cancellationToken
-    )
-    {
-        await mediator.Send(new DeleteByIdCategoryRequest(Id), cancellationToken);
-        return Ok();
     }
 }

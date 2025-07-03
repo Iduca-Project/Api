@@ -26,6 +26,9 @@ public static class ServiceExtensions
         // Registrar serviços de auditoria
         services.AddScoped<ILogService, LogService>();
         
+        // Registrar serviço de hierarquia
+        services.AddScoped<IHierarchyService, HierarchyService>();
+        
         // Registrar serviço de seed
         services.AddScoped<ISeedService, SeedService>();
     }

@@ -1,4 +1,4 @@
-# Rotas de Cursos - API Iduca
+# Documentação das Rotas de Curso e Analytics - API Iduca
 
 ## Estrutura de Relacionamentos
 
@@ -8,45 +8,269 @@
 - **UserCourse**: Matrícula do usuário no curso (tabela de relacionamento)
 - **Module**: Módulos do curso
 - **Lesson**: Lições dentro dos módulos
-- **UserLesson**: Progresso do usuário nas lições (tabela user_lesson)
 - **Exercise**: Exercícios dos módulos
-- **Question**: Questões dos exercícios/provas
-- **Alternative**: Alternativas das questões
 - **Category**: Categorias dos cursos
 - **Company**: Empresa do usuário
 
-## Rotas Implementadas
+## 🟢 Rotas Implementadas
 
 ### 1. Rotas Básicas de Curso
 
-#### GET /api/courses
+#### GET /api/courses/all
 - **Descrição**: Lista todos os cursos com paginação e filtros
-- **Parâmetros**: `Page`, `MaxItems`, `Name`, `Difficulty`, `Categories[]`
-- **Response**: Lista de cursos com informações básicas + número de estudantes
+- **Autenticação**: Requerida (Admin ou Usuário)
+- **Parâmetros Query**:
+  - `name` (string, opcional): Filtrar por nome do curso
+  - `difficulty` (int, opcional): Filtrar por nível de dificuldade (1-5)
+  - `category` (array de GUIDs, opcional): Filtrar por categorias
+  - `page` (int, padrão: 1): Página atual
+  - `maxItems` (int, padrão: 10): Itens por página
 
 #### GET /api/courses/{id}
-- **Descrição**: Busca um curso específico
-- **Response**: Detalhes do curso + número de estudantes matriculados
+- **Descrição**: Obter detalhes de um curso específico
+- **Autenticação**: Requerida (Admin ou Usuário)
+- **Parâmetros**: `id` (GUID): ID do curso
 
 #### POST /api/courses
-- **Descrição**: Cria novo curso
-- **Requer**: Admin
-- **Body**: `Name`, `Description`, `Difficulty`, `Image`, `TotalHours`, `Categories[]`
+- **Descrição**: Criar um novo curso
+- **Autenticação**: Requerida (Admin)
+- **Body**:
+```json
+{
+  "name": "Nome do Curso",
+  "description": "Descrição do curso",
+  "difficulty": 3,
+  "image": "url-da-imagem",
+  "totalHours": 40,
+  "categories": ["guid-categoria-1", "guid-categoria-2"]
+}
+```
 
-#### PATCH /api/courses
-- **Descrição**: Atualiza curso existente
-- **Requer**: Admin
-- **Body**: `Id`, `Name`, `Description`, `Difficulty`, `Image`, `TotalHours`, `Categories[]`
+#### PATCH /api/courses/{id}
+- **Descrição**: Atualizar um curso existente
+- **Autenticação**: Requerida (Admin)
+- **Parâmetros**: `id` (GUID): ID do curso
+- **Body**: Campos opcionais para atualização
 
-## Rotas a Implementar
+#### DELETE /api/courses/{id}
+- **Descrição**: Excluir um curso (soft delete)
+- **Autenticação**: Requerida (Admin)
+- **Parâmetros**: `id` (GUID): ID do curso
 
-### 2. Matrícula em Cursos
+### 2. Rotas de Matrícula e Progresso
 
 #### POST /api/courses/{courseId}/enroll
-- **Descrição**: Matricula o usuário logado no curso
-- **Requer**: Autenticação
-- **Response**: Confirmação da matrícula
+- **Descrição**: Matricular usuário em um curso
+- **Autenticação**: Requerida (Admin ou Usuário)
+- **Parâmetros**: `courseId` (GUID): ID do curso
+- **Body**:
 ```json
+{
+  "userId": "guid-do-usuario"
+}
+```
+- **Response**:
+```json
+{
+  "courseId": "guid-do-curso",
+  "userId": "guid-do-usuario",
+  "enrolledAt": "2024-01-01T10:00:00Z",
+  "message": "Usuário matriculado com sucesso no curso!",
+  "initialProgress": {
+    "totalModules": 5,
+    "completedModules": 0,
+    "totalLessons": 25,
+    "completedLessons": 0,
+    "totalExercises": 10,
+    "completedExercises": 0,
+    "percentageComplete": 0.0,
+    "lastAccessedLesson": null
+  }
+}
+```
+
+#### GET /api/users/my-courses
+- **Descrição**: Listar cursos do usuário com progresso
+- **Autenticação**: Requerida (Admin ou Usuário)
+- **Query Parameters**: `userId` (GUID): ID do usuário (obrigatório)
+- **Response**:
+```json
+{
+  "courses": [
+    {
+      "courseId": "guid-do-curso",
+      "courseName": "Nome do Curso",
+      "description": "Descrição do curso",
+      "image": "url-da-imagem",
+      "enrolledAt": "2024-01-01T10:00:00Z",
+      "progress": {
+        "totalModules": 5,
+        "completedModules": 2,
+        "totalLessons": 25,
+        "completedLessons": 15,
+        "totalExercises": 10,
+        "completedExercises": 5,
+        "percentageComplete": 60.0,
+        "lastAccessedLesson": {
+          "lessonId": "guid-da-licao",
+          "lessonTitle": "Título da Lição",
+          "moduleTitle": "Título do Módulo"
+        }
+      },
+      "estimatedTimeToComplete": "PT40H",
+      "certificate": null
+    }
+  ]
+}
+```
+
+#### POST /api/lessons/{lessonId}/complete
+- **Descrição**: Marcar uma lição como concluída
+- **Autenticação**: Requerida (Admin ou Usuário)
+- **Parâmetros**: `lessonId` (GUID): ID da lição
+- **Body**:
+```json
+{
+  "userId": "guid-do-usuario"
+}
+```
+- **Response**:
+```json
+{
+  "lessonId": "guid-da-licao",
+  "userId": "guid-do-usuario",
+  "completedAt": "2024-01-01T10:30:00Z",
+  "message": "Lição concluída com sucesso!",
+  "newProgressPercentage": 65.0
+}
+```
+
+### 3. Rotas de Analytics (Somente Admin)
+
+#### GET /api/analytics/companies/{companyId}
+- **Descrição**: Obter estatísticas detalhadas de uma empresa
+- **Autenticação**: Requerida (Admin)
+- **Parâmetros**: `companyId` (GUID): ID da empresa
+- **Query Parameters**:
+  - `startDate` (DateTime, opcional): Data inicial para filtro
+  - `endDate` (DateTime, opcional): Data final para filtro
+- **Response**:
+```json
+{
+  "companyId": "guid-da-empresa",
+  "companyName": "Nome da Empresa",
+  "statistics": {
+    "totalUsers": 150,
+    "totalCourses": 25,
+    "totalEnrollments": 450,
+    "completedCourses": 200,
+    "averageCompletionRate": 75.5,
+    "totalHoursLearned": 1200,
+    "activeUsers": 89
+  },
+  "courseBreakdown": [
+    {
+      "courseId": "guid-do-curso",
+      "courseName": "Nome do Curso",
+      "enrollments": 45,
+      "completions": 32,
+      "completionRate": 71.1,
+      "averageProgress": 85.2,
+      "totalHours": 40
+    }
+  ],
+  "categoryBreakdown": [
+    {
+      "categoryId": "guid-da-categoria",
+      "categoryName": "Tecnologia",
+      "coursesCount": 8,
+      "enrollments": 180,
+      "popularityPercentage": 40.0
+    }
+  ],
+  "generatedAt": "2024-01-01T12:00:00Z"
+}
+```
+
+#### GET /api/analytics/categories/{categoryId}
+- **Descrição**: Obter estatísticas detalhadas de uma categoria
+- **Autenticação**: Requerida (Admin)
+- **Parâmetros**: `categoryId` (GUID): ID da categoria
+- **Query Parameters**:
+  - `startDate` (DateTime, opcional): Data inicial para filtro
+  - `endDate` (DateTime, opcional): Data final para filtro
+- **Response**:
+```json
+{
+  "categoryId": "guid-da-categoria",
+  "categoryName": "Tecnologia",
+  "analytics": {
+    "totalCourses": 15,
+    "totalEnrollments": 320,
+    "completedEnrollments": 240,
+    "averageCompletionRate": 75.0,
+    "totalHoursContent": 600,
+    "uniqueUsers": 180,
+    "popularityRank": 85.5
+  },
+  "topCourses": [
+    {
+      "courseId": "guid-do-curso",
+      "courseName": "Nome do Curso",
+      "enrollments": 65,
+      "completions": 52,
+      "completionRate": 80.0,
+      "averageRating": 4.5,
+      "totalHours": 40
+    }
+  ],
+  "companyBreakdown": [
+    {
+      "companyId": "guid-da-empresa",
+      "companyName": "Nome da Empresa",
+      "enrollments": 120,
+      "uniqueUsers": 85,
+      "completionRate": 78.3
+    }
+  ],
+  "generatedAt": "2024-01-01T12:00:00Z"
+}
+```
+
+## Códigos de Resposta
+
+- **200 OK**: Requisição bem-sucedida
+- **201 Created**: Recurso criado com sucesso
+- **400 Bad Request**: Dados inválidos na requisição
+- **401 Unauthorized**: Token de autenticação inválido ou ausente
+- **403 Forbidden**: Usuário não tem permissão para a operação
+- **404 Not Found**: Recurso não encontrado
+- **409 Conflict**: Conflito (ex: usuário já matriculado no curso)
+- **500 Internal Server Error**: Erro interno do servidor
+
+## Headers Obrigatórios
+
+Todas as rotas protegidas requerem o header:
+```
+Authorization: Bearer {jwt-token}
+```
+
+## Observações Importantes
+
+1. **Progresso**: O cálculo de progresso é baseado no número de lições completadas em relação ao total de lições do curso
+2. **Módulos Completados**: Um módulo é considerado completo quando todas as suas lições foram completadas
+3. **Matrícula**: Um usuário só pode se matricular uma vez em cada curso
+4. **Analytics**: As rotas de analytics são exclusivas para administradores e fornecem insights detalhados sobre engajamento e performance
+5. **Filtros de Data**: Nas rotas de analytics, os filtros de data se aplicam à data de matrícula dos usuários
+6. **Última Lição Acessada**: Refere-se à última lição que o usuário completou (não apenas visualizou)
+
+## ⚠️ Funcionalidades em Desenvolvimento
+
+### Rotas Futuras (Não Implementadas)
+- DELETE /api/courses/{courseId}/unenroll - Cancelar matrícula
+- GET /api/courses/{courseId}/my-progress - Progresso detalhado por módulo
+- POST /api/exercises/{exerciseId}/submit - Submeter exercícios
+- GET /api/analytics/my-ranking - Ranking do usuário na empresa
 {
   "userId": "guid",
   "courseId": "guid",

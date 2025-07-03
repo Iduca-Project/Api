@@ -47,13 +47,16 @@ public class CreateUserHandler(
                 ?? throw new NotFoundException("Responsável não encontrado.");
         }
 
-        // Buscar categorias de interesse
+        // Buscar categorias de interesse (se informadas)
         var interests = new List<Category>();
-        foreach (var interestId in request.Interests)
+        if (request.Interests != null)
         {
-            var category = await categoryRepository.Get(interestId, cancellationToken)
-                ?? throw new NotFoundException($"Categoria {interestId} não encontrada.");
-            interests.Add(category);
+            foreach (var interestId in request.Interests)
+            {
+                var category = await categoryRepository.Get(interestId, cancellationToken)
+                    ?? throw new NotFoundException($"Categoria {interestId} não encontrada.");
+                interests.Add(category);
+            }
         }
 
         var user = new Domain.Models.User

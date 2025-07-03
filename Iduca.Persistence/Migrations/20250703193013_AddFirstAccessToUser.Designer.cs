@@ -3,6 +3,7 @@ using System;
 using Iduca.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Iduca.Migrations
 {
     [DbContext(typeof(IducaContext))]
-    partial class IducaContextModelSnapshot : ModelSnapshot
+    [Migration("20250703193013_AddFirstAccessToUser")]
+    partial class AddFirstAccessToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -264,7 +267,7 @@ namespace Iduca.Migrations
                     b.HasIndex("CourseId")
                         .IsUnique();
 
-                    b.ToTable("Exam");
+                    b.ToTable("Exams");
                 });
 
             modelBuilder.Entity("Iduca.Domain.Models.Exercise", b =>
@@ -563,6 +566,9 @@ namespace Iduca.Migrations
                         .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("email");
+
+                    b.Property<bool>("FirstAccess")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Identity")
                         .IsRequired()

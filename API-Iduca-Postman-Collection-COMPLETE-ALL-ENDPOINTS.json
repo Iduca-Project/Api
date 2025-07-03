@@ -1,0 +1,2138 @@
+{
+	"info": {
+		"name": "API Iduca - Collection Organizada por Nível de Acesso",
+		"description": "Collection ORGANIZADA da API Iduca separada por nível de acesso: Usuário Comum, Gestor e Administrador. Estrutura corrigida e padronizada conforme a reorganização dos controllers.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_postman_id": "iduca-api-organized-2025"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5284",
+			"type": "string"
+		},
+		{
+			"key": "admin_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.admin_token_here",
+			"type": "string"
+		},
+		{
+			"key": "user_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.user_token_here",
+			"type": "string"
+		},
+		{
+			"key": "manager_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.manager_token_here",
+			"type": "string"
+		},
+		{
+			"key": "company_id",
+			"value": "550e8400-e29b-41d4-a716-446655440000",
+			"type": "string"
+		},
+		{
+			"key": "course_id",
+			"value": "550e8400-e29b-41d4-a716-446655440001",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "550e8400-e29b-41d4-a716-446655440002",
+			"type": "string"
+		},
+		{
+			"key": "lesson_id",
+			"value": "550e8400-e29b-41d4-a716-446655440003",
+			"type": "string"
+		},
+		{
+			"key": "category_id",
+			"value": "550e8400-e29b-41d4-a716-446655440004",
+			"type": "string"
+		},
+		{
+			"key": "module_id",
+			"value": "550e8400-e29b-41d4-a716-446655440005",
+			"type": "string"
+		},
+		{
+			"key": "employee_id",
+			"value": "550e8400-e29b-41d4-a716-446655440006",
+			"type": "string"
+		},
+		{
+			"key": "manager_id",
+			"value": "550e8400-e29b-41d4-a716-446655440007",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "🔐 Autenticação",
+			"item": [
+				{
+					"name": "Login Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.collectionVariables.set('admin_token', response.token);",
+									"    console.log('Token do admin salvo:', response.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@iduca.com\",\n  \"password\": \"admin123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "login"]
+						}
+					}
+				},
+				{
+					"name": "Login Manager",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.collectionVariables.set('manager_token', response.token);",
+									"    console.log('Token do manager salvo:', response.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"manager@empresa.com\",\n  \"password\": \"manager123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "login"]
+						}
+					}
+				},
+				{
+					"name": "Login Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.collectionVariables.set('user_token', response.token);",
+									"    console.log('Token do usuário salvo:', response.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"usuario@empresa.com\",\n  \"password\": \"senha123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "login"]
+						}
+					}
+				},
+				{
+					"name": "Esqueci a Senha",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"usuario@empresa.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/forgotPass",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "forgotPass"]
+						}
+					}
+				},
+				{
+					"name": "Verificar Código",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"usuario@empresa.com\",\n  \"code\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/checkCode",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "checkCode"]
+						}
+					}
+				},
+				{
+					"name": "Reenviar Código",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"usuario@empresa.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/resendCode",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "resendCode"]
+						}
+					}
+				},
+				{
+					"name": "Redefinir Senha",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"usuario@empresa.com\",\n  \"newPassword\": \"senhaNova123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/resetPassword",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "resetPassword"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "👤 Usuários (CRUD Completo)",
+			"item": [
+				{
+					"name": "Criar Usuário",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"João Silva\",\n  \"identity\": \"123456789\",\n  \"email\": \"joao@empresa.com\",\n  \"password\": \"senha123\",\n  \"companyId\": \"{{company_id}}\",\n  \"isAdmin\": false\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users"]
+						}
+					}
+				},
+				{
+					"name": "Criar Usuário com Interesses",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Maria Santos\",\n  \"identity\": \"987654321\",\n  \"email\": \"maria@empresa.com\",\n  \"password\": \"senha123\",\n  \"companyId\": \"{{company_id}}\",\n  \"isAdmin\": false,\n  \"interests\": [\"{{category_id}}\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users"]
+						}
+					}
+				},
+				{
+					"name": "Listar Todos os Usuários",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/users/all?Page=1&MaxItems=10&Name=&Email=&CompanyId=&IsAdmin=",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users", "all"],
+							"query": [
+								{
+									"key": "Page",
+									"value": "1"
+								},
+								{
+									"key": "MaxItems",
+									"value": "10"
+								},
+								{
+									"key": "Name",
+									"value": ""
+								},
+								{
+									"key": "Email",
+									"value": ""
+								},
+								{
+									"key": "CompanyId",
+									"value": ""
+								},
+								{
+									"key": "IsAdmin",
+									"value": ""
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Obter Usuário por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/users/{{user_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users", "{{user_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Atualizar Usuário",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{user_id}}\",\n  \"name\": \"João Silva Atualizado\",\n  \"email\": \"joao.novo@empresa.com\",\n  \"isAdmin\": false,\n  \"isManager\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users"]
+						}
+					}
+				},
+				{
+					"name": "Deletar Usuário",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/users/{{user_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users", "{{user_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Meus Cursos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/users/my-courses",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users", "my-courses"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "🏢 Empresas (CRUD Completo)",
+			"item": [
+				{
+					"name": "Criar Empresa",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Empresa Teste Ltda\",\n  \"cnpj\": \"12.345.678/0001-90\",\n  \"email\": \"contato@empresateste.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/companies",
+							"host": ["{{base_url}}"],
+							"path": ["api", "companies"]
+						}
+					}
+				},
+				{
+					"name": "Buscar Empresa por Nome",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/companies?Name=Empresa",
+							"host": ["{{base_url}}"],
+							"path": ["api", "companies"],
+							"query": [
+								{
+									"key": "Name",
+									"value": "Empresa"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Obter Empresa por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/companies/{{company_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "companies", "{{company_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Listar Todas as Empresas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/companies/all",
+							"host": ["{{base_url}}"],
+							"path": ["api", "companies", "all"]
+						}
+					}
+				},
+				{
+					"name": "Atualizar Empresa",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{company_id}}\",\n  \"name\": \"Empresa Atualizada Ltda\",\n  \"cnpj\": \"12.345.678/0001-90\",\n  \"email\": \"novo@empresateste.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/companies",
+							"host": ["{{base_url}}"],
+							"path": ["api", "companies"]
+						}
+					}
+				},
+				{
+					"name": "Deletar Empresa",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/companies/{{company_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "companies", "{{company_id}}"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "📚 Cursos (CRUD + Funcionalidades)",
+			"item": [
+				{
+					"name": "Criar Curso",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Curso de Teste\",\n  \"description\": \"Descrição do curso de teste\",\n  \"difficulty\": 1,\n  \"duration\": \"10:00:00\",\n  \"categoryId\": \"{{category_id}}\",\n  \"companyId\": \"{{company_id}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/courses",
+							"host": ["{{base_url}}"],
+							"path": ["api", "courses"]
+						}
+					}
+				},
+				{
+					"name": "Listar Cursos (README)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/courses?page=1&search=&category=&difficulty=",
+							"host": ["{{base_url}}"],
+							"path": ["api", "courses"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "search",
+									"value": ""
+								},
+								{
+									"key": "category",
+									"value": ""
+								},
+								{
+									"key": "difficulty",
+									"value": ""
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Detalhes do Curso (README)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/courses/{{course_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "courses", "{{course_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Listar Todos os Cursos (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/courses/all?Name=&Difficulty=&Page=1&MaxItems=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "courses", "all"],
+							"query": [
+								{
+									"key": "Name",
+									"value": ""
+								},
+								{
+									"key": "Difficulty",
+									"value": ""
+								},
+								{
+									"key": "Page",
+									"value": "1"
+								},
+								{
+									"key": "MaxItems",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Obter Curso por ID (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/courses/{{course_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "courses", "{{course_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Atualizar Curso",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{course_id}}\",\n  \"title\": \"Curso Atualizado\",\n  \"description\": \"Nova descrição do curso\",\n  \"difficulty\": 2\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/courses",
+							"host": ["{{base_url}}"],
+							"path": ["api", "courses"]
+						}
+					}
+				},
+				{
+					"name": "Deletar Curso",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/courses/{{course_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "courses", "{{course_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Matricular em Curso",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"courseId\": \"{{course_id}}\",\n  \"userId\": \"{{user_id}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/courses/{{course_id}}/enroll",
+							"host": ["{{base_url}}"],
+							"path": ["api", "courses", "{{course_id}}", "enroll"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "🗂️ Categorias",
+			"item": [
+				{
+					"name": "Listar Categorias (README)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/categories",
+							"host": ["{{base_url}}"],
+							"path": ["api", "categories"]
+						}
+					}
+				},
+				{
+					"name": "Criar Categoria",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Nova Categoria\",\n  \"description\": \"Descrição da nova categoria\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/categories",
+							"host": ["{{base_url}}"],
+							"path": ["api", "categories"]
+						}
+					}
+				},
+				{
+					"name": "Buscar Categoria por Nome",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/categories/search?Name=Programação",
+							"host": ["{{base_url}}"],
+							"path": ["api", "categories", "search"],
+							"query": [
+								{
+									"key": "Name",
+									"value": "Programação"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Obter Categoria por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/categories/{{category_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "categories", "{{category_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Listar Todas as Categorias",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/categories/all",
+							"host": ["{{base_url}}"],
+							"path": ["api", "categories", "all"]
+						}
+					}
+				},
+				{
+					"name": "Deletar Categoria",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/categories/{{category_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "categories", "{{category_id}}"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "📖 Lições",
+			"item": [
+				{
+					"name": "Detalhes da Lição (README)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/lessons/{{lesson_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "lessons", "{{lesson_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Criar Lição",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Nova Lição\",\n  \"content\": \"Conteúdo da lição\",\n  \"moduleId\": \"{{module_id}}\",\n  \"order\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/lessons",
+							"host": ["{{base_url}}"],
+							"path": ["api", "lessons"]
+						}
+					}
+				},
+				{
+					"name": "Lições por Módulo",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/lessons/module/{{module_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "lessons", "module", "{{module_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Obter Lição por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/lessons/{{lesson_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "lessons", "{{lesson_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Completar Lição",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"lessonId\": \"{{lesson_id}}\",\n  \"userId\": \"{{user_id}}\",\n  \"completedAt\": \"2025-07-03T10:00:00Z\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/lessons/{{lesson_id}}/complete",
+							"host": ["{{base_url}}"],
+							"path": ["api", "lessons", "{{lesson_id}}", "complete"]
+						}
+					}
+				},
+				{
+					"name": "Deletar Lição",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/lessons/{{lesson_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "lessons", "{{lesson_id}}"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "📝 Módulos",
+			"item": [
+				{
+					"name": "Criar Módulo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Novo Módulo\",\n  \"description\": \"Descrição do módulo\",\n  \"courseId\": \"{{course_id}}\",\n  \"order\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/modules",
+							"host": ["{{base_url}}"],
+							"path": ["api", "modules"]
+						}
+					}
+				},
+				{
+					"name": "Obter Módulo por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/modules/{{module_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "modules", "{{module_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Módulos por Curso",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/modules/course/{{course_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "modules", "course", "{{course_id}}"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "🏠 Home/Dashboard (Usuário)",
+			"item": [
+				{
+					"name": "Progresso Geral",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/home/progress",
+							"host": ["{{base_url}}"],
+							"path": ["api", "home", "progress"]
+						}
+					}
+				},
+				{
+					"name": "Cursos em Andamento",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/home/coursesInProgress",
+							"host": ["{{base_url}}"],
+							"path": ["api", "home", "coursesInProgress"]
+						}
+					}
+				},
+				{
+					"name": "Calendário Home",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/home/calendar",
+							"host": ["{{base_url}}"],
+							"path": ["api", "home", "calendar"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "🗓️ Calendário",
+			"item": [
+				{
+					"name": "Todos os Eventos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/calendar",
+							"host": ["{{base_url}}"],
+							"path": ["api", "calendar"]
+						}
+					}
+				},
+				{
+					"name": "Próximos 7 Dias",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/calendar/next",
+							"host": ["{{base_url}}"],
+							"path": ["api", "calendar", "next"]
+						}
+					}
+				},
+				{
+					"name": "Adicionar Lembrete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Estudar para a prova\",\n  \"date\": \"2025-07-10\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/calendar/reminder",
+							"host": ["{{base_url}}"],
+							"path": ["api", "calendar", "reminder"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "👤 Perfil",
+			"item": [
+				{
+					"name": "Obter Perfil",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/profile",
+							"host": ["{{base_url}}"],
+							"path": ["api", "profile"]
+						}
+					}
+				},
+				{
+					"name": "Atualizar Perfil",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"interests\": [1, 2, 4, 6, 7]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/profile",
+							"host": ["{{base_url}}"],
+							"path": ["api", "profile"]
+						}
+					}
+				},
+				{
+					"name": "Certificado - Imagem",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/certificate/{{course_id}}/image",
+							"host": ["{{base_url}}"],
+							"path": ["api", "certificate", "{{course_id}}", "image"]
+						}
+					}
+				},
+				{
+					"name": "Certificado - PDF",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/certificate/{{course_id}}/pdf",
+							"host": ["{{base_url}}"],
+							"path": ["api", "certificate", "{{course_id}}", "pdf"]
+						}
+					}
+				},
+				{
+					"name": "Listar Interesses",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/interests",
+							"host": ["{{base_url}}"],
+							"path": ["api", "interests"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "📝 Testes/Provas",
+			"item": [
+				{
+					"name": "Obter Prova por Curso",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/test/{{course_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "test", "{{course_id}}"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "🧑‍💼 Manager",
+			"item": [
+				{
+					"name": "Dashboard Manager",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{manager_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/manager/dashboard",
+							"host": ["{{base_url}}"],
+							"path": ["api", "manager", "dashboard"]
+						}
+					}
+				},
+				{
+					"name": "Equipe",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{manager_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/manager/team",
+							"host": ["{{base_url}}"],
+							"path": ["api", "manager", "team"]
+						}
+					}
+				},
+				{
+					"name": "Status dos Cursos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{manager_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/manager/courses-status?employeeId={{employee_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "manager", "courses-status"],
+							"query": [
+								{
+									"key": "employeeId",
+									"value": "{{employee_id}}"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Matricular Funcionário",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{manager_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"employeeId\": \"{{employee_id}}\",\n  \"courseId\": \"{{course_id}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/manager/enroll",
+							"host": ["{{base_url}}"],
+							"path": ["api", "manager", "enroll"]
+						}
+					}
+				},
+				{
+					"name": "Resumo dos Funcionários",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{manager_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/manager/employeesSummary",
+							"host": ["{{base_url}}"],
+							"path": ["api", "manager", "employeesSummary"]
+						}
+					}
+				},
+				{
+					"name": "Dashboard do Funcionário",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{manager_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/manager/employee/{{employee_id}}/dashboard",
+							"host": ["{{base_url}}"],
+							"path": ["api", "manager", "employee", "{{employee_id}}", "dashboard"]
+						}
+					}
+				},
+				{
+					"name": "Exportar Relatório PDF",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{manager_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/manager/export?format=pdf",
+							"host": ["{{base_url}}"],
+							"path": ["api", "manager", "export"],
+							"query": [
+								{
+									"key": "format",
+									"value": "pdf"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Exportar Relatório Excel",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{manager_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/manager/export?format=xlsx",
+							"host": ["{{base_url}}"],
+							"path": ["api", "manager", "export"],
+							"query": [
+								{
+									"key": "format",
+									"value": "xlsx"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Criar Funcionário",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{manager_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"João Silva\",\n  \"identity\": \"123456789\",\n  \"email\": \"joao@empresa.com\",\n  \"password\": \"senha123\",\n  \"companyId\": \"{{company_id}}\",\n  \"isManager\": false\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/manager/employees",
+							"host": ["{{base_url}}"],
+							"path": ["api", "manager", "employees"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "👑 Admin",
+			"item": [
+				{
+					"name": "🏢 Empresas Admin",
+					"item": [
+						{
+							"name": "Listar Empresas",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/admin/companies",
+									"host": ["{{base_url}}"],
+									"path": ["api", "admin", "companies"]
+								}
+							}
+						},
+						{
+							"name": "Criar Empresa",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Empresa Gama\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/admin/companies",
+									"host": ["{{base_url}}"],
+									"path": ["api", "admin", "companies"]
+								}
+							}
+						},
+						{
+							"name": "Deletar Empresa",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/admin/companies/{{company_id}}",
+									"host": ["{{base_url}}"],
+									"path": ["api", "admin", "companies", "{{company_id}}"]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "📚 Cursos Admin",
+					"item": [
+						{
+							"name": "Criar Curso Completo",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Git and GitHub\",\n  \"image\": \"https://cdn.exemplo.com/curso5.png\",\n  \"description\": \"Aprenda a versionar seus projetos com Git e GitHub do zero.\",\n  \"difficulty\": 1,\n  \"category\": \"Ferramentas\",\n  \"duration\": \"10:00:00\",\n  \"haveExam\": true,\n  \"modules\": []\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/admin/course",
+									"host": ["{{base_url}}"],
+									"path": ["api", "admin", "course"]
+								}
+							}
+						},
+						{
+							"name": "Deletar Curso",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/admin/course/{{course_id}}",
+									"host": ["{{base_url}}"],
+									"path": ["api", "admin", "course", "{{course_id}}"]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "🧑‍💼 Managers Admin",
+					"item": [
+						{
+							"name": "Criar Manager",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Lucas Andrade\",\n  \"identity\": \"987654321\",\n  \"email\": \"lucas@empresa.com\",\n  \"password\": \"manager123\",\n  \"companyId\": \"{{company_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/admin/managers",
+									"host": ["{{base_url}}"],
+									"path": ["api", "admin", "managers"]
+								}
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "📊 Analytics (Admin)",
+			"item": [
+				{
+					"name": "Estatísticas da Empresa",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/analytics/companies/{{company_id}}?startDate=2025-01-01&endDate=2025-12-31",
+							"host": ["{{base_url}}"],
+							"path": ["api", "analytics", "companies", "{{company_id}}"],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2025-01-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2025-12-31"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Estatísticas da Categoria",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/analytics/categories/{{category_id}}?startDate=2025-01-01&endDate=2025-12-31",
+							"host": ["{{base_url}}"],
+							"path": ["api", "analytics", "categories", "{{category_id}}"],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2025-01-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2025-12-31"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "🏗️ Hierarquia Organizacional",
+			"item": [
+				{
+					"name": "Definir Responsabilidade",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": \"{{user_id}}\",\n  \"responsibleId\": \"{{manager_id}}\",\n  \"reason\": \"Reorganização da equipe\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/hierarchy/assign-responsibility",
+							"host": ["{{base_url}}"],
+							"path": ["api", "hierarchy", "assign-responsibility"]
+						}
+					}
+				},
+				{
+					"name": "Remover Responsabilidade",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/hierarchy/remove-responsibility/{{user_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "hierarchy", "remove-responsibility", "{{user_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Árvore Hierárquica",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/hierarchy/tree",
+							"host": ["{{base_url}}"],
+							"path": ["api", "hierarchy", "tree"]
+						}
+					}
+				},
+				{
+					"name": "Subordinados de um Usuário",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{manager_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/hierarchy/subordinates/{{user_id}}?includeIndirect=true",
+							"host": ["{{base_url}}"],
+							"path": ["api", "hierarchy", "subordinates", "{{user_id}}"],
+							"query": [
+								{
+									"key": "includeIndirect",
+									"value": "true"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Superiores de um Usuário",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/hierarchy/superiors/{{user_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "hierarchy", "superiors", "{{user_id}}"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "🔧 Atividades (Faltantes)",
+			"item": [
+				{
+					"name": "Enviar Respostas Quiz",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"answers\": [\n    { \"questionId\": 1, \"selectedOptionId\": \"b\" },\n    { \"questionId\": 2, \"selectedOptionId\": \"c\" }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/activities/{{lesson_id}}/submitQuiz",
+							"host": ["{{base_url}}"],
+							"path": ["api", "activities", "{{lesson_id}}", "submitQuiz"]
+						}
+					}
+				},
+				{
+					"name": "Upload PDF Atividade",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/activities/{{lesson_id}}/upload",
+							"host": ["{{base_url}}"],
+							"path": ["api", "activities", "{{lesson_id}}", "upload"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "📊 HIERARCHY - Hierarquia Organizacional",
+			"description": "Endpoints para gerenciar hierarquia de usuários (responsabilidades/subordinados)",
+			"item": [
+				{
+					"name": "Atribuir Responsável",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/hierarchy/{{user_id}}/assign-responsible/{{responsible_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "hierarchy", "{{user_id}}", "assign-responsible", "{{responsible_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Remover Responsável",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/hierarchy/{{user_id}}/remove-responsible",
+							"host": ["{{base_url}}"],
+							"path": ["api", "hierarchy", "{{user_id}}", "remove-responsible"]
+						}
+					}
+				},
+				{
+					"name": "Obter Árvore Hierárquica",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{manager_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/hierarchy/tree?rootUserId={{user_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "hierarchy", "tree"],
+							"query": [
+								{
+									"key": "rootUserId",
+									"value": "{{user_id}}",
+									"description": "ID do usuário raiz (opcional)"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Obter Subordinados",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{manager_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/hierarchy/{{user_id}}/subordinates?includeIndirect=true",
+							"host": ["{{base_url}}"],
+							"path": ["api", "hierarchy", "{{user_id}}", "subordinates"],
+							"query": [
+								{
+									"key": "includeIndirect",
+									"value": "true",
+									"description": "Incluir subordinados indiretos"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Obter Superiores",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/hierarchy/{{user_id}}/superiors",
+							"host": ["{{base_url}}"],
+							"path": ["api", "hierarchy", "{{user_id}}", "superiors"]
+						}
+					}
+				},
+				{
+					"name": "Verificar Hierarquia",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{manager_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/hierarchy/check-hierarchy/{{superior_id}}/{{subordinate_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "hierarchy", "check-hierarchy", "{{superior_id}}", "{{subordinate_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Verificar Ciclo",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/hierarchy/check-cycle/{{user_id}}/{{new_responsible_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "hierarchy", "check-cycle", "{{user_id}}", "{{new_responsible_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Obter Usuários Acessíveis",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{manager_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/hierarchy/accessible-users",
+							"host": ["{{base_url}}"],
+							"path": ["api", "hierarchy", "accessible-users"]
+						}
+					}
+				},
+				{
+					"name": "Matricular Equipe em Curso",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{manager_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/hierarchy/enroll-team/{{course_id}}?includeIndirect=true",
+							"host": ["{{base_url}}"],
+							"path": ["api", "hierarchy", "enroll-team", "{{course_id}}"],
+							"query": [
+								{
+									"key": "includeIndirect",
+									"value": "true",
+									"description": "Incluir subordinados indiretos"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	]
+}

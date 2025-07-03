@@ -41,11 +41,17 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
         // Gerar token JWT
         var token = _authenticator.GenerateUserToken(user);
 
-        // Determinar se é primeiro acesso
+        // Determinar se é primeiro acesso (antes de fazer log de login)
         var firstAccess = await _userRepository.IsFirstAccessAsync(user.Id, cancellationToken);
 
         // Log de login bem-sucedido
         await _logService.LogLoginAsync(user.Id, true, cancellationToken);
+
+        // Se é o primeiro acesso, marcar como completo após o login bem-sucedido
+        if (firstAccess)
+        {
+            await _userRepository.MarkFirstAccessCompleteAsync(user.Id, cancellationToken);
+        }
 
         return new LoginResponse(token, firstAccess);
     }
