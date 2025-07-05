@@ -36,20 +36,17 @@ public class CoursesController : BaseController
     public async Task<ActionResult<GetCoursesResponse>> GetCourses(
         [FromQuery] int page = 1,
         [FromQuery] string? search = null,
-        [FromQuery] string? category = null,
+        [FromQuery] Guid? category = null,
         [FromQuery] int? difficulty = null,
         [FromQuery] int maxItems = 10,
         CancellationToken cancellationToken = default
     )
     {
-        // Para simplificar, vamos passar lista vazia de categorias por enquanto
-        // No futuro, isso pode ser expandido para aceitar GUIDs de categorias
-        var categories = new List<Guid>();
         
         var request = new GetCoursesRequest(
             search,
-            (CourseDifficulty?)difficulty,
-            categories,
+            difficulty,
+            category,
             page,
             maxItems
         );

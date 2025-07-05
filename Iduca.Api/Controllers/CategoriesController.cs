@@ -27,21 +27,10 @@ public class CategoriesController : ControllerBase
     /// Retorna a lista de categorias disponíveis para o usuário escolher
     /// </summary>
     [HttpGet]
-    public ActionResult GetCategories(CancellationToken cancellationToken = default)
+    public async Task<ActionResult> GetCategoriesAsync([FromQuery] GetAllCategoriesRequest request, CancellationToken cancellationToken = default)
     {
-        // TODO: Implementar GetCategoriesRequest e Handler
-        var mockResponse = new object[]
-        {
-            new { id = 1, name = "Programação" },
-            new { id = 2, name = "UX/UI" },
-            new { id = 3, name = "DevOps" },
-            new { id = 4, name = "Gestão" },
-            new { id = 5, name = "Banco de Dados" },
-            new { id = 6, name = "Inteligência Artificial" },
-            new { id = 7, name = "Mecânica" }
-        };
-
-        return Ok(mockResponse);
+        var response = await _mediator.Send(request, cancellationToken);
+        return Ok(response);
     }
 
     /// <summary>

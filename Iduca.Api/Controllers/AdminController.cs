@@ -6,6 +6,9 @@ using Iduca.Application.Features.Categories.DeleteById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Iduca.Application.Features.Companies.GetAll;
+using Iduca.Application.Features.Courses.Create;
+using Iduca.Application.Features.Modules.Create;
+using Iduca.Application.Features.Modules.CreateList;
 
 namespace Iduca.Api.Controllers;
 
@@ -72,7 +75,32 @@ public class AdminController : ControllerBase
         return Ok(response);
     }
 
+
+
+
     #endregion
+
+    #region Modules
+    [HttpPost("module")]
+    public async Task<ActionResult<CreateModuleResponse>> Create(
+        CreateModuleRequest request, CancellationToken cancellationToken
+    )
+    {
+        var response = await _mediator.Send(request, cancellationToken);
+        return Ok(response);
+    }
+
+    [HttpPost("module/list")]
+    public async Task<ActionResult<CreateListModuleResponse>> CreateList(
+        [FromBody] CreateListModuleRequest request, CancellationToken cancellationToken
+    )
+    {
+        var response = await _mediator.Send(request, cancellationToken);
+        return Ok(response);
+    }
+    #endregion
+
+
 
     #region Cursos
 
@@ -80,16 +108,10 @@ public class AdminController : ControllerBase
     /// Cria um curso novo com módulos e conteúdos
     /// </summary>
     [HttpPost("course")]
-    public ActionResult CreateCourse([FromBody] CreateCourseAdminRequest request, CancellationToken cancellationToken = default)
+    public async Task<ActionResult> CreateCourseAsync([FromBody] CreateCourseRequest request, CancellationToken cancellationToken = default)
     {
-        // TODO: Implementar CreateCourseAdminRequest e Handler
-        var mockResponse = new
-        {
-            message = "Course created successfully",
-            courseId = 123
-        };
-
-        return Ok(mockResponse);
+        var response = await _mediator.Send(request, cancellationToken);
+        return Ok(response);
     }
 
     /// <summary>
