@@ -4,10 +4,12 @@ using Iduca.Persistence;
 using Iduca.Api.Extensions;
 using Iduca.Api.Middlewares.ExceptionHandlers;
 using Iduca.Api.Middlewares;
+using Iduca.Api.Security;
 
 using Iduca.Application;
 using Iduca.Application.Config;
 using Iduca.Application.Common.Services;
+using Iduca.Application.Common.Session;
 using System.Text.Json.Serialization;
 using Iduca.Application.Features.Companies.Get;
 using Iduca.Application.Features.Courses.GetByQuery;
@@ -18,6 +20,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.ConfigurePersistence();
 builder.Services.ConfigureApplication();
+
+// Registrar serviços específicos da API
+builder.Services.AddScoped<IRequestSession, RequestSession>();
 
 builder.Services.ConfigureCorsPolicy();
 

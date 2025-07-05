@@ -1,6 +1,7 @@
 using System.Reflection;
 using Iduca.Application.Common.Exceptions;
 using Iduca.Application.Common.Services;
+using Iduca.Application.Common.Session;
 using Iduca.Application.Contracts;
 using FluentValidation;
 using MediatR;

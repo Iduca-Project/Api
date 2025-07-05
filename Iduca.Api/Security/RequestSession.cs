@@ -3,7 +3,7 @@ using Iduca.Application.Common.Session;
 using Iduca.Domain.Common.Messages;
 using Iduca.Domain.Objects;
 
-namespace IAgro.API.Security;
+namespace Iduca.Api.Security;
 
 public class RequestSession : IRequestSession
 {

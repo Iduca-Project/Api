@@ -1,6 +1,8 @@
 using Iduca.Api.Attributes;
 using Iduca.Application.Common.Services;
+using Iduca.Application.Features.Manager.EnrollEmployee;
 using Iduca.Application.Features.Manager.GetDashboard;
+using Iduca.Application.Repository.UserCourseRepository;
 using Iduca.Persistence.Repositories.Users;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -46,11 +48,18 @@ public class ManagerController : BaseController
         }
 
         var teamResponse = new List<object>();
+        var userCourseRepository = HttpContext.RequestServices.GetRequiredService<IUserCourseRepository>();
         
         foreach (var subordinate in allSubordinates)
         {
-            // Buscar quantidade de cursos do usuário
-            var coursesCount = subordinate.Courses?.Count ?? 0;
+            // Buscar cursos do usuário
+            var userCourses = await userCourseRepository.GetAllByUserId(subordinate.Id, cancellationToken);
+            var coursesCount = userCourses.Count;
+            
+            // Por enquanto, não temos um sistema de notas implementado
+            // O Rating em UserCourse é a avaliação que o usuário dá ao curso, não a nota dele no curso
+            // TODO: Implementar sistema de notas baseado em exercícios/exames
+            var averageScore = 0.0; // Placeholder até implementar sistema de notas real
             
             teamResponse.Add(new
             {
@@ -60,7 +69,8 @@ public class ManagerController : BaseController
                 isAdmin = subordinate.IsAdmin,
                 isDirect = directSubordinates.Any(d => d.Id == subordinate.Id),
                 responsibleId = subordinate.ResponsibleId,
-                coursesCount = coursesCount
+                coursesCount = coursesCount,
+                averageScore = averageScore
             });
         }
 
@@ -127,8 +137,8 @@ public class ManagerController : BaseController
     [HttpPost("enroll")]
     public async Task<ActionResult> EnrollEmployee([FromBody] EnrollEmployeeRequest request, CancellationToken cancellationToken = default)
     {
-        // TODO: Implementar EnrollEmployeeRequest e Handler
-        return Ok(new { response = true });
+        var response = await _mediator.Send(request, cancellationToken);
+        return Ok(response);
     }
 
     /// <summary>
@@ -253,13 +263,6 @@ public class ManagerController : BaseController
         // TODO: Implementar CreateEmployeeRequest e Handler
         return Ok(new { message = "Employee created successfully", employeeId = 45 });
     }
-}
-
-// Classes temporárias para os requests
-public class EnrollEmployeeRequest
-{
-    public Guid EmployeeId { get; set; }
-    public Guid CourseId { get; set; }
 }
 
 public class CreateEmployeeRequest
