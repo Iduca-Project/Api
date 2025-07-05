@@ -5,12 +5,13 @@ using Iduca.Application.Features.Categories.Create;
 using Iduca.Application.Features.Categories.DeleteById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Iduca.Application.Features.Companies.GetAll;
 
 namespace Iduca.Api.Controllers;
 
 [ApiController]
 [Route("api/admin")]
-[CustomAuthorize] // TODO: Adicionar atributo específico para Admin quando disponível
+[AdminAuthorize] // TODO: Adicionar atributo específico para Admin quando disponível
 public class AdminController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -26,34 +27,17 @@ public class AdminController : ControllerBase
     /// Lista todas as empresas cadastradas no sistema
     /// </summary>
     [HttpGet("companies")]
-    public ActionResult GetCompanies(CancellationToken cancellationToken = default)
+    public async Task<ActionResult<GetAllCompanyResponse>> GetAllCompany([FromQuery] GetAllCompanyRequest request, CancellationToken cancellationToken)
     {
-        // TODO: Implementar GetCompaniesRequest e Handler
-        var mockResponse = new
-        {
-            companies = new object[]
-            {
-                new
-                {
-                    id = 1,
-                    name = "Empresa Alfa"
-                },
-                new
-                {
-                    id = 2,
-                    name = "Beta Ltda"
-                }
-            }
-        };
-
-        return Ok(mockResponse);
+        var response = await _mediator.Send(request, cancellationToken);
+        return Ok(response);
     }
 
     /// <summary>
     /// Cadastra uma nova empresa
     /// </summary>
     [HttpPost("companies")]
-    public async Task<ActionResult<CreateCompanyResponse>> CreateCompany([FromBody] CreateCompanyRequest request, CancellationToken cancellationToken = default)
+    public async Task<ActionResult<CreateCompanyResponse>> CreateCompany([FromBody] CreateCompanyRequest request, CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(request, cancellationToken);
         return Created($"/api/admin/companies", response);
@@ -63,7 +47,7 @@ public class AdminController : ControllerBase
     /// Deleta uma empresa e funcionários vinculados
     /// </summary>
     [HttpDelete("companies/{companyId}")]
-    public ActionResult DeleteCompany([FromRoute] int companyId, CancellationToken cancellationToken = default)
+    public ActionResult DeleteCompany([FromRoute] int companyId, CancellationToken cancellationToken)
     {
         // TODO: Implementar DeleteCompanyRequest e Handler
         var mockResponse = new

@@ -44,6 +44,10 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
         // Determinar se é primeiro acesso (antes de fazer log de login)
         var firstAccess = await _userRepository.IsFirstAccessAsync(user.Id, cancellationToken);
 
+        var admin = user.IsAdmin;
+
+        var manager = await _userRepository.IsManager(user.Id, cancellationToken);
+
         // Log de login bem-sucedido
         await _logService.LogLoginAsync(user.Id, true, cancellationToken);
 
@@ -53,7 +57,7 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
             await _userRepository.MarkFirstAccessCompleteAsync(user.Id, cancellationToken);
         }
 
-        return new LoginResponse(token, firstAccess);
+        return new LoginResponse(token, admin, manager, firstAccess);
     }
 
     private static bool VerifyPassword(string password, string hashedPassword)

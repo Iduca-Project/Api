@@ -6,6 +6,7 @@ public interface IUserRepository : IBaseRepository<User>
 {
     Task<User?> GetUserByEmail(string email, CancellationToken cancellationToken);
     Task<User?> GetUserByIdentity(string identity, CancellationToken cancellationToken);
+    Task<bool> IsManager(Guid id, CancellationToken cancellationToken);
     Task<List<User>> GetUsersByCompany(Guid companyId, CancellationToken cancellationToken);
     Task<User?> GetUserWithDetails(Guid id, CancellationToken cancellationToken);
     Task<List<User>> GetUsersByQuery(string? name, string? email, Guid? companyId, bool? isAdmin, int page, int maxItems, CancellationToken cancellationToken);
