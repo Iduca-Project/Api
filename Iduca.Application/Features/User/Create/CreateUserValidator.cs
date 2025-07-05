@@ -33,9 +33,5 @@ public class CreateUserValidator : AbstractValidator<CreateUserRequest>
             .WithMessage("Senha é obrigatória")
             .MinimumLength(6)
             .WithMessage("Senha deve ter pelo menos 6 caracteres");
-
-        RuleFor(u => u.CompanyId)
-            .NotEmpty()
-            .WithMessage("Empresa é obrigatória");
     }
 }

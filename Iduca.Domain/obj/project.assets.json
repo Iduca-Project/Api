@@ -8,19 +8,19 @@
     "net9.0": []
   },
   "packageFolders": {
-    "C:\\Users\\crisr\\.nuget\\packages\\": {}
+    "C:\\Users\\amilt\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\crisr\\Desktop\\repositories\\Api\\Iduca.Domain\\Iduca.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Domain\\Iduca.Domain.csproj",
       "projectName": "Iduca.Domain",
-      "projectPath": "C:\\Users\\crisr\\Desktop\\repositories\\Api\\Iduca.Domain\\Iduca.Domain.csproj",
-      "packagesPath": "C:\\Users\\crisr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\crisr\\Desktop\\repositories\\Api\\Iduca.Domain\\obj\\",
+      "projectPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Domain\\Iduca.Domain.csproj",
+      "packagesPath": "C:\\Users\\amilt\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\amilt\\Desktop\\Códigos\\Api\\Iduca.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\crisr\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\amilt\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -44,7 +44,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -65,7 +65,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.107/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

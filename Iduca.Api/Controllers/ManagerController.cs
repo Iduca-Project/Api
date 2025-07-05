@@ -1,6 +1,7 @@
 using Iduca.Api.Attributes;
 using Iduca.Application.Common.Services;
 using Iduca.Application.Features.Manager.GetDashboard;
+using Iduca.Persistence.Repositories.Users;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,10 +21,6 @@ public class ManagerController : BaseController
         _hierarchyService = hierarchyService;
     }
 
-    /// <summary>
-    /// Dashboard principal para managers
-    /// REGRA: Apenas dados dos subordinados diretos e indiretos do manager logado
-    /// </summary>
     [HttpGet("dashboard")]
     public async Task<ActionResult<GetManagerDashboardResponse>> GetDashboard(CancellationToken cancellationToken = default)
     {
@@ -35,15 +32,11 @@ public class ManagerController : BaseController
         return Ok(response);
     }
 
-    /// <summary>
-    /// Retorna a lista dos colaboradores do time do manager logado
-    /// </summary>
     [HttpGet("team")]
     public async Task<ActionResult> GetTeam(CancellationToken cancellationToken = default)
     {
         var currentUserId = GetCurrentUserId();
         
-        // Obter subordinados diretos e indiretos
         var allSubordinates = await _hierarchyService.GetSubordinatesAsync(currentUserId, true, cancellationToken);
         var directSubordinates = await _hierarchyService.GetSubordinatesAsync(currentUserId, false, cancellationToken);
         
@@ -52,15 +45,24 @@ public class ManagerController : BaseController
             return Ok(new { message = "Você não possui subordinados.", team = new List<object>() });
         }
 
-        var teamResponse = allSubordinates.Select(subordinate => new
+        var teamResponse = new List<object>();
+        
+        foreach (var subordinate in allSubordinates)
         {
-            id = subordinate.Id,
-            name = subordinate.Name,
-            email = subordinate.Email,
-            isAdmin = subordinate.IsAdmin,
-            isDirect = directSubordinates.Any(d => d.Id == subordinate.Id),
-            responsibleId = subordinate.ResponsibleId
-        }).ToArray();
+            // Buscar quantidade de cursos do usuário
+            var coursesCount = subordinate.Courses?.Count ?? 0;
+            
+            teamResponse.Add(new
+            {
+                id = subordinate.Id,
+                name = subordinate.Name,
+                email = subordinate.Email,
+                isAdmin = subordinate.IsAdmin,
+                isDirect = directSubordinates.Any(d => d.Id == subordinate.Id),
+                responsibleId = subordinate.ResponsibleId,
+                coursesCount = coursesCount
+            });
+        }
 
         return Ok(new
         {

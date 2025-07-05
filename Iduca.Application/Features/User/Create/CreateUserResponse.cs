@@ -6,8 +6,8 @@ public sealed record CreateUserResponse(
     string Identity,
     string Email,
     bool IsAdmin,
-    Guid? ResponsibleId,
-    Guid CompanyId,
+    Guid ResponsibleId,
+    Guid? CompanyId,
     string? Image,
     DateTime CreatedAt
 );

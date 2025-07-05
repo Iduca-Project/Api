@@ -8,8 +8,8 @@ public sealed record CreateUserRequest(
     string Email,
     string Password,
     bool IsAdmin,
-    Guid? ResponsibleId,
-    Guid CompanyId,
+    Guid ResponsibleId,
+    Guid? CompanyId,
     string? Image,
     List<Guid>? Interests
 ) : IRequest<CreateUserResponse>;

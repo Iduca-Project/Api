@@ -27,13 +27,26 @@ public class UsersController : BaseController
     }
 
     [HttpPost]
-    [AdminAuthorize] // Apenas admins podem criar usuários
     public async Task<ActionResult<CreateUserResponse>> Create(
         [FromBody] CreateUserRequest request, CancellationToken cancellationToken
     )
     {
-         Console.WriteLine(request);
-        var response = await _mediator.Send(request, cancellationToken);
+        Console.WriteLine(request);
+
+        var currentUserId = GetCurrentUserId();
+
+        var response = await _mediator.Send(
+            new CreateUserRequest(
+                request.Name,
+                request.Identity,
+                request.Email,
+                request.Password,
+                request.IsAdmin,
+                currentUserId,
+                null,
+                request.Image,
+                request.Interests
+            ), cancellationToken);
         return Created(APIRoutes.Users, response);
     }
 

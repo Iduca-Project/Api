@@ -5,7 +5,6 @@ using Iduca.Application.Repository.CompanyRepository;
 using Iduca.Application.Repository.CategoryRepository;
 using Iduca.Application.Common.Services;
 using Iduca.Domain.Models;
-using Iduca.Domain.Common.Messages;
 using Iduca.Application.Common.Exceptions;
 using MediatR;
 using BC = BCrypt.Net.BCrypt;
@@ -32,18 +31,18 @@ public class CreateUserHandler(
     {
         // Verificar se já existe usuário com mesmo email
         var existingUser = await userRepository.GetUserByEmail(request.Email, cancellationToken);
+
         if (existingUser is not null)
             throw new DuplicityException("Já existe um usuário com este email.");
 
-        // Verificar se a empresa existe
-        var company = await companyRepository.Get(request.CompanyId, cancellationToken)
-            ?? throw new NotFoundException("Empresa não encontrada.");
+        var getCompanyByUserID = await companyRepository.GetCompanyByUserId(request.ResponsibleId, cancellationToken)
+            ?? throw new NotFoundException("Empresa de usuário responsável não encontrado.");
 
-        // Verificar se o responsável existe (se informado)
         Domain.Models.User? responsible = null;
-        if (request.ResponsibleId.HasValue)
+        
+        if (getCompanyByUserID.DisabledAt != null )
         {
-            responsible = await userRepository.Get(request.ResponsibleId.Value, cancellationToken)
+            responsible = await userRepository.Get(request.ResponsibleId, cancellationToken)
                 ?? throw new NotFoundException("Responsável não encontrado.");
         }
 
@@ -68,8 +67,8 @@ public class CreateUserHandler(
             IsAdmin = request.IsAdmin,
             Responsible = responsible,
             ResponsibleId = request.ResponsibleId,
-            Company = company,
-            CompanyId = request.CompanyId,
+            Company = getCompanyByUserID,
+            CompanyId = getCompanyByUserID.Id,
             Image = request.Image,
             Interests = interests,
             CreatedAt = DateTime.UtcNow,
