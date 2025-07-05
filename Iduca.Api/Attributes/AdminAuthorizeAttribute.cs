@@ -14,8 +14,7 @@ public class AdminAuthorizeAttribute : Attribute, IAuthorizationFilter
     {
         // Verificar se há header Authorization
         var authHeader = context.HttpContext.Request.Headers.Authorization.FirstOrDefault();
-
-        Console.WriteLine(authHeader);
+;
 
         if (string.IsNullOrEmpty(authHeader))
         {
