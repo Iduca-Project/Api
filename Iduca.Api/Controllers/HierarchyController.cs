@@ -268,76 +268,76 @@ public class HierarchyController : BaseController
     /// </summary>
     /// <param name="courseId">ID do curso</param>
     /// <param name="includeIndirect">Incluir subordinados indiretos</param>
-    [HttpPost("enroll-team/{courseId}")]
-    public async Task<IActionResult> EnrollTeamInCourse(Guid courseId, [FromQuery] bool includeIndirect = false)
-    {
-        try
-        {
-            var currentUserId = GetCurrentUserId();
+    // [HttpPost("enroll-team/{courseId}")]
+    // public async Task<IActionResult> EnrollTeamInCourse(Guid courseId, [FromQuery] bool includeIndirect = false)
+    // {
+    //     try
+    //     {
+    //         var currentUserId = GetCurrentUserId();
             
-            // Verificar se o usuário tem permissão para matricular no curso
-            if (!await _hierarchyService.CanUserAccessDataAsync(currentUserId, currentUserId))
-            {
-                return Forbid("Você não tem permissão para realizar matrículas em massa.");
-            }
+    //         // Verificar se o usuário tem permissão para matricular no curso
+    //         if (!await _hierarchyService.CanUserAccessDataAsync(currentUserId, currentUserId))
+    //         {
+    //             return Forbid("Você não tem permissão para realizar matrículas em massa.");
+    //         }
 
-            // Obter subordinados
-            var subordinates = await _hierarchyService.GetSubordinatesAsync(currentUserId, includeIndirect);
+    //         // Obter subordinados
+    //         var subordinates = await _hierarchyService.GetSubordinatesAsync(currentUserId, includeIndirect);
             
-            if (!subordinates.Any())
-            {
-                return BadRequest(new { message = "Você não possui subordinados para matricular." });
-            }
+    //         if (!subordinates.Any())
+    //         {
+    //             return BadRequest(new { message = "Você não possui subordinados para matricular." });
+    //         }
 
-            // Matricular cada subordinado no curso
-            var successfulEnrollments = new List<object>();
-            var failedEnrollments = new List<object>();
+    //         // Matricular cada subordinado no curso
+    //         var successfulEnrollments = new List<object>();
+    //         var failedEnrollments = new List<object>();
 
-            foreach (var subordinate in subordinates)
-            {
-                try
-                {
-                    // Usar o mediador para matricular cada usuário
-                    var enrollRequest = new EnrollCourseRequest(subordinate.Id, courseId);
-                    var enrollResult = await _mediator.Send(enrollRequest);
+    //         foreach (var subordinate in subordinates)
+    //         {
+    //             try
+    //             {
+    //                 // Usar o mediador para matricular cada usuário
+    //                 var enrollRequest = new EnrollCourseRequest(subordinate.Id, courseId);
+    //                 var enrollResult = await _mediator.Send(enrollRequest);
                     
-                    successfulEnrollments.Add(new
-                    {
-                        id = subordinate.Id,
-                        name = subordinate.Name,
-                        email = subordinate.Email,
-                        status = "success"
-                    });
-                }
-                catch (Exception ex)
-                {
-                    failedEnrollments.Add(new
-                    {
-                        id = subordinate.Id,
-                        name = subordinate.Name,
-                        email = subordinate.Email,
-                        status = "failed",
-                        error = ex.Message
-                    });
-                }
-            }
+    //                 successfulEnrollments.Add(new
+    //                 {
+    //                     id = subordinate.Id,
+    //                     name = subordinate.Name,
+    //                     email = subordinate.Email,
+    //                     status = "success"
+    //                 });
+    //             }
+    //             catch (Exception ex)
+    //             {
+    //                 failedEnrollments.Add(new
+    //                 {
+    //                     id = subordinate.Id,
+    //                     name = subordinate.Name,
+    //                     email = subordinate.Email,
+    //                     status = "failed",
+    //                     error = ex.Message
+    //                 });
+    //             }
+    //         }
 
-            return Ok(new {
-                message = $"Processo de matrícula concluído para {subordinates.Count} subordinados no curso {courseId}",
-                courseId = courseId,
-                totalProcessed = subordinates.Count,
-                successfulEnrollments = successfulEnrollments.Count,
-                failedEnrollments = failedEnrollments.Count,
-                successful = successfulEnrollments,
-                failed = failedEnrollments,
-                includeIndirect = includeIndirect
-            });
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new { message = "Erro interno do servidor.", error = ex.Message });
-        }
-    }
+    //         return Ok(new {
+    //             message = $"Processo de matrícula concluído para {subordinates.Count} subordinados no curso {courseId}",
+    //             courseId = courseId,
+    //             totalProcessed = subordinates.Count,
+    //             successfulEnrollments = successfulEnrollments.Count,
+    //             failedEnrollments = failedEnrollments.Count,
+    //             successful = successfulEnrollments,
+    //             failed = failedEnrollments,
+    //             includeIndirect = includeIndirect
+    //         });
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         return StatusCode(500, new { message = "Erro interno do servidor.", error = ex.Message });
+    //     }
+    // }
 }
 
 /// <summary>

@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Iduca.Application.Features.Companies.GetAll;
 using Iduca.Application.Features.Courses.Create;
 using Iduca.Application.Features.Modules.Create;
-using Iduca.Application.Features.Modules.CreateList;
-
 namespace Iduca.Api.Controllers;
 
 [ApiController]
@@ -84,15 +82,6 @@ public class AdminController : ControllerBase
     [HttpPost("module")]
     public async Task<ActionResult<CreateModuleResponse>> Create(
         CreateModuleRequest request, CancellationToken cancellationToken
-    )
-    {
-        var response = await _mediator.Send(request, cancellationToken);
-        return Ok(response);
-    }
-
-    [HttpPost("module/list")]
-    public async Task<ActionResult<CreateListModuleResponse>> CreateList(
-        [FromBody] CreateListModuleRequest request, CancellationToken cancellationToken
     )
     {
         var response = await _mediator.Send(request, cancellationToken);

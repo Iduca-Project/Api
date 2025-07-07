@@ -35,17 +35,17 @@ public class CreateUserHandler(
         if (existingUser is not null)
             throw new DuplicityException("Já existe um usuário com este email.");
 
-        // Verificar se a empresa existe
-        var company = await companyRepository.Get(request.CompanyId, cancellationToken)
-            ?? throw new NotFoundException("Empresa não encontrada.");
 
         // Verificar se o responsável existe (se informado)
-        Domain.Models.User? responsible = null;
-        if (request.ResponsibleId.HasValue)
-        {
-            responsible = await userRepository.Get(request.ResponsibleId.Value, cancellationToken)
+        Domain.Models.User responsible =  await userRepository.Get((Guid)request.ResponsibleId!, cancellationToken)
                 ?? throw new NotFoundException("Responsável não encontrado.");
-        }
+
+        var companyId = request.CompanyId == null ? responsible.CompanyId : (Guid)request.CompanyId;
+
+        // Verificar se a empresa existe
+        var company = await companyRepository.Get(companyId , cancellationToken)
+            ?? throw new NotFoundException("Empresa não encontrada.");
+        
 
         // Buscar categorias de interesse (se informadas)
         var interests = new List<Category>();
@@ -59,17 +59,22 @@ public class CreateUserHandler(
             }
         }
 
+        Console.WriteLine("\n\n\n");
+        Console.WriteLine(request.CompanyId == null ? responsible.CompanyId : (Guid)request.CompanyId);
+        Console.WriteLine("\n\n\n");
+
+
         var user = new Domain.Models.User
         {
             Name = request.Name,
             Identity = request.Identity,
             Email = request.Email,
             Password = BC.HashPassword(request.Password),
-            IsAdmin = request.IsAdmin,
+            IsAdmin = request.IsAdmin ?? false,
             Responsible = responsible,
             ResponsibleId = request.ResponsibleId,
             Company = company,
-            CompanyId = request.CompanyId,
+            CompanyId = companyId,
             Image = request.Image,
             Interests = interests,
             CreatedAt = DateTime.UtcNow,

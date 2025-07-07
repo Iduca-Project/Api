@@ -19,7 +19,7 @@ public sealed record ModuleDetails(
     Guid Id,
     string Title,
     string Description,
-    int Index,
+    int? Index,
     List<ContentDetails> Content
 );
 

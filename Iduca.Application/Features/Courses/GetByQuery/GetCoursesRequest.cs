@@ -6,8 +6,8 @@ namespace Iduca.Application.Features.Courses.GetByQuery;
 
 public sealed record GetCoursesRequest(
     string? Name,
-    CourseDifficulty? Difficulty,
-    List<Guid> Categories,
+    int? Difficulty,
+    Guid? Category,
     int Page,
     int MaxItems
 ) : IRequest<GetCoursesResponse>;

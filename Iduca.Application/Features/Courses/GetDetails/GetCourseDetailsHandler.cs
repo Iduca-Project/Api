@@ -93,7 +93,7 @@ public class GetCourseDetailsHandler(
         var categoryName = course.Categories.FirstOrDefault()?.Name ?? "Geral";
 
         // Formatar duração
-        var duration = $"{course.TotalHours}:00:00";
+        var duration = $"{course.TotalHours}";
 
         return new GetCourseDetailsResponse(
             course.Id,

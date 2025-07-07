@@ -27,23 +27,23 @@ public class EnrollCourseHandler(
     public async Task<EnrollCourseResponse> Handle(EnrollCourseRequest request, CancellationToken cancellationToken)
     {
         // Verificar se o curso existe
-        var course = await courseRepository.Get(request.CourseId, cancellationToken)
+        var course = await courseRepository.GetCourseByEqualName(request.CourseName, cancellationToken)
             ?? throw new NotFoundException("Curso não encontrado.");
 
         // Verificar se o usuário existe
-        var user = await userRepository.Get(request.UserId, cancellationToken)
+        var user = await userRepository.GetUserByIdentity(request.Identity, cancellationToken)
             ?? throw new NotFoundException("Usuário não encontrado.");
 
         // Verificar se o usuário já está matriculado
-        var existingEnrollment = await userCourseRepository.GetUserCourseByIds(request.UserId, request.CourseId, cancellationToken);
+        var existingEnrollment = await userCourseRepository.GetUserCourseByIds(user.Id, course.Id, cancellationToken);
         if (existingEnrollment is not null)
             throw new DuplicityException("Usuário já está matriculado neste curso.");
 
         // Criar nova matrícula
         var userCourse = new UserCourse
         {
-            UserId = request.UserId,
-            CourseId = request.CourseId,
+            UserId = user.Id,
+            CourseId = course.Id,
             User = user,
             Course = course,
             CreatedAt = DateTime.UtcNow,
@@ -54,8 +54,8 @@ public class EnrollCourseHandler(
         await unitOfWork.Save(cancellationToken);
 
         return new EnrollCourseResponse(
-            request.UserId,
-            request.CourseId,
+            user.Id,
+            course.Id,
             userCourse.CreatedAt,
             "Matrícula realizada com sucesso"
         );

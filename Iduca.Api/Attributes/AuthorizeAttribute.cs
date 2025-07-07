@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Iduca.Application.Contracts;
 using System.Text.Json;
+using Iduca.Application.Repository.UserRepository;
 
 namespace Iduca.Api.Attributes;
 
@@ -9,6 +10,7 @@ namespace Iduca.Api.Attributes;
 public class CustomAuthorizeAttribute : Attribute, IAuthorizationFilter
 {
     public bool RequireAdmin { get; set; } = false;
+    public bool RequireAManager { get; set; } = false;
 
     public void OnAuthorization(AuthorizationFilterContext context)
     {
@@ -33,6 +35,8 @@ public class CustomAuthorizeAttribute : Attribute, IAuthorizationFilter
         {
             var authService = context.HttpContext.RequestServices.GetRequiredService<IAuthenticator>();
             var sessionData = authService.ExtractToken(token);
+
+
 
             // Verificar se é admin quando necessário
             if (RequireAdmin && !sessionData.IsAdmin)

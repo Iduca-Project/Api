@@ -1,4 +1,5 @@
 using Iduca.Api.Attributes;
+using Iduca.Application.Features.User.Get;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ namespace Iduca.Api.Controllers;
 [ApiController]
 [Route("api")]
 [CustomAuthorize] // Requer autenticação para todas as rotas
-public class ProfileController(IMediator mediator) : ControllerBase
+public class ProfileController(IMediator mediator) : BaseController
 {
     private readonly IMediator mediator = mediator;
 
@@ -16,37 +17,12 @@ public class ProfileController(IMediator mediator) : ControllerBase
     /// Retorna todas as informações do usuário logado
     /// </summary>
     [HttpGet("profile")]
-    public ActionResult GetProfile(CancellationToken cancellationToken = default)
+    public async Task<ActionResult> GetProfileAsync(CancellationToken cancellationToken = default)
     {
-        // TODO: Implementar GetProfileRequest e Handler
-        var mockResponse = new
-        {
-            photoUser = "https://cdn.exemplo.com/perfil/usuario123.png",
-            name = "Sabrina Mortean",
-            email = "sabrina@empresa.com",
-            interests = new[] { "Programação", "UX/UI", "Banco de Dados" },
-            completedCourses = 4,
-            averageTest = 8.7,
-            completedCoursesList = new[]
-            {
-                new
-                {
-                    id = 1,
-                    title = "Node.js Avançado",
-                    image = "https://cdn.exemplo.com/cursos/node.png",
-                    certificateAvailable = true
-                },
-                new
-                {
-                    id = 2,
-                    title = "Banco de Dados",
-                    image = "https://cdn.exemplo.com/cursos/bd.png",
-                    certificateAvailable = true
-                }
-            }
-        };
+        var userId = GetCurrentUserId();
 
-        return Ok(mockResponse);
+        var response = await mediator.Send(new GetUserRequest(userId), cancellationToken);
+        return Ok(response);
     }
 
     /// <summary>

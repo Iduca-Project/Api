@@ -1,5 +1,6 @@
 using Iduca.Api.Attributes;
 using Iduca.Application.Common.Services;
+using Iduca.Application.Features.Courses.Enroll;
 using Iduca.Application.Features.Manager.GetDashboard;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -57,6 +58,7 @@ public class ManagerController : BaseController
             id = subordinate.Id,
             name = subordinate.Name,
             email = subordinate.Email,
+            identity = subordinate.Identity,
             isAdmin = subordinate.IsAdmin,
             isDirect = directSubordinates.Any(d => d.Id == subordinate.Id),
             responsibleId = subordinate.ResponsibleId
@@ -123,10 +125,10 @@ public class ManagerController : BaseController
     /// Inscreve um colaborador em um curso
     /// </summary>
     [HttpPost("enroll")]
-    public async Task<ActionResult> EnrollEmployee([FromBody] EnrollEmployeeRequest request, CancellationToken cancellationToken = default)
+    public async Task<ActionResult> EnrollEmployee([FromBody] EnrollCourseRequest request, CancellationToken cancellationToken = default)
     {
-        // TODO: Implementar EnrollEmployeeRequest e Handler
-        return Ok(new { response = true });
+        var response = await _mediator.Send(request, cancellationToken);
+        return Ok(response);
     }
 
     /// <summary>

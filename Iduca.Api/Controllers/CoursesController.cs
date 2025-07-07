@@ -12,6 +12,7 @@ using Iduca.Application.Features.Courses.Update;
 using Iduca.Domain.Common.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Iduca.Application.Features.Courses.GetCourseOfUser;
 
 namespace Iduca.Api.Controllers;
 
@@ -58,14 +59,26 @@ public class CoursesController : BaseController
     /// <summary>
     /// Retorna as informações gerais de um curso + lista de módulos
     /// </summary>
-    [HttpGet("courses/{id}")]
+    [HttpGet("{id}")]
     public async Task<ActionResult<GetCourseDetailsResponse>> GetCourseById(
         [FromRoute] Guid id,
         [FromQuery] Guid? userId = null,
         CancellationToken cancellationToken = default
     )
     {
+        if (userId is null)
+            userId = GetCurrentUserId();
         var response = await _mediator.Send(new GetCourseDetailsRequest(id, userId), cancellationToken);
+        return Ok(response);
+    }
+
+
+    [HttpGet("user")]
+    public async Task<ActionResult<GetCourseDetailsResponse>> GetCourseById(
+        CancellationToken cancellationToken
+    )
+    {
+        var response = await _mediator.Send(new GetCourseOfUserCourseRequest(GetCurrentUserId()), cancellationToken);
         return Ok(response);
     }
 
@@ -75,7 +88,7 @@ public class CoursesController : BaseController
     [HttpPost("{courseId}/enroll")]
     public async Task<ActionResult<EnrollCourseResponse>> Enroll(
         [FromRoute] Guid courseId,
-        [FromBody] EnrollCourseRequest request,
+        [FromBody] EnrollCourseRequestId request,
         CancellationToken cancellationToken
     )
     {

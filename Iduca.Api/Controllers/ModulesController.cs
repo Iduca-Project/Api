@@ -6,7 +6,6 @@ using Iduca.Application.Features.Modules.Update;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Iduca.Api.Attributes;
-using Iduca.Application.Features.Modules.CreateList;
 
 namespace Iduca.Api.Controllers;
 

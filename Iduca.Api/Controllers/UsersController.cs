@@ -14,7 +14,7 @@ namespace Iduca.Api.Controllers;
 
 [ApiController]
 [Route(APIRoutes.Users)]
-[CustomAuthorize] // Todas as rotas de usuário precisam de autenticação
+[CustomAuthorize]
 public class UsersController : BaseController
 {
     private readonly IMediator _mediator;
@@ -27,13 +27,26 @@ public class UsersController : BaseController
     }
 
     [HttpPost]
-    [AdminAuthorize] // Apenas admins podem criar usuários
     public async Task<ActionResult<CreateUserResponse>> Create(
         [FromBody] CreateUserRequest request, CancellationToken cancellationToken
     )
     {
-         Console.WriteLine(request);
-        var response = await _mediator.Send(request, cancellationToken);
+
+        var currentUserId = GetCurrentUserId();
+
+        var newRequest = new CreateUserRequest(
+                request.Name,
+                request.Identity,
+                request.Email,
+                request.Password,
+                request.CompanyId,
+                currentUserId,
+                request.IsAdmin,
+                request.Image,
+                request.Interests
+            );
+
+        var response = await _mediator.Send(newRequest, cancellationToken);
         return Created(APIRoutes.Users, response);
     }
 
